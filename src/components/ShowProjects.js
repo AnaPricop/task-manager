@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import ProjectCard from './ProjectCard';
 // import Sidemenu from './dashboard/Sidemenu';
 
-function ShowProjects() {
-    const [projects, setProjects] = useState([]);
-    var token = localStorage.getItem("token");
+function ShowProjects(project) {
+    // const [projects, setProjects] = useState([]);
     // useEffect(() => {
     //     axios
     //         .get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
@@ -18,15 +17,11 @@ function ShowProjects() {
     //             console.log('Error from Projectslist');
     //         });
     // }, []);
-
+   // const projlist = React.createContext(projects);
     const projectList =
-        projects.length === 0
+        project.length === 0
             ? 'there are no projects!'
-            : projects.map((project, k) => <ProjectCard project={project} key={k} />);
-    // const projectList1 =
-    //     projects.length === 0
-    //         ? 'there are no projects!'
-    //         : projects.map((project, k) => <Sidemenu project={project} key={k} />);
+            : project.projects.map((project, k) => <ProjectCard project={project} key={k} />);
 
     const handleLogout = () => {
         localStorage.removeItem("token");

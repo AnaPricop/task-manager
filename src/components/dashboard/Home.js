@@ -22,14 +22,14 @@ const Home = () => {
             });
     }, []);
 
-    const projectList =
-        projects.length === 0
-            ? 'there are no projects!'
-            : projects.map((project, k) => <Sidemenu project={project} key={k} />);
+    // const projectList =
+    //     projects.length === 0
+    //         ? 'there are no projects!'
+    //         : projects.map((project, k) => <Sidemenu project={project} key={k} />);
     return (
         <div className="h-100">
             <Sidemenu projects={projects}/>
-            <Projects />
+            <Projects projects={projects}/>
         </div>
     );
 };
