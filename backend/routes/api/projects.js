@@ -24,7 +24,12 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Project.create(req.body)
+    console.log(req.body)
+    let token = req.headers["authorization"].split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+    var tkn = decoded._id;
+    var arrProj={title: req.body.title, user: tkn};
+    Project.create(arrProj)
         .then(project => res.json({ msg: 'Project added successfully' }))
         .catch(err => res.status(400).json({ error: 'Unable to add this project' }));
 });

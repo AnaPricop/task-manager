@@ -6,15 +6,23 @@
     font-size:16px;
     font-weight:300;
 }
+.svg_navbar{
+    
+}
 .nav-link.active{
     background-color: rgba(97, 103, 122, 0.32) !important;
     color: #D8D9DA!important;
 }
-.nav-link, .link-dark{
+.nav-link, .link-dark1{
     color: #D8D9DA!important;
+}
+.header-logo{
+    width:50px;
+    padding-right:10px;
 }
 .header-sidemenu{
     color: #D8D9DA!important;
+    font-size:20px;
 }
 .section_setting{
     color: #D8D9DA;
@@ -60,4 +68,11 @@
     /*height:20px;*/
     background-color: rgba(170, 172, 180, 0.46) !important;
     color: #D8D9DA;
+}
+
+.create_project_hidden{
+    display:none;
+}
+.create_project_visible{
+    display:block;
 }
