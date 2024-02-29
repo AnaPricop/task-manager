@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
 const authRoutes = require("./routes/api/auth");
 const projectRoutes = require("./routes/api/projects");
+const boardRoutes = require("./routes/api/boards");
 app.use(express.json());
 
 const port = process.env.PORT || 8001;
@@ -24,6 +25,7 @@ app.use("/api/books", routes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/boards", boardRoutes);
 // app.use(userRoutes);
 connectDB();
 
