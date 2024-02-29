@@ -28,7 +28,7 @@ const Home = () => {
     //         : projects.map((project, k) => <Sidemenu project={project} key={k} />);
     return (
         <div className="h-100">
-            <Sidemenu projects={projects}/>
+            <Sidemenu projects={projects} setProjects={setProjects}/>
             <Projects projects={projects}/>
         </div>
     );

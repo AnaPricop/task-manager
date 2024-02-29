@@ -6,8 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
 
-
-const Sidemenu = (project) => {
+const Sidemenu = (project, setProjects) => {
     const [active, setActive] = useState(0);
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -15,14 +14,12 @@ const Sidemenu = (project) => {
     };
     var token = localStorage.getItem("token");
     const [prevProject, setNewProjects] = useState([]);
-    console.log(project.projects)
-    // setNewProjects(project.projects);
     const [isVisible, setIsVisible] = useState(false);
     const [projectData, setProject] = useState({
         title: ""
     });
     const onChange = (e) => {
-        setProject({ ...project, [e.target.name]: e.target.value });
+        setProject({ ...projectData, [e.target.name]: e.target.value });
     };
     const handleCreate = () => {
         setIsVisible(!isVisible);
@@ -35,25 +32,13 @@ const Sidemenu = (project) => {
                 setProject({
                     title: ""
                 });
-                // if (prevProject == [])
-                //     setNewProjects(project.projects)
-                // setNewProjects(prevProject=>({
-                //     prevProject: [projectData, ...prevProject]
-                // }))
-                this.setState(project=>({
-                    project: [projectData, ...project.projects]
-                }))
-                console.log(project)
-                console.log(prevProject)
-                // // Push to /
-                // navigate("/");
+                project.setProjects([...project.projects, res.data.project]);
             })
             .catch((err) => {
                 console.log("Error in Create project!");
             });
     };
-    console.log(isVisible)
-// console.log(project.projects)
+
     const projectList =
         project.length === 0
             ? 'there are no projects!'
