@@ -13,7 +13,9 @@ const Sidemenu = (project, setProjects) => {
         window.location.reload();
     };
     var token = localStorage.getItem("token");
-    const [prevProject, setNewProjects] = useState([]);
+    //const [prevProject, setNewProjects] = useState([]);
+   const [boardBck, setBoardBck] = useState('bck1');
+
     const [isVisible, setIsVisible] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const [projectData, setProject] = useState({
@@ -24,9 +26,13 @@ const Sidemenu = (project, setProjects) => {
     };
     const handleCreate = () => {
         setIsVisible(!isVisible);
+        if (isVisibleBoard === true)
+            setIsVisibleBoard(!isVisibleBoard);
     }
     const handleCreateBoard = () => {
         setIsVisibleBoard(!isVisibleBoard);
+        if (isVisible === true)
+            setIsVisible(!isVisible);
     }
     const onSubmit = (e) => {
         e.preventDefault();
@@ -49,6 +55,11 @@ const Sidemenu = (project, setProjects) => {
         idProject: "",
         background: ""
     });
+    const onChangeBck = (e) => {
+        setBoard({ ...boardData, 'background': e });
+        setBoardBck(e)//set values for board form
+        console.log(boardData)
+    };
     const onChangeBoard = (e) => {
         setBoard({ ...boardData, [e.target.name]: e.target.value });   //set values for board form
     };
@@ -83,10 +94,13 @@ const Sidemenu = (project, setProjects) => {
         project.length === 0
             ? 'there are no projects!'
             : project.projects.map((project, k) =>
-                // <a className="nav-link link-dark1" key={project._id}>
-                // <svg className="bi me-2" width="16" height="16"></svg>
-                // {project.title} </a>
     <option key={project._id} value={project._id}>{project.title}</option>);
+
+console.log(boardBck)
+    // const setBck = (e) => {
+    //     setBoardBck(e);   //set values for board form
+    // };
+
     return (
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
              style={styles.sidebar_dsh}>
@@ -147,15 +161,38 @@ const Sidemenu = (project, setProjects) => {
                         Create board
                     </a>
                     <section
-                        className={isVisibleBoard ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
+                        className={isVisibleBoard ? 'create_project_visible section_board' : 'create_project_hidden section_board'}
                         style={styles.section_setting}>
-                        <div className="section_header row" style={styles.section_header}>
-                            <div className="row justify-content-center">Create board</div>
+                        <div className="section_header justify-content-center" style={styles.section_header}>
+                            <div className="">Create board</div>
                         </div>
                         {/*<div className="row">*/}
                         {/*    <div className="col-xs-12">Name of Section</div>*/}
                         {/*</div>*/}
-                        <form className="form-create-project" onSubmit={onSubmitBoard}>
+                        <form className="form-create-board" onSubmit={onSubmitBoard}>
+                            <div className="form-group row justify-content-center">
+                                <div className={boardBck + " background-div"} value={boardBck}>
+                                    {/*<img src="./bck1.svg"/>*/}
+                                </div>
+                                <a className="row bck-title">Background</a>
+                                <ul className="ul-little-div">
+                                    <li className="li-little-div" onClick={() => onChangeBck('bck2')}>
+                                        <a className="little-bck-div bck2"></a>
+                                    </li>
+                                    <li className="li-little-div" onClick={() => onChangeBck('bck3')}>
+                                        <a className="little-bck-div bck3"></a>
+                                    </li>
+                                    <li className="li-little-div" onClick={() => onChangeBck('bck4')}>
+                                        <a className="little-bck-div bck4"></a>
+                                    </li>
+                                    <li className="li-little-div" onClick={() => onChangeBck('bck5')}>
+                                        <a className="little-bck-div bck5"></a>
+                                    </li>
+                                    <li className="li-little-div" onClick={() => onChangeBck('bck6')}>
+                                        <a className="little-bck-div bck6"></a>
+                                    </li>
+                                </ul>
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="titleOfProject">Board title</label>
                                 <input type="text" className="form-control" id="titleOfProject"
@@ -164,7 +201,7 @@ const Sidemenu = (project, setProjects) => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="selectProject">Project</label>
-                                <select className="form-select" aria-label="Default select example"  name="idProject" id="selectProject" value={boardData.idProject} onChange={onChangeBoard}>
+                                <select className="form-select" name="idProject" id="selectProject" value={boardData.idProject} onChange={onChangeBoard}>
                                     {projectListSelect}
                                 </select>
                                 {/*<input type="text" className="form-control" id="selectProject"*/}
