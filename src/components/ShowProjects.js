@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import styles from "../css/projects.css";
 import ProjectCard from './ProjectCard';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 // import Sidemenu from './dashboard/Sidemenu';
 
 function ShowProjects(project) {
@@ -29,32 +32,14 @@ function ShowProjects(project) {
     };
 
     return (
-        <div className='ShowBookList col'>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <br />
-                        <h2 className='display-4 text-center'>Projects List</h2>
-                        {/*<button  onClick={handleLogout}>*/}
-                        {/*    Logout*/}
-                        {/*</button>*/}
-                    </div>
-
-                    {/*<div className='col-md-11'>*/}
-                    {/*    <Link*/}
-                    {/*        to='/create-book'*/}
-                    {/*        className='btn btn-outline-warning float-right'*/}
-                    {/*    >*/}
-                    {/*        + Add New Book*/}
-                    {/*    </Link>*/}
-                    {/*    <br />*/}
-                    {/*    <br />*/}
-                    {/*    <hr />*/}
+        <div className='ShowBookList p-3'>
+                {/*<div className='row'>*/}
+                {/*    <div className='proj-list'>*/}
+                        <h3>Your Projects</h3>
                     {/*</div>*/}
-                </div>
+                {/*</div>*/}
 
-                <div className='list row py-5'>{projectList}</div>
-            </div>
+                <div className='list row py-2'>{projectList}</div>
         </div>
     );
 }

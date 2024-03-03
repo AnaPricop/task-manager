@@ -39,3 +39,13 @@ width:50px;
         display: inline-block;
     }
 }
+.bck-pr{
+    background-color:#272829;
+    display: flex;
+    /*display: flex; */
+    flex-flow: row nowrap;
+    /*flex-direction:row;*/
+}
+.proj-list-margin{
+    padding-left:80px;
+}

@@ -9,6 +9,10 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        required: true
+    },
     idBoards: {
         type: Array,
         required: false

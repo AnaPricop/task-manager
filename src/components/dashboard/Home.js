@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
-// import styles from "../css/homepage.css";
+ import styles from "../../css/homepage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Sidemenu from './Sidemenu';
@@ -27,9 +27,13 @@ const Home = () => {
     //         ? 'there are no projects!'
     //         : projects.map((project, k) => <Sidemenu project={project} key={k} />);
     return (
-        <div className="h-100">
+        <div className="bck-pr d-flex flex-row">
+            <div className="col-2">
             <Sidemenu projects={projects} setProjects={setProjects}/>
+            </div>
+            <div className="col-10 proj-list-margin">
             <Projects projects={projects}/>
+            </div>
         </div>
     );
 };

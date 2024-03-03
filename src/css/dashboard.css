@@ -2,9 +2,11 @@
     width: 280px;
     background-color: #272829 !important;
     color: #D8D9DA;
-    font-family: Georgia, serif;
+    /*font-family: Roboto, serif;*/
+    font-family: Poppins, sans-serif;
     font-size: 16px;
-    font-weight: 300;
+    flex-grow: 2;
+    /*font-weight: 300;*/
 }
 
 .svg_navbar {
@@ -18,10 +20,11 @@
 
 .nav-link, .link-dark1 {
     color: #D8D9DA !important;
+    font-size: 15px;
 }
 
 .header-logo {
-    width: 50px;
+    width: 40px;
     padding-right: 10px;
 }
 
@@ -32,8 +35,8 @@
 
 .section_setting {
     color: #D8D9DA;
-    font-family: Georgia, serif;
-    font-size: 16px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
     line-height: 20px;
     font-weight: 400;
     background-color: #61677A;
@@ -51,8 +54,8 @@
 
 .section_board {
     color: #D8D9DA;
-    font-family: Georgia, serif;
-    font-size: 16px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
     line-height: 20px;
     font-weight: 400;
     background-color: #61677A;
@@ -127,6 +130,18 @@
     align-items: center;
     justify-content: center;
 }
+.background-div-img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom:20px;
+    background-position: center center;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .form-create-board{
     padding: 10px;
     /*margin-bottom:5px;*/
@@ -180,7 +195,7 @@ li.li-little-div{
 }
 .bck-title{
     color: #D8D9DA;
-    font-family: Georgia, serif;
+    font-family: Poppins, sans-serif;
     font-size: 16px;
     line-height: 20px;
     font-weight: 400;
@@ -194,4 +209,44 @@ select option{
 #selectProject{
     background-color:transparent;
     color:white;
+}
+.select-img{
+    line-height: 30px;
+    text-align: center;
+   /*cursor:pointer;*/
+    width: 100px;
+    height: 120px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-select{
+    opacity: 0.0;
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    cursor:pointer
+    /*top:0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right:0;*/
+    /*width: 100%;*/
+    /*height:100%;*/
+}
+.change-img{
+    display: none;
+    /*color: var(--ds-text-inverse, #ffffff);*/
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    /*bottom: 0;*/
+    width: 150px;
+    top: 140px;
+    height: 52px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 52px;
+    z-index:1000;
+    align-items: center;
+    justify-content: center;
 }

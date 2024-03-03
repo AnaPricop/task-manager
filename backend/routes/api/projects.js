@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     let token = req.headers["authorization"].split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
     var tkn = decoded._id;
-    var arrProj={title: req.body.title, user: tkn};
+    var arrProj={image: req.body.image, title: req.body.title, user: tkn};
     Project.create(arrProj)
         .then(project => {res.json({ msg: 'Project added successfully', project: project })})
         .catch(err => res.status(400).json({ error: 'Unable to add this project' }));

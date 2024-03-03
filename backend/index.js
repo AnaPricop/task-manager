@@ -9,8 +9,10 @@ const userRoutes = require("./routes/api/users");
 const authRoutes = require("./routes/api/auth");
 const projectRoutes = require("./routes/api/projects");
 const boardRoutes = require("./routes/api/boards");
-app.use(express.json());
 
+app.use(express.json());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 const port = process.env.PORT || 8001;
 // const userRoutes = require("./routes/api/users");
 app.use(cors({ origin: true, credentials: true }));

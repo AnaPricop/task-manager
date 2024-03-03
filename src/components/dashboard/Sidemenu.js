@@ -8,6 +8,7 @@ import ProjectCard from "../ProjectCard";
 
 const Sidemenu = (project, setProjects) => {
     const [active, setActive] = useState(0);
+    const fileInput = React.createRef();
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
@@ -96,14 +97,27 @@ const Sidemenu = (project, setProjects) => {
             : project.projects.map((project, k) =>
     <option key={project._id} value={project._id}>{project.title}</option>);
 
-console.log(boardBck)
+// console.log(boardBck)
     // const setBck = (e) => {
     //     setBoardBck(e);   //set values for board form
     // };
+    const [image, setImage] = useState('./bck4.svg')
+
+    const onImageChange = async (e) => {
+        // if (event.target.files && event.target.files[0]) {
+
+            const file = e.target.files[0];
+            const base64 = await convertToBase64(file);
+            console.log(base64)
+            setImage(base64);
+            setProject({ ...projectData, image: base64});
+      //  }
+    }
+    const [style, setStyle] = useState({display: 'none'});
 
     return (
-        <div className="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
-             style={styles.sidebar_dsh}>
+        <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
+             >
             <a href="/"
                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                 <img className="header-logo" src="/taskmng.svg"/>
@@ -135,12 +149,29 @@ console.log(boardBck)
                             className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
                             style={styles.section_setting}>
                             <div className="section_header row" style={styles.section_header}>
-                                <div className="row justify-content-center">Create a project</div>
+                                <div className=" justify-content-center">Create a project</div>
                             </div>
                             {/*<div className="row">*/}
                             {/*    <div className="col-xs-12">Name of Section</div>*/}
                             {/*</div>*/}
                             <form className="form-create-project" onSubmit={onSubmit}>
+                                <div className="form-group justify-content-center row py-4"
+                                >
+                                    {/*{boardBck + " background-div"}*/}
+                                    <div className="select-img"
+                                         onMouseEnter={e => {
+                                             setStyle({display: 'block'});
+                                         }}
+                                         onMouseLeave={e => {
+                                             setStyle({display: 'none'})
+                                         }}>
+                                    <img className="background-div-img" src={image} onChange={onImageChange}  />
+
+                                        {/*<img src="./bck1.svg"/>*/}
+                                    {/*</img>*/}
+                                    <input type="file" onChange={onImageChange} className="filetype input-select" />
+                                    <span className="change-img"  style={style}>Change Image</span></div>
+                                </div>
                                 <div className="form-group">
                                     <label htmlFor="titleOfProject">Project title</label>
                                     <input type="text" className="form-control" id="titleOfProject"
@@ -248,3 +279,16 @@ console.log(boardBck)
 };
 
 export default Sidemenu;
+
+function convertToBase64(file){
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result)
+        };
+        fileReader.onerror = (error) => {
+            reject(error)
+        }
+    })
+}
