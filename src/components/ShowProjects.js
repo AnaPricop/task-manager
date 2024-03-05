@@ -32,7 +32,7 @@ function ShowProjects(project) {
     };
 
     return (
-        <div className='ShowBookList p-3'>
+        <div className='ShowBookList p-3 row'>
                 {/*<div className='row'>*/}
                 {/*    <div className='proj-list'>*/}
                         <h3>Your Projects</h3>

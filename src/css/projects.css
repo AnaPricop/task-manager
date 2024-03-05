@@ -9,10 +9,10 @@
     /*width: 1000px;float:right;*/
 }
 .img-style-proj{
-    width: 150px;
-    height: 130px;
+    width: 100px;
+    height: 80px;
     object-fit: cover;
-    margin-top:20px;
+    /*margin-top:20px;*/
     margin-bottom:20px;
     background-position: center center;
     /*box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);*/
@@ -20,6 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 25px;
 }
 .blob-to-image{
     width:50px;
@@ -34,4 +35,12 @@
 .svg-icon{
     width:25px;
     height:25px;
+}
+.card{
+    min-width: 300px;
+    background-color: #FFF6E0;
+}
+.card-title{
+    font-size:16px;
+    margin-top: -10px;
 }

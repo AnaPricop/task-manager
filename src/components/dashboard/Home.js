@@ -31,7 +31,7 @@ const Home = () => {
             <div className="col-2">
             <Sidemenu projects={projects} setProjects={setProjects}/>
             </div>
-            <div className="col-10 proj-list-margin">
+            <div className="col-10 col-sm-11 my-3 proj-list-margin">
             <Projects projects={projects}/>
             </div>
         </div>
