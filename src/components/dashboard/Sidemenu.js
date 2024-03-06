@@ -5,8 +5,10 @@ import styles from "../../css/dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
+import CreateProject from "./CreateProject";
 
-const Sidemenu = (project, setProjects) => {
+const Sidemenu = (project, setProjects, children) => {
+    console.log(children)
     const [active, setActive] = useState(0);
     const fileInput = React.createRef();
     const handleLogout = () => {
@@ -25,10 +27,12 @@ const Sidemenu = (project, setProjects) => {
     const onChange = (e) => {
         setProject({ ...projectData, [e.target.name]: e.target.value });
     };
+
     const handleCreate = () => {
         setIsVisible(!isVisible);
         if (isVisibleBoard === true)
             setIsVisibleBoard(!isVisibleBoard);
+       console.log(children)
     }
     const handleCreateBoard = () => {
         setIsVisibleBoard(!isVisibleBoard);
@@ -115,6 +119,10 @@ const Sidemenu = (project, setProjects) => {
     }
     const [style, setStyle] = useState({display: 'none'});
 
+    // setIsVisibleBoard(!isVisibleBoard);
+    // if (isVisible === true)
+    //     setIsVisible(!isVisible);
+    const createProject = <CreateProject value={isVisible} project={project} setProjects={setProjects} />;
     return (
         <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
              >
@@ -145,42 +153,43 @@ const Sidemenu = (project, setProjects) => {
                             </svg>
                             Create project
                         </a>
-                        <section
-                            className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
-                            style={styles.section_setting}>
-                            <div className="section_header row" style={styles.section_header}>
-                                <div className=" justify-content-center">Create a project</div>
-                            </div>
-                            {/*<div className="row">*/}
-                            {/*    <div className="col-xs-12">Name of Section</div>*/}
-                            {/*</div>*/}
-                            <form className="form-create-project" onSubmit={onSubmit}>
-                                <div className="form-group justify-content-center row py-4"
-                                >
-                                    {/*{boardBck + " background-div"}*/}
-                                    <div className="select-img"
-                                         onMouseEnter={e => {
-                                             setStyle({display: 'block'});
-                                         }}
-                                         onMouseLeave={e => {
-                                             setStyle({display: 'none'})
-                                         }}>
-                                    <img className="background-div-img" src={image} onChange={onImageChange}  />
+                        {isVisible ? children : ''}
+                        {/*<section*/}
+                        {/*    className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}*/}
+                        {/*    style={styles.section_setting}>*/}
+                        {/*    <div className="section_header row" style={styles.section_header}>*/}
+                        {/*        <div className=" justify-content-center">Create a project</div>*/}
+                        {/*    </div>*/}
+                        {/*    /!*<div className="row">*!/*/}
+                        {/*    /!*    <div className="col-xs-12">Name of Section</div>*!/*/}
+                        {/*    /!*</div>*!/*/}
+                        {/*    <form className="form-create-project" onSubmit={onSubmit}>*/}
+                        {/*        <div className="form-group justify-content-center row py-4"*/}
+                        {/*        >*/}
+                        {/*            /!*{boardBck + " background-div"}*!/*/}
+                        {/*            <div className="select-img"*/}
+                        {/*                 onMouseEnter={e => {*/}
+                        {/*                     setStyle({display: 'block'});*/}
+                        {/*                 }}*/}
+                        {/*                 onMouseLeave={e => {*/}
+                        {/*                     setStyle({display: 'none'})*/}
+                        {/*                 }}>*/}
+                        {/*            <img className="background-div-img" src={image} onChange={onImageChange}  />*/}
 
-                                        {/*<img src="./bck1.svg"/>*/}
-                                    {/*</img>*/}
-                                    <input type="file" onChange={onImageChange} className="filetype input-select" />
-                                    <span className="change-img"  style={style}>Change Image</span></div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="titleOfProject">Project title</label>
-                                    <input type="text" className="form-control" id="titleOfProject"
-                                           placeholder="" value={project.title} name="title"
-                                           onChange={onChange}/>
-                                </div>
-                                <button type="submit" className="btn create-project-btn btn-sm">Create</button>
-                            </form>
-                        </section>
+                        {/*                /!*<img src="./bck1.svg"/>*!/*/}
+                        {/*            /!*</img>*!/*/}
+                        {/*            <input type="file" onChange={onImageChange} className="filetype input-select" />*/}
+                        {/*            <span className="change-img"  style={style}>Change Image</span></div>*/}
+                        {/*        </div>*/}
+                        {/*        <div className="form-group">*/}
+                        {/*            <label htmlFor="titleOfProject">Project title</label>*/}
+                        {/*            <input type="text" className="form-control" id="titleOfProject"*/}
+                        {/*                   placeholder="" value={project.title} name="title"*/}
+                        {/*                   onChange={onChange}/>*/}
+                        {/*        </div>*/}
+                        {/*        <button type="submit" className="btn create-project-btn btn-sm">Create</button>*/}
+                        {/*    </form>*/}
+                        {/*</section>*/}
                     </div>
                 </li>
                 <li>

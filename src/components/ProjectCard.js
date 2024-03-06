@@ -10,7 +10,9 @@ import '../App.css';
 const ProjectCard = ({project}) => {
     const [boards, setBoards] = useState([]);
     var token = localStorage.getItem("token");
-    var background = './gradient.png';
+    var background = './color.svg';
+    const [textSpan, setTextSpan] = useState("In Progress");
+    // textSpan = project.progress == 0 ? setTextSpan("In Progress") :
     // useEffect(() => {
     //     axios
     //         .get('http://localhost:8001/api/boards')
@@ -40,6 +42,18 @@ const ProjectCard = ({project}) => {
     // }, [imgURL]);
     return (
         <div className="card mx-3 my-3 col-lg-2 col-md-8 justify-content-center">
+            <div className="progress_top">
+                <svg viewBox="0 0 36 36" width="10px" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true" role="img" className="iconify iconify--twemoji"
+                     preserveAspectRatio="xMidYMid meet" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <circle fill="#f5a447" cx="18" cy="18" r="18"></circle>
+                    </g>
+                </svg>
+                <span className="span_progress">In Progress</span>
+            </div>
             <div className="row justify-content-center">
                 <img className="img-style-proj" src={project.image ? project.image : background} alt="Card image cap"/>
             </div>

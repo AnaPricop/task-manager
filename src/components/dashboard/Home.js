@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Sidemenu from './Sidemenu';
 import Projects from '../ShowProjects';
 import ProjectCard from "../ProjectCard";
+import CreateProject from "./CreateProject";
 
 const Home = () => {
     const [projects, setProjects] = useState([]);
@@ -29,7 +30,9 @@ const Home = () => {
     return (
         <div className="bck-pr d-flex flex-row">
             <div className="col-2">
-            <Sidemenu projects={projects} setProjects={setProjects}/>
+            <Sidemenu projects={projects} setProjects={setProjects} children={<CreateProject/>}>
+                {/*<CreateProject/>*/}
+            </Sidemenu>
             </div>
             <div className="col-10 col-sm-11 my-3 proj-list-margin">
             <Projects projects={projects}/>
