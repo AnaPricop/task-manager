@@ -9,6 +9,7 @@ import Projects from '../ShowProjects';
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 
+
 const Home = () => {
     const [projects, setProjects] = useState([]);
     var token = localStorage.getItem("token");
@@ -16,13 +17,15 @@ const Home = () => {
         axios
             .get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
             .then((res) => {
+                console.log(res.data);
                 setProjects(res.data);
             })
             .catch((err) => {
                 console.log('Error from Projectslist');
             });
     }, []);
-
+console.log(projects)
+    const [val, setVal] = useState(false);
     // const projectList =
     //     projects.length === 0
     //         ? 'there are no projects!'
@@ -30,7 +33,7 @@ const Home = () => {
     return (
         <div className="bck-pr d-flex flex-row">
             <div className="col-2">
-            <Sidemenu projects={projects} setProjects={setProjects} children={<CreateProject/>}>
+            <Sidemenu projects={projects} setProjects={setProjects} >
                 {/*<CreateProject/>*/}
             </Sidemenu>
             </div>

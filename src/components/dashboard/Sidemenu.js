@@ -7,8 +7,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 
-const Sidemenu = (project, setProjects, children) => {
-    console.log(children)
+const Sidemenu = ({projects, setProjects}) => {
+    console.log(projects)
     const [active, setActive] = useState(0);
     const fileInput = React.createRef();
     const handleLogout = () => {
@@ -17,56 +17,42 @@ const Sidemenu = (project, setProjects, children) => {
     };
     var token = localStorage.getItem("token");
     //const [prevProject, setNewProjects] = useState([]);
-   const [boardBck, setBoardBck] = useState('bck1');
+    const [boardBck, setBoardBck] = useState('bck1');
 
     const [isVisible, setIsVisible] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const [projectData, setProject] = useState({
         title: ""
     });
-    const onChange = (e) => {
-        setProject({ ...projectData, [e.target.name]: e.target.value });
-    };
 
+    const [children, setChildren] = useState(<CreateProject projects={projects} setProjects={setProjects} isVisible={isVisible} setIsVisible={setIsVisible}/>);
     const handleCreate = () => {
         setIsVisible(!isVisible);
+        //  children = true;
+        setChildren(<CreateProject projects={projects} setProjects={setProjects} val={!isVisible}/>);
+        // {children}.setVal(true);
         if (isVisibleBoard === true)
             setIsVisibleBoard(!isVisibleBoard);
-       console.log(children)
+        // console.log(children)
     }
     const handleCreateBoard = () => {
         setIsVisibleBoard(!isVisibleBoard);
         if (isVisible === true)
             setIsVisible(!isVisible);
     }
-    const onSubmit = (e) => {
-        e.preventDefault();
-        axios
-            .post("http://localhost:8001/api/projects", projectData, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then((res) => {
-                setProject({
-                    title: ""
-                });
-                project.setProjects([...project.projects, res.data.project]);
-                handleCreate();
-            })
-            .catch((err) => {
-                console.log("Error in Create project!");
-            });
-    };
-   // const [selectedOption, setSelectedOption] = useState(options[0].value); //board select
+
     const [boardData, setBoard] = useState({  //board data
         title: "",
         idProject: "",
         background: ""
     });
     const onChangeBck = (e) => {
-        setBoard({ ...boardData, 'background': e });
+        setBoard({...boardData, 'background': e});
         setBoardBck(e)//set values for board form
         console.log(boardData)
     };
     const onChangeBoard = (e) => {
-        setBoard({ ...boardData, [e.target.name]: e.target.value });   //set values for board form
+        setBoard({...boardData, [e.target.name]: e.target.value});   //set values for board form
     };
     const [boards, setBoards] = useState([]);  //boards
     const onSubmitBoard = (e) => {
@@ -81,7 +67,7 @@ const Sidemenu = (project, setProjects, children) => {
                     background: ""
                 });
                 console.log(res.data.board)
-               setBoards([...boards, res.data.board]);
+                setBoards([...boards, res.data.board]);
                 handleCreateBoard();
             })
             .catch((err) => {
@@ -90,16 +76,16 @@ const Sidemenu = (project, setProjects, children) => {
     };
 
     const projectList =
-        project.length === 0
+        projects.length === 0
             ? 'there are no projects!'
-            : project.projects.map((project, k) => <a className="nav-link link-dark1" key={project._id}>
+            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {project.title} </a>);
     const projectListSelect =
-        project.length === 0
+        projects.length === 0
             ? 'there are no projects!'
-            : project.projects.map((project, k) =>
-    <option key={project._id} value={project._id}>{project.title}</option>);
+            : projects.map((project, k) =>
+                <option key={project._id} value={project._id}>{project.title}</option>);
 
 // console.log(boardBck)
     // const setBck = (e) => {
@@ -110,22 +96,22 @@ const Sidemenu = (project, setProjects, children) => {
     const onImageChange = async (e) => {
         // if (event.target.files && event.target.files[0]) {
 
-            const file = e.target.files[0];
-            const base64 = await convertToBase64(file);
-            console.log(base64)
-            setImage(base64);
-            setProject({ ...projectData, image: base64});
-      //  }
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        console.log(base64)
+        setImage(base64);
+        setProject({...projectData, image: base64});
+        //  }
     }
     const [style, setStyle] = useState({display: 'none'});
 
     // setIsVisibleBoard(!isVisibleBoard);
     // if (isVisible === true)
     //     setIsVisible(!isVisible);
-    const createProject = <CreateProject value={isVisible} project={project} setProjects={setProjects} />;
+    // const createProject = <CreateProject value={isVisible} project={projects} setProjects={setProjects} />;
     return (
         <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
-             >
+        >
             <a href="/"
                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                 <img className="header-logo" src="/taskmng.svg"/>
@@ -153,43 +139,7 @@ const Sidemenu = (project, setProjects, children) => {
                             </svg>
                             Create project
                         </a>
-                        {isVisible ? children : ''}
-                        {/*<section*/}
-                        {/*    className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}*/}
-                        {/*    style={styles.section_setting}>*/}
-                        {/*    <div className="section_header row" style={styles.section_header}>*/}
-                        {/*        <div className=" justify-content-center">Create a project</div>*/}
-                        {/*    </div>*/}
-                        {/*    /!*<div className="row">*!/*/}
-                        {/*    /!*    <div className="col-xs-12">Name of Section</div>*!/*/}
-                        {/*    /!*</div>*!/*/}
-                        {/*    <form className="form-create-project" onSubmit={onSubmit}>*/}
-                        {/*        <div className="form-group justify-content-center row py-4"*/}
-                        {/*        >*/}
-                        {/*            /!*{boardBck + " background-div"}*!/*/}
-                        {/*            <div className="select-img"*/}
-                        {/*                 onMouseEnter={e => {*/}
-                        {/*                     setStyle({display: 'block'});*/}
-                        {/*                 }}*/}
-                        {/*                 onMouseLeave={e => {*/}
-                        {/*                     setStyle({display: 'none'})*/}
-                        {/*                 }}>*/}
-                        {/*            <img className="background-div-img" src={image} onChange={onImageChange}  />*/}
-
-                        {/*                /!*<img src="./bck1.svg"/>*!/*/}
-                        {/*            /!*</img>*!/*/}
-                        {/*            <input type="file" onChange={onImageChange} className="filetype input-select" />*/}
-                        {/*            <span className="change-img"  style={style}>Change Image</span></div>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="form-group">*/}
-                        {/*            <label htmlFor="titleOfProject">Project title</label>*/}
-                        {/*            <input type="text" className="form-control" id="titleOfProject"*/}
-                        {/*                   placeholder="" value={project.title} name="title"*/}
-                        {/*                   onChange={onChange}/>*/}
-                        {/*        </div>*/}
-                        {/*        <button type="submit" className="btn create-project-btn btn-sm">Create</button>*/}
-                        {/*    </form>*/}
-                        {/*</section>*/}
+                        {children}
                     </div>
                 </li>
                 <li>
@@ -241,7 +191,8 @@ const Sidemenu = (project, setProjects, children) => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="selectProject">Project</label>
-                                <select className="form-select" name="idProject" id="selectProject" value={boardData.idProject} onChange={onChangeBoard}>
+                                <select className="form-select" name="idProject" id="selectProject"
+                                        value={boardData.idProject} onChange={onChangeBoard}>
                                     {projectListSelect}
                                 </select>
                                 {/*<input type="text" className="form-control" id="selectProject"*/}
@@ -289,7 +240,7 @@ const Sidemenu = (project, setProjects, children) => {
 
 export default Sidemenu;
 
-function convertToBase64(file){
+function convertToBase64(file) {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);

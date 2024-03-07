@@ -6,22 +6,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
 
-const CreateProject = (value, project, setProjects) => {
+const CreateProject = ({projects, setProjects, isVisible, setIsVisible}) => {
+    // console.log(val)
+    console.log(isVisible)
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
     };
     var token = localStorage.getItem("token");
 
-    const [isVisible, setIsVisible] = useState(false);
+    // const [isVisible, setIsVisible] = useState(false);
 
     const [projectData, setProject] = useState({
-        title: ""
+        title: "",
+        image: ""
     });
     const onChange = (e) => {
         setProject({...projectData, [e.target.name]: e.target.value});
     };
     const handleCreate = () => {
+       // val = false;
         setIsVisible(!isVisible);
         // if (isVisibleBoard === true)
         //     setIsVisibleBoard(!isVisibleBoard);
@@ -32,10 +36,16 @@ const CreateProject = (value, project, setProjects) => {
         axios
             .post("http://localhost:8001/api/projects", projectData, {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
-                setProject({
-                    title: ""
-                });
-                project.setProjects([...project.projects, res.data.project]);
+                // console.log(projects)
+                // console.log(res.data)
+                // setProject({
+                //     title: "",
+                //     image: ""
+                // });
+               // projects.append(res.data.project);
+            //    console.log([...projects, res.data.project])
+                setProjects([...projects, res.data.project]);
+                // console.log(projects)
                 handleCreate();
             })
             .catch((err) => {
@@ -89,7 +99,7 @@ const CreateProject = (value, project, setProjects) => {
                 <div className="form-group">
                     <label htmlFor="titleOfProject">Project title</label>
                     <input type="text" className="form-control" id="titleOfProject"
-                           placeholder="" value={project.title} name="title"
+                           placeholder="" value={projectData.title} name="title"
                            onChange={onChange}/>
                 </div>
                 <button type="submit" className="btn create-project-btn btn-sm">Create</button>
