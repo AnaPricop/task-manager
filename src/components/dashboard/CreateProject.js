@@ -24,12 +24,12 @@ const CreateProject = ({projects, setProjects, isVisible, setIsVisible}) => {
     const onChange = (e) => {
         setProject({...projectData, [e.target.name]: e.target.value});
     };
-    const handleCreate = () => {
-       // val = false;
-        setIsVisible(!isVisible);
-        // if (isVisibleBoard === true)
-        //     setIsVisibleBoard(!isVisibleBoard);
-    }
+    // const handleCreate = () => {
+    //    // val = false;
+    //     setIsVisible(!isVisible);
+    //     // if (isVisibleBoard === true)
+    //     //     setIsVisibleBoard(!isVisibleBoard);
+    // }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -45,8 +45,9 @@ const CreateProject = ({projects, setProjects, isVisible, setIsVisible}) => {
                // projects.append(res.data.project);
             //    console.log([...projects, res.data.project])
                 setProjects([...projects, res.data.project]);
+                setIsVisible(!isVisible)
                 // console.log(projects)
-                handleCreate();
+              //  handleCreate();
             })
             .catch((err) => {
                 console.log("Error in Create project!");
@@ -71,7 +72,7 @@ const CreateProject = ({projects, setProjects, isVisible, setIsVisible}) => {
     return (
         <section
             className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
-            style={styles.section_setting}>
+            style={{zIndex: 1000}}>
             <div className="section_header row" style={styles.section_header}>
                 <div className=" justify-content-center">Create a project</div>
             </div>

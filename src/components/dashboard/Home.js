@@ -24,21 +24,22 @@ const Home = () => {
                 console.log('Error from Projectslist');
             });
     }, []);
-console.log(projects)
-    const [val, setVal] = useState(false);
-    // const projectList =
-    //     projects.length === 0
-    //         ? 'there are no projects!'
-    //         : projects.map((project, k) => <Sidemenu project={project} key={k} />);
+
     return (
-        <div className="bck-pr d-flex flex-row">
-            <div className="col-2">
-            <Sidemenu projects={projects} setProjects={setProjects} >
-                {/*<CreateProject/>*/}
-            </Sidemenu>
+        <div className="bck-pr d-flex flex-row-reverse">
+            {/*<div className="col-2">*/}
+            {/*<Sidemenu projects={projects} setProjects={setProjects} style={{zIndex: 1000}}>*/}
+            {/*    /!*<CreateProject/>*!/*/}
+            {/*</Sidemenu>*/}
+            {/*</div>*/}
+            <div className="col-10
+             col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
+            <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}}/>
             </div>
-            <div className="col-10 col-sm-11 my-3 proj-list-margin">
-            <Projects projects={projects}/>
+            <div className="col">
+                <Sidemenu projects={projects} setProjects={setProjects} style={{zIndex: 1000}}>
+                    {/*<CreateProject/>*/}
+                </Sidemenu>
             </div>
         </div>
     );

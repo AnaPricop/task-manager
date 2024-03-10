@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Link} from 'react-router-dom';
 // import googlebooks from '@googleapis/books';
 import axios from 'axios';
@@ -6,42 +6,47 @@ import styles from "../css/projects.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import '../App.css';
+import Modal from './dashboard/Modal';
 
-const ProjectCard = ({project}) => {
+const ProjectCard = ({project, setProjectsDel}) => {
     const [boards, setBoards] = useState([]);
     var token = localStorage.getItem("token");
     var background = './color.svg';
-    const [textSpan, setTextSpan] = useState("In Progress");
-    // textSpan = project.progress == 0 ? setTextSpan("In Progress") :
-    // useEffect(() => {
-    //     axios
-    //         .get('http://localhost:8001/api/boards')
-    //         .then((res) => {
-    //             setBoards(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log('Error from Projectslist');
-    //         });
-    // }, []);
-    // const [blobURL, setBlobURL] = React.useState(null);
-    // const imgURL = project[10].image;
-    // React.useEffect(() => {
-    //     const controller = new AbortController(); // https://developer.mozilla.org/en-US/docs/Web/API/AbortController
-    //     const signal = controller.signal;
-    //     fetch(imgURL, { signal })
-    //         .then((res) => res.blob()) // Get the response and return it as a blob
-    //         .then((blob) => { // Create a URL to the blob and use it without modifying it.
-    //             setBlobURL(URL.createObjectURL(blob));
-    //         })
-    //         .catch((error) => { // Error handling here
-    //             console.error(error);
-    //         });
-    //
-    //     // Cancel the fetch request on any dependency change
-    //     return () => controller.abort();
-    // }, [imgURL]);
+    const [unique, setUnique] = useState('#'+project.name + '_' + project._id);
+    const [showModal, setShowModal] = useState(false);
+    const [projid, setProjId] = useState('');
+    const approveDelete = (value) => {
+        if (value === 1)
+        {
+            confirmedDelete();
+        }
+    };
+    const deleteProject = (projectid) => {
+        setProjId(projectid);
+        setShowModal(true);
+    };
+
+    const confirmedDelete = () => {
+        axios
+            .delete("http://localhost:8001/api/projects/" + projid)
+            .then((res) => {
+                console.log(projid);
+                setProjectsDel(projid);
+                setProjId('');
+                // const del = projects.filter(project => projectid !== project._id)
+                // setProjects(del)
+                // setProject({
+                //     title: ""
+                // });
+                // setProjects([...projects, res.data.project]);
+                // handleCreate();
+            })
+            .catch((err) => {
+                console.log("Error in Delete project!");
+            });
+    }
     return (
-        <div className="card mx-3 my-3 col-lg-2 col-md-8 justify-content-center">
+        <div className="card mx-3 my-3 col-lg-2 col-md-8 justify-content-center" key={project._id}>
             <div className="progress_top">
                 <svg viewBox="0 0 36 36" width="10px" xmlns="http://www.w3.org/2000/svg"
                      aria-hidden="true" role="img" className="iconify iconify--twemoji"
@@ -60,7 +65,7 @@ const ProjectCard = ({project}) => {
             <div className="card-body ">
                 <h5 className="card-title">{project.title}</h5>
                 <div className="row justify-content-center py-3">
-                    <div className="col col-lg-2"  style={{textAlign: 'center'}}>
+                    <div className="col col-lg-2" style={{textAlign: 'center'}}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -70,7 +75,7 @@ const ProjectCard = ({project}) => {
                             </g>
                         </svg>
                     </div>
-                    <div className="col col-lg-2"  style={{textAlign: 'center'}}>
+                    <div className="col col-lg-2" style={{textAlign: 'center'}}>
                         <svg viewBox="0 0 24 24" width="25px" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -86,28 +91,10 @@ const ProjectCard = ({project}) => {
                                     fill="#272829"></path>
                             </g>
                         </svg>
-                        {/*<svg viewBox="0 0 24 24" width="25px" fill="none" xmlns="http://www.w3.org/2000/svg"*/}
-                        {/*     style={{textAlign: 'center'}}>*/}
-                        {/*    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>*/}
-                        {/*    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>*/}
-                        {/*    <g id="SVGRepo_iconCarrier">*/}
-                        {/*        <path d="M13 21H21" stroke="#61677A" strokeWidth="2" strokeLinecap="round"*/}
-                        {/*              strokeLinejoin="round"></path>*/}
-                        {/*        <path*/}
-                        {/*            d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"*/}
-                        {/*            stroke="#61677A" strokeWidth="2" strokeLinecap="round"*/}
-                        {/*            strokeLinejoin="round"></path>*/}
-                        {/*        <path d="M15.3096 5.30981L18.7273 8.72755" stroke="#61677A" strokeWidth="2"*/}
-                        {/*              strokeLinecap="round" strokeLinejoin="round"></path>*/}
-                        {/*        <path opacity="0.1"*/}
-                        {/*              d="M18.556 8.90942L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L15.0647 5.35974C15.0742 5.4062 15.0969 5.45049 15.1329 5.48653L18.5506 8.90426C18.5524 8.90601 18.5542 8.90773 18.556 8.90942Z"*/}
-                        {/*              fill="#61677A"></path>*/}
-                        {/*    </g>*/}
-                        {/*</svg>*/}
                     </div>
-                    {/*</div>*/}
-                    {/*<div className="svg-icon col-4">*/}
-                    <div className="col col-lg-2"  style={{textAlign: 'center'}}>
+                    <div className="col col-lg-2" style={{textAlign: 'center'}}
+                         onClick={() => deleteProject(project._id)} data-bs-toggle="modal"
+                         data-bs-target={unique}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -120,6 +107,10 @@ const ProjectCard = ({project}) => {
                     {/*</div>*/}
                 </div>
             </div>
+
+            {showModal && (
+                <Modal  approveDelete={approveDelete} projName={project.title} idModal={unique}/>
+            )}
             {/*<ul className="list-group list-group-flush">*/}
             {/*    <li className="list-group-item">Cras justo odio</li>*/}
             {/*    <li className="list-group-item">Dapibus ac facilisis in</li>*/}

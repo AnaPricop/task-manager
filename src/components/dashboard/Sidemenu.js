@@ -8,7 +8,7 @@ import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 
 const Sidemenu = ({projects, setProjects}) => {
-    console.log(projects)
+  //  console.log(projects)
     const [active, setActive] = useState(0);
     const fileInput = React.createRef();
     const handleLogout = () => {
@@ -22,14 +22,15 @@ const Sidemenu = ({projects, setProjects}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const [projectData, setProject] = useState({
-        title: ""
+        title: "",
+        image: ''
     });
 
-    const [children, setChildren] = useState(<CreateProject projects={projects} setProjects={setProjects} isVisible={isVisible} setIsVisible={setIsVisible}/>);
+    //const [children, setChildren] = useState(<div><CreateProject projects={projects} setProjects={setProjects} isVisible={isVisible} setIsVisible={setIsVisible}/></div>);
     const handleCreate = () => {
         setIsVisible(!isVisible);
         //  children = true;
-        setChildren(<CreateProject projects={projects} setProjects={setProjects} val={!isVisible}/>);
+      //  setChildren(<div><CreateProject projects={projects} setProjects={setProjects} isVisible={!isVisible} setIsVisible={setIsVisible}/></div>);
         // {children}.setVal(true);
         if (isVisibleBoard === true)
             setIsVisibleBoard(!isVisibleBoard);
@@ -46,6 +47,7 @@ const Sidemenu = ({projects, setProjects}) => {
         idProject: "",
         background: ""
     });
+    //background board
     const onChangeBck = (e) => {
         setBoard({...boardData, 'background': e});
         setBoardBck(e)//set values for board form
@@ -54,6 +56,7 @@ const Sidemenu = ({projects, setProjects}) => {
     const onChangeBoard = (e) => {
         setBoard({...boardData, [e.target.name]: e.target.value});   //set values for board form
     };
+    //submit board
     const [boards, setBoards] = useState([]);  //boards
     const onSubmitBoard = (e) => {
         e.preventDefault();
@@ -74,7 +77,9 @@ const Sidemenu = ({projects, setProjects}) => {
                 console.log("Error in Create project!");
             });
     };
-
+    const onChange = (e) => {
+        setProject({ ...projectData, [e.target.name]: e.target.value });
+    };
     const projectList =
         projects.length === 0
             ? 'there are no projects!'
@@ -104,11 +109,23 @@ const Sidemenu = ({projects, setProjects}) => {
         //  }
     }
     const [style, setStyle] = useState({display: 'none'});
+    //submit create project
+    const onSubmit = (e) => {
+        e.preventDefault();
+        axios
+            .post("http://localhost:8001/api/projects", projectData, { headers: {"Authorization" : `Bearer ${token}`} })
+            .then((res) => {
+                setProject({
+                    title: ""
+                });
+                setProjects([...projects, res.data.project]);
+                handleCreate();
+            })
+            .catch((err) => {
+                console.log("Error in Create project!");
+            });
+    };
 
-    // setIsVisibleBoard(!isVisibleBoard);
-    // if (isVisible === true)
-    //     setIsVisible(!isVisible);
-    // const createProject = <CreateProject value={isVisible} project={projects} setProjects={setProjects} />;
     return (
         <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
         >
@@ -139,7 +156,42 @@ const Sidemenu = ({projects, setProjects}) => {
                             </svg>
                             Create project
                         </a>
-                        {children}
+                        <section
+                            className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
+                            style={styles.section_setting}>
+                            <div className="section_header row" style={styles.section_header}>
+                                <div className=" justify-content-center">Create a project</div>
+                            </div>
+                            {/*<div className="row">*/}
+                            {/*    <div className="col-xs-12">Name of Section</div>*/}
+                            {/*</div>*/}
+                            <form className="form-create-project" onSubmit={onSubmit}>
+                                <div className="form-group justify-content-center row py-4"
+                                >
+                                    {/*{boardBck + " background-div"}*/}
+                                    <div className="select-img"
+                                         onMouseEnter={e => {
+                                             setStyle({display: 'block'});
+                                         }}
+                                         onMouseLeave={e => {
+                                             setStyle({display: 'none'})
+                                         }}>
+                                        <img className="background-div-img" src={image} onChange={onImageChange}  />
+
+                                        {/*<img src="./bck1.svg"/>*/}
+                                        {/*</img>*/}
+                                        <input type="file" onChange={onImageChange} className="filetype input-select" />
+                                        <span className="change-img"  style={style}>Change Image</span></div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="titleOfProject">Project title</label>
+                                    <input type="text" className="form-control" id="titleOfProject"
+                                           placeholder="" value={projectData.title} name="title"
+                                           onChange={onChange}/>
+                                </div>
+                                <button type="submit" className="btn create-project-btn btn-sm">Create</button>
+                            </form>
+                        </section>
                     </div>
                 </li>
                 <li>

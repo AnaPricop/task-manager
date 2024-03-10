@@ -226,7 +226,8 @@ select option{
     position: absolute;
     width: 200px;
     height: 120px;
-    cursor:pointer
+    cursor:pointer;
+    z-index:1000;
     /*top:0;*/
     /*left: 0;*/
     /*bottom: 0;*/
@@ -246,7 +247,6 @@ select option{
     text-align: center;
     font-weight: bold;
     line-height: 52px;
-    z-index:1000;
     align-items: center;
     justify-content: center;
 }
