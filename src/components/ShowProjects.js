@@ -15,11 +15,6 @@ function ShowProjects({projects, setProjects}) {
         setProjects(del)
         console.log(del, projectid)
     }
-    // const approveDelete = (projectid) => {
-    //     const del = projects.filter(project => projectid !== project._id)
-    //     setProjects(del)
-    //     console.log(del, projectid)
-    // }
     const projectList =
         projects.length === 0
             ? 'there are no projects!'

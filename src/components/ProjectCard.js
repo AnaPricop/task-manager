@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {Link} from 'react-router-dom';
-// import googlebooks from '@googleapis/books';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styles from "../css/projects.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,15 +8,11 @@ import '../App.css';
 import Modal from './dashboard/Modal';
 
 const ProjectCard = ({project, setProjectsDel}) => {
-    const [boards, setBoards] = useState([]);
-    var token = localStorage.getItem("token");
     var background = './color.svg';
-    const [unique, setUnique] = useState('#'+project.name + '_' + project._id);
-    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
     const [projid, setProjId] = useState('');
     const approveDelete = (value) => {
-        if (value === 1)
-        {
+        if (value === 1) {
             confirmedDelete();
         }
     };
@@ -26,7 +21,9 @@ const ProjectCard = ({project, setProjectsDel}) => {
         setProjId(projectid);
         setShow(true);
     };
-
+    const handleNext = () => {
+        navigate(`/proj/${project._id}`);
+    }
     const confirmedDelete = () => {
         axios
             .delete("http://localhost:8001/api/projects/" + projid)
@@ -34,13 +31,6 @@ const ProjectCard = ({project, setProjectsDel}) => {
                 console.log(projid);
                 setProjectsDel(projid);
                 setProjId('');
-                // const del = projects.filter(project => projectid !== project._id)
-                // setProjects(del)
-                // setProject({
-                //     title: ""
-                // });
-                // setProjects([...projects, res.data.project]);
-                // handleCreate();
             })
             .catch((err) => {
                 console.log("Error in Delete project!");
@@ -66,7 +56,7 @@ const ProjectCard = ({project, setProjectsDel}) => {
             <div className="card-body ">
                 <h5 className="card-title">{project.title}</h5>
                 <div className="row justify-content-center py-3">
-                    <div className="col col-lg-2" style={{textAlign: 'center'}}>
+                    <div className="col col-lg-2" style={{textAlign: 'center'}} onClick={() => handleNext()}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -94,7 +84,7 @@ const ProjectCard = ({project, setProjectsDel}) => {
                         </svg>
                     </div>
                     <div className="col col-lg-2" style={{textAlign: 'center'}}
-                         onClick={() => deleteProject(project._id)} >
+                         onClick={() => deleteProject(project._id)}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -107,19 +97,7 @@ const ProjectCard = ({project, setProjectsDel}) => {
                     {/*</div>*/}
                 </div>
             </div>
-
-            {/*{showModal && (*/}
-                <Modal  approveDelete={approveDelete} projName={project.title} show={show} setShow={setShow}/>
-            {/*)}*/}
-            {/*<ul className="list-group list-group-flush">*/}
-            {/*    <li className="list-group-item">Cras justo odio</li>*/}
-            {/*    <li className="list-group-item">Dapibus ac facilisis in</li>*/}
-            {/*    <li className="list-group-item">Vestibulum at eros</li>*/}
-            {/*</ul>*/}
-            {/*<div className="card-body">*/}
-            {/*    <a className="card-link">Card link</a>*/}
-            {/*    <a className="card-link">Another link</a>*/}
-            {/*</div>*/}
+            <Modal approveDelete={approveDelete} projName={project.title} show={show} setShow={setShow}/>
         </div>
 
     );

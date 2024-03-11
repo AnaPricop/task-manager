@@ -10,7 +10,7 @@ const authRoutes = require("./routes/api/auth");
 const projectRoutes = require("./routes/api/projects");
 const boardRoutes = require("./routes/api/boards");
 
-app.use(express.json());
+
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 const port = process.env.PORT || 8001;
@@ -18,9 +18,9 @@ const port = process.env.PORT || 8001;
 app.use(cors({ origin: true, credentials: true }));
 
 // use the body-parser middleware to parse JSON and URL-encoded data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
 // use the routes module as a middleware
 // for the /api/books path
 app.use("/api/books", routes);

@@ -11,7 +11,7 @@ const ProjectSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false
     },
     idBoards: {
         type: Array,
@@ -29,23 +29,5 @@ const ProjectSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-    // author: {
-    //     type: String,
-    //     required: true
-    // },
-    // description: {
-    //     type: String
-    // },
-    // published_date: {
-    //     type: Date
-    // },
-    // publisher: {
-    //     type: String
-    // },
-    // updated_date: {
-    //     type: Date,
-    //     default: Date.now
-    // }
 });
-//done 300-400k import
 module.exports = Project = mongoose.model('project', ProjectSchema);

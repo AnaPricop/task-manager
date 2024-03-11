@@ -1,15 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
-// import '../App.css';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
-// import styles from "../css/projects.css";
-// import ProjectCard from './ProjectCard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function Modal1({approveDelete, projName, show, setShow}) {
+    //Modal for delete project
     const handleClose = () => setShow(false);
     const onClickHandler = () => {
         approveDelete(1);

@@ -35,6 +35,7 @@ import SignUp from "./components/Signup";
 import Home from "./components/Homepage";
 import Dashboard from "./components/dashboard/Dashboard";
 import HomeLogin from "./components/dashboard/Home";
+import BoardWrapper from "./components/boards/BoardWrapper";
 // Routes
 const user = localStorage.getItem("token");
 console.log(user)
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
     { path: "/", element: <Home /> },
     { path: "/dashboard", element: user ? <Dashboard /> : <Home />},
     { path: "/home", element: user ? <HomeLogin /> : <Home /> },
+    { path: "/proj/:projectId", element: user ? <BoardWrapper /> : <Home /> },
     // { path: "/", element: user ? <ShowProjects /> :  <LogIn /> },
     // { path: "/", element: user ? <ShowProjects /> :  <LogIn /> },
     // { path: "/create-book", element: <CreateBook /> },

@@ -27,11 +27,6 @@ const Home = () => {
 
     return (
         <div className="bck-pr d-flex flex-row-reverse">
-            {/*<div className="col-2">*/}
-            {/*<Sidemenu projects={projects} setProjects={setProjects} style={{zIndex: 1000}}>*/}
-            {/*    /!*<CreateProject/>*!/*/}
-            {/*</Sidemenu>*/}
-            {/*</div>*/}
             <div className="col-10
              col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
             <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}}/>
