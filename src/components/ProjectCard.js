@@ -21,9 +21,10 @@ const ProjectCard = ({project, setProjectsDel}) => {
             confirmedDelete();
         }
     };
+    const [show, setShow] = useState(false);
     const deleteProject = (projectid) => {
         setProjId(projectid);
-        setShowModal(true);
+        setShow(true);
     };
 
     const confirmedDelete = () => {
@@ -93,8 +94,7 @@ const ProjectCard = ({project, setProjectsDel}) => {
                         </svg>
                     </div>
                     <div className="col col-lg-2" style={{textAlign: 'center'}}
-                         onClick={() => deleteProject(project._id)} data-bs-toggle="modal"
-                         data-bs-target={unique}>
+                         onClick={() => deleteProject(project._id)} >
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -108,9 +108,9 @@ const ProjectCard = ({project, setProjectsDel}) => {
                 </div>
             </div>
 
-            {showModal && (
-                <Modal  approveDelete={approveDelete} projName={project.title} idModal={unique}/>
-            )}
+            {/*{showModal && (*/}
+                <Modal  approveDelete={approveDelete} projName={project.title} show={show} setShow={setShow}/>
+            {/*)}*/}
             {/*<ul className="list-group list-group-flush">*/}
             {/*    <li className="list-group-item">Cras justo odio</li>*/}
             {/*    <li className="list-group-item">Dapibus ac facilisis in</li>*/}

@@ -99,14 +99,11 @@ const Sidemenu = ({projects, setProjects}) => {
     const [image, setImage] = useState('./bck4.svg')
 
     const onImageChange = async (e) => {
-        // if (event.target.files && event.target.files[0]) {
-
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
         console.log(base64)
         setImage(base64);
         setProject({...projectData, image: base64});
-        //  }
     }
     const [style, setStyle] = useState({display: 'none'});
     //submit create project
@@ -116,9 +113,11 @@ const Sidemenu = ({projects, setProjects}) => {
             .post("http://localhost:8001/api/projects", projectData, { headers: {"Authorization" : `Bearer ${token}`} })
             .then((res) => {
                 setProject({
-                    title: ""
+                    title: "",
+                    image: ''
                 });
                 setProjects([...projects, res.data.project]);
+                setImage('./bck4.svg');
                 handleCreate();
             })
             .catch((err) => {
