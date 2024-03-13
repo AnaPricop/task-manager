@@ -1,31 +1,31 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-
+import styles from "../../css/dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-
+import BoardCard from "./BoardCard";
+import Row from 'react-bootstrap/Row';
+import Card from "react-bootstrap/Card";
 
 
 const BoardView = ({board, project}) => {
 console.log(board, project)
-//     var token = localStorage.getItem("token");
-// const [board, setBoard] = useState();
-//     useEffect(() => {
-//         axios
-//             .get('http://localhost:8001/api/boards/'+ project._id, { headers: {"Authorization" : `Bearer ${token}`} })
-//             .then((res) => {
-//                 console.log(res.data);
-//                 setBoard(res.data);
-//             })
-//             .catch((err) => {
-//                 console.log('Error from Projectslist');
-//             });
-//     }, []);
+    const boardList =
+        board.length === 0
+            ? 'No boards.'
+            : board.map((b, k) => <BoardCard board={b} key={k} />);
+
     return (
-        <div>
-            <h2>dsojkpfsldf </h2>
-        </div>
+        <Row>
+            <h2 className="boards-h2 mx-5 my-3">Boards</h2>
+            <div className="px-2 mx-5 my-5 col-lg-2 col-md-8 justify-content-center" key={board._id}>
+                <Card className="text-white card-board bg-dark justify-content-center">
+                    <Card.Img src="../addboard.svg" alt="Card image" className="card-svg" />
+                </Card>
+            </div>
+            {boardList}
+        </Row>
     );
 };
 

@@ -25,11 +25,6 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
-// Components imports
-import CreateBook from "./components/CreateBook";
-import ShowProjects from "./components/ShowProjects";
-import ShowBookDetails from "./components/ShowBookDetails";
-import UpdateBookInfo from "./components/UpdateBookInfo";
 import LogIn from "./components/Login";
 import SignUp from "./components/Signup";
 import Home from "./components/Homepage";

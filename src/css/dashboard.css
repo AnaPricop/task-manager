@@ -186,6 +186,7 @@ li.li-little-div{
 }
 .bck4{
     background-image: url("../../public/bck4.svg");
+    background-size: cover;
 }
 .bck5{
     background-image: url("../../public/bck5.svg");

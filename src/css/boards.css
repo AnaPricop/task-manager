@@ -62,3 +62,32 @@ margin-right: 15px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
+.card-board{
+    height:100px;
+    width:300px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.card-img{
+    height:100px;
+    object-fit: cover;
+    width:300px;
+}
+.card-svg{
+    height:30px;
+    object-fit: cover;
+    width:30px;
+    margin: auto;
+    /*margin-top:10px;*/
+    /*text-align:center;*/
+}
+.boards-h2{
+    color: white;
+    margin-bottom:-30px!important;
+    font-size:22px;
+    font-family: Poppins, sans-serif;
+}
+.card-title-board{
+    font-weight: bold;
+    text-align: unset;
+}
