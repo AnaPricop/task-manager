@@ -7,14 +7,17 @@ import Loading from '../Loading';
 import Projects from "../ShowProjects";
 import styles from "../../css/dashboard.css";
 import SidemenuBoards from "../boards/SidemenuBoards";
+import Board from "../boards/Board";
 
 const BoardWrapper = () => {
     const [isLoading, setIsLoading] = useState(true);
     const {projectId} = useParams();
-
+    const {boardId} = useParams();
+    console.log(projectId, boardId);
     const [projects, setProjects] = useState([]);
     const [fProject, setFproject] = useState([]);
     const [currentProject, setCurrentProject] = useState([]);
+    const [currentBoard, setCurrentBoard] = useState([]);
     var token = localStorage.getItem("token");
     const [board, setBoard] = useState([]);
     const [boardBck, setBoardBck] = useState();
@@ -25,6 +28,7 @@ const BoardWrapper = () => {
                 console.log(res.data);
                 setBoard(res.data);
                 setBoardBck(res.data[0].background)
+                setCurrentBoard(res.data.find(m => m._id === boardId))
             })
             .catch((err) => {
                 console.log('Error from Projectslist');
@@ -32,7 +36,7 @@ const BoardWrapper = () => {
         axios
             .get('http://localhost:8001/api/projects', {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
-                console.log(res.data);
+              //  console.log(res.data);
                 setProjects(res.data);
                 setFproject(res.data.find(m => m._id === projectId))
                 setCurrentProject(res.data.find(m => m._id === projectId))
@@ -53,10 +57,10 @@ const BoardWrapper = () => {
             ) : ( <>
                 <div className=" col-10 col-sm-11 my-3 proj-list-margin"
                      style={{paddingLeft: '210px', overflowX: 'hidden'}} >
-                    <BoardView  board={board} project={currentProject} />
+                    {!boardId ? (<BoardView  board={board} project={currentProject} />) : (<Board  board={board} currentBoard={currentBoard}  />)}
                 </div>
                 <div className="col">
-                <SidemenuBoards board={board} setBoard={setBoard} project={currentProject}>
+                <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!boardId ? 'none' : boardId}>
             {/*<CreateProject/>*/}
                 </SidemenuBoards>
                 </div></>

@@ -7,9 +7,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 
-const SidemenuBoards = ({board, setBoard, project}) => {
+const SidemenuBoards = ({board, setBoard, project, selected}) => {
     let navigate = useNavigate();
     // const {projectId} = useParams();
+    console.log(selected, project)
     const [active, setActive] = useState(0);
     const handleCreate = () => {
         setIsVisible(!isVisible);
@@ -49,7 +50,7 @@ const SidemenuBoards = ({board, setBoard, project}) => {
     const boardList =
         board !== 'undefined' && board.length === 0
             ? 'there are no projects!'
-            : board.map((b, k) => <a className="nav-link link-dark1" key={b._id}>
+            : board.map((b, k) => <a className={selected && b._id == selected ? "active nav-link link-dark1" : "nav-link link-dark1"} key={b._id}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {b.title} </a>);
     const [boardBck, setBoardBck] = useState('bck1');

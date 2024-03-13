@@ -6,14 +6,19 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Card from 'react-bootstrap/Card';
 import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
-const BoardCard = ({board}) => {
+const BoardCard = ({board, project}) => {
     var background = './color.svg';
     const navigate = useNavigate();
     const [projid, setProjId] = useState('');
     const [boardBck, setBoardBck] = useState('./../' + (board.background ? board.background : 'bck4') + '.svg');
+
+    const handleNext = () => {
+        navigate(`/${project._id}/${board._id}`);
+    }
+
     return (
         <div className="px-2 mx-5 my-5 col-lg-2 col-md-8 justify-content-center" key={board._id}>
-            <Card className="text-white card-board bg-dark">
+            <Card className="text-white card-board bg-dark" onClick={() => handleNext()}>
                 <Card.Img src={boardBck} alt="Card image" className="card-img" />
                 <Card.ImgOverlay>
                     <Card.Title className="card-title-board">{board.title}</Card.Title>
