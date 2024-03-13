@@ -1,14 +1,14 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Link} from "react-router-dom";
-import styles from "../../css/dashboard.css";
+import styles from "../../css/boards.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 
-const SidemenuBoards = ({board, setBoard}) => {
-    console.log(board)
-    // const [board, setBoard] = useState([]);  //boards
+const SidemenuBoards = ({board, setBoard, project}) => {
+    let navigate = useNavigate();
     const [active, setActive] = useState(0);
     const handleCreate = () => {
         setIsVisible(!isVisible);
@@ -45,20 +45,23 @@ const SidemenuBoards = ({board, setBoard}) => {
         title: "",
         image: ''
     });
-    // const boardList =
-    //     board !== 'undefined' && board.length === 0
-    //         ? 'there are no projects!'
-    //         : board.map((b, k) => <a className="nav-link link-dark1" key={b._id}>
-    //             <svg className="bi me-2" width="16" height="16"></svg>
-    //             {b.title} </a>);
+    const boardList =
+        board !== 'undefined' && board.length === 0
+            ? 'there are no projects!'
+            : board.map((b, k) => <a className="nav-link link-dark1" key={b._id}>
+                <svg className="bi me-2" width="16" height="16"></svg>
+                {b.title} </a>);
     const [boardBck, setBoardBck] = useState('bck1');
     return (
         <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
         >
+            <button className="btn btn-lg text-center button-d" onClick={() => navigate(-1)}><span>Back</span>
+            </button>
             <a href="/"
                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
-                <img className="header-logo" src="/taskmng.svg"/>
-                TaskAcc
+                <img className="img-style-board" src={project.image ? project.image : '/bck5.svg'}/>
+                {project.title}
+
             </a>
             <hr/>
             <ul className="nav nav-pills flex-column mb-auto">
@@ -70,45 +73,6 @@ const SidemenuBoards = ({board, setBoard}) => {
                         </svg>
                         Home
                     </a>
-                </li>
-                <li>
-                    <div className="d-flex">
-                        <a href="#" onClick={handleCreate}
-                           className="nav-link link-dark1 ">
-                            <svg className="bi me-2" width="16" height="16">
-                            </svg>
-                            Create project
-                        </a>
-                        {/*<section*/}
-                        {/*    className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}*/}
-                        {/*    style={styles.section_setting}>*/}
-                        {/*    <div className="section_header row" style={styles.section_header}>*/}
-                        {/*        <div className=" justify-content-center">Create a project</div>*/}
-                        {/*    </div>*/}
-                        {/*    <form className="form-create-project" onSubmit={onSubmit}>*/}
-                        {/*        <div className="form-group justify-content-center row py-4"*/}
-                        {/*        >*/}
-                        {/*            <div className="select-img"*/}
-                        {/*                 onMouseEnter={e => {*/}
-                        {/*                     setStyle({display: 'block'});*/}
-                        {/*                 }}*/}
-                        {/*                 onMouseLeave={e => {*/}
-                        {/*                     setStyle({display: 'none'})*/}
-                        {/*                 }}>*/}
-                        {/*                <img className="background-div-img" src={image} onChange={onImageChange}  />*/}
-                        {/*                <input type="file" onChange={onImageChange} className="filetype input-select" />*/}
-                        {/*                <span className="change-img"  style={style}>Change Image</span></div>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="form-group">*/}
-                        {/*            <label htmlFor="titleOfProject">Project title</label>*/}
-                        {/*            <input type="text" className="form-control" id="titleOfProject"*/}
-                        {/*                   placeholder="" value={projectData.title} name="title"*/}
-                        {/*                   onChange={onChange}/>*/}
-                        {/*        </div>*/}
-                        {/*        <button type="submit" className="btn create-project-btn btn-sm">Create</button>*/}
-                        {/*    </form>*/}
-                        {/*</section>*/}
-                    </div>
                 </li>
                 <li>
                     <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>
@@ -168,11 +132,11 @@ const SidemenuBoards = ({board, setBoard}) => {
                 <a href="/"
                    className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none">
                     <img className="header-logo" src="/myprojects.svg"/>
-                    My projects
+                    My Boards
                 </a>
                 <ul className="nav nav-pills flex-column mb-auto">
                     {/*{board}*/}
-
+                    {boardList}
                 </ul>
             </ul>
 

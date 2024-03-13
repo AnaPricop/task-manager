@@ -8,25 +8,30 @@ import Sidemenu from './Sidemenu';
 import Projects from '../ShowProjects';
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
-
+import Loading from "../Loading";
 
 const Home = () => {
     const [projects, setProjects] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     var token = localStorage.getItem("token");
+    async function fetchData() {
+        let res = await axios.get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
+        console.log(res.data);
+        setProjects(res.data);
+        setIsLoading(false);
+    }
     useEffect(() => {
-        axios
-            .get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
-            .then((res) => {
-                console.log(res.data);
-                setProjects(res.data);
-            })
-            .catch((err) => {
-                console.log('Error from Projectslist');
-            });
+
+        fetchData()
+        console.log('i fire once');
+
     }, []);
 
     return (
         <div className="bck-pr d-flex flex-row-reverse">
+            {isLoading ? (
+                <Loading/>
+            ) : ( <>
             <div className="col-10
              col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
             <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}}/>
@@ -36,6 +41,8 @@ const Home = () => {
                     {/*<CreateProject/>*/}
                 </Sidemenu>
             </div>
+                </>
+                )}
         </div>
     );
 };

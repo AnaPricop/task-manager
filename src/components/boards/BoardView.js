@@ -7,8 +7,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 
 
-const BoardView = ({board}) => {
-console.log(board)
+const BoardView = ({board, project}) => {
+console.log(board, project)
 //     var token = localStorage.getItem("token");
 // const [board, setBoard] = useState();
 //     useEffect(() => {

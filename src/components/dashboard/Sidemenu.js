@@ -6,9 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
+import Loading from "../Loading";
 
 const Sidemenu = ({projects, setProjects}) => {
-  //  console.log(projects)
+    const [isLoading, setIsLoading] = useState(false);
+
     const [active, setActive] = useState(0);
     const fileInput = React.createRef();
     const handleLogout = () => {
@@ -123,6 +125,9 @@ const Sidemenu = ({projects, setProjects}) => {
     return (
         <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
         >
+            {isLoading ? (
+                <Loading/>
+            ) : ( <>
             <a href="/"
                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                 <img className="header-logo" src="/taskmng.svg"/>
@@ -280,6 +285,8 @@ const Sidemenu = ({projects, setProjects}) => {
                     <li><a className="dropdown-item" onClick={handleLogout}>Sign out</a></li>
                 </ul>
             </div>
+            </>
+                )}
         </div>
     );
 };
