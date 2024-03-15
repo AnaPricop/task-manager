@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -11,14 +11,18 @@ const BoardCard = ({board, project}) => {
     const navigate = useNavigate();
     const [projid, setProjId] = useState('');
     const [boardBck, setBoardBck] = useState('./../' + (board.background ? board.background : 'bck4') + '.svg');
-
-    const handleNext = () => {
-        navigate(`/${project._id}/${board._id}`);
-    }
+    //
+    // const handleNext = () => {
+    //    // navigate(`/${project._id}/${board._id}`);
+    //     history.push(`/${project._id}/${board.title}`, { data });
+    // }
 
     return (
         <div className="px-2 mx-5 my-5 col-lg-2 col-md-8 justify-content-center" key={board._id}>
-            <Card className="text-white card-board bg-dark" onClick={() => handleNext()}>
+            <Link  to={{
+                pathname: `/${project._id}/${board.title}`
+            }}  state={board}>
+            <Card className="text-white card-board bg-dark" >
                 <Card.Img src={boardBck} alt="Card image" className="card-img" />
                 <Card.ImgOverlay>
                     <Card.Title className="card-title-board">{board.title}</Card.Title>
@@ -28,7 +32,7 @@ const BoardCard = ({board, project}) => {
                     {/*</Card.Text>*/}
                     {/*<Card.Text>Last updated 3 mins ago</Card.Text>*/}
                 </Card.ImgOverlay>
-            </Card>
+            </Card></Link>
         </div>
     );
 };

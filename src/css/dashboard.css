@@ -180,9 +180,11 @@ li.li-little-div{
 }
 .bck2{
     background-image: url("../../public/bck2.svg");
+    background-size: cover;
 }
 .bck3{
     background-image: url("../../public/bck3.svg");
+    background-size: cover;
 }
 .bck4{
     background-image: url("../../public/bck4.svg");
@@ -190,9 +192,11 @@ li.li-little-div{
 }
 .bck5{
     background-image: url("../../public/bck5.svg");
+    background-size: cover;
 }
 .bck6{
     background-image: url("../../public/bck6.svg");
+    background-size: cover;
 }
 .bck-title{
     color: #D8D9DA;

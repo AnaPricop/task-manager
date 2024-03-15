@@ -82,34 +82,99 @@ margin-right: 15px;
     /*text-align:center;*/
 }
 .boards-h2{
-    color: white;
-    margin-bottom:-30px!important;
-    font-size:22px;
+    color: #272829;
+    /*margin-bottom:-10px!important;*/
+    font-size:20px;
     font-family: Poppins, sans-serif;
+    font-weight: 600;
+    padding-top:20px;
 }
 .card-title-board{
     font-weight: bold;
     text-align: unset;
 }
 .list-board{
-    background-color: var(--accent-background, var(--tr-background-list, #ebecf0));
-    border-radius: 12px;
+    background-color: var(--accent-background, var(--tr-background-list, rgb(255, 255, 255)));
+    border-radius: 7px;
     box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
     color: var(--accent-text, var(--ds-text-subtle, #44546f));
     display: flex;
     justify-content: space-between;
     max-height: 100%;
     flex-direction: column;
-    flex-grow: 0;
-    flex-shrink: 0;
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
     /*flex-basis: 272px;*/
     align-self: start;
-    padding-bottom: 8px;
+    /*padding-bottom: 8px;*/
     position: relative;
-    scroll-margin: 8px;
+    /*scroll-margin: 8px;*/
     white-space: normal;
     width: 380px;
     box-sizing: border-box;
-    min-height:100px;
-    vertical-align: top;
+    min-height:40px;
+    /*vertical-align: top;*/
+}
+.task-status{
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom:10px;
+}
+.list-add-svg{
+    width:15px;
+    height:15px;
+   margin-right:5px;
+}
+.span-tsk{
+    /*padding-top:2px;*/
+}
+.add-card{
+    background-color: var(--accent-background, var(--tr-background-list, rgb(255, 255, 255)));
+    border-radius: 7px;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+    color: var(--accent-text, var(--ds-text-subtle, #44546f));
+    display: flex;
+    justify-content: space-between;
+    max-height: 100%;
+    margin-bottom:20px;
+    flex-direction: column;
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
+    /*flex-basis: 272px;*/
+    align-self: start;
+    /*padding-bottom: 8px;*/
+    position: relative;
+    /*scroll-margin: 8px;*/
+    white-space: normal;
+    width: 380px;
+    box-sizing: border-box;
+    min-height:120px;
+    /*vertical-align: top;*/
+}
+.create-task{
+    font-size:17px;
+    font-weight: 600;
+}
+.form-create-task{
+    padding:10px;
+    width: 97%;
+}
+.taskDescription{
+
+}
+.titleOfTask{
+
+}
+.create-task-btn{
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 7px;
+    /*padding-bottom:20px;*/
+    /*height:20px;*/
+    /*background-color: rgba(19, 42, 144, 0.46) !important;*/
+    color: #ffffff;
+}
+.form-create-task .form-group label, .form-create-task .form-group input, .form-create-task .form-group textarea{
+    font-size:15px;
+    padding-top:10px;
 }

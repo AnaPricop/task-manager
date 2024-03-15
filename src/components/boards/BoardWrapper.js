@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useLocation, Link} from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import BoardView from './BoardView';
 import React, {useEffect, useState} from "react";
@@ -13,7 +13,9 @@ const BoardWrapper = () => {
     const [isLoading, setIsLoading] = useState(true);
     const {projectId} = useParams();
     const {boardId} = useParams();
-    console.log(projectId, boardId);
+   // console.log(projectId, boardId);
+    const { state } = useLocation();
+    console.log(state)
     const [projects, setProjects] = useState([]);
     const [fProject, setFproject] = useState([]);
     const [currentProject, setCurrentProject] = useState([]);
@@ -27,8 +29,8 @@ const BoardWrapper = () => {
             .then((res) => {
                 console.log(res.data);
                 setBoard(res.data);
-                setBoardBck(res.data[0].background)
-                setCurrentBoard(res.data.find(m => m._id === boardId))
+               // setBoardBck(res.data[0].background)
+               // setCurrentBoard(res.data.find(m => m._id === boardId))
             })
             .catch((err) => {
                 console.log('Error from Projectslist');
@@ -55,12 +57,12 @@ const BoardWrapper = () => {
             {isLoading ? (
                 <Loading/>
             ) : ( <>
-                <div className=" col-10 col-sm-11 my-3 proj-list-margin"
+                <div className={!state ? " col-10 col-sm-11 my-3 proj-list-margin" : state.background + " col-10 col-sm-11 my-3 proj-list-margin"}
                      style={{paddingLeft: '210px', overflowX: 'hidden'}} >
-                    {!boardId ? (<BoardView  board={board} project={currentProject} />) : (<Board  board={board} currentBoard={currentBoard}  />)}
+                    {!state ? (<BoardView  board={board} project={currentProject} />) : (<Board  board={board} currentBoard={state}  />)}
                 </div>
                 <div className="col">
-                <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!boardId ? 'none' : boardId}>
+                <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!state ? 'none' : state._id}>
             {/*<CreateProject/>*/}
                 </SidemenuBoards>
                 </div></>
