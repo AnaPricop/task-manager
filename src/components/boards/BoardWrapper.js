@@ -11,8 +11,8 @@ import Board from "../boards/Board";
 
 const BoardWrapper = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const {projectId} = useParams();
-    const {boardId} = useParams();
+    const {projectId, boardId} = useParams();
+    //const {boardId} = useParams();
     console.log(projectId, boardId);
     const [projects, setProjects] = useState([]);
     const [fProject, setFproject] = useState([]);
@@ -29,6 +29,7 @@ const BoardWrapper = () => {
                 setBoard(res.data);
                 setBoardBck(res.data[0].background)
                 setCurrentBoard(res.data.find(m => m._id === boardId))
+                console.log(res.data.find(m => m._id === boardId))
             })
             .catch((err) => {
                 console.log('Error from Projectslist');
@@ -36,7 +37,7 @@ const BoardWrapper = () => {
         axios
             .get('http://localhost:8001/api/projects', {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
-              //  console.log(res.data);
+                //  console.log(res.data);
                 setProjects(res.data);
                 setFproject(res.data.find(m => m._id === projectId))
                 setCurrentProject(res.data.find(m => m._id === projectId))
@@ -52,12 +53,12 @@ const BoardWrapper = () => {
         //     <BoardView project={projects.find(m => m._id === projectId)} />
         // </Col>
         <div className="bck-pr d-flex flex-row-reverse">
-            {isLoading ? (
+            {isLoading  ? (
                 <Loading/>
             ) : ( <>
                 <div className=" col-10 col-sm-11 my-3 proj-list-margin"
                      style={{paddingLeft: '210px', overflowX: 'hidden'}} >
-                    {!boardId ? (<BoardView  board={board} project={currentProject} />) : (<Board  board={board} currentBoard={currentBoard}  />)}
+                    {boardId ? (<Board  board={board} currentBoard={currentBoard}  />) : (<BoardView  board={board} project={currentProject} />)}
                 </div>
                 <div className="col">
                 <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!boardId ? 'none' : boardId}>
