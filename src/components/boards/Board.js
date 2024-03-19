@@ -4,10 +4,12 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Card from 'react-bootstrap/Card';
+import AddCard from './AddCard';
 import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
+
 const BoardCard = ({board, currentBoard}) => {
-    console.log(board)
+    console.log(currentBoard)
     var background = './color.svg';
     const navigate = useNavigate();
     const [projid, setProjId] = useState('');
@@ -15,14 +17,39 @@ const BoardCard = ({board, currentBoard}) => {
     // const handleNext = () => {
     //     navigate(`/boards/${board._id}`);
     // }
-
+const [isClicked, setClicked] = useState(0);
     return (
 <div className=" w-100 h-90 row my-3">
     <h2 className="boards-h2 row">{currentBoard.title}</h2>
-        <div className="my-5 w-100 d-flex h-90">
-            <div className="list-board mx-5"></div>
-            <div className="list-board mx-5"></div>
-            <div className="list-board mx-5"></div>
+        <div className="my-5 w-100 row h-90">
+            <div className="col-3 mx-5">
+            <div className="task-status">To Do</div>
+                {isClicked ? <AddCard setClicked={setClicked} color={currentBoard.background}></AddCard> : ''}
+            <div className="list-board justify-content-center align-items-center" onClick={() => setClicked(!isClicked)}>
+                <div className="d-flex justify-content-center align-items-center">
+                    <img src="../../addboard.svg" alt="Card image" className="list-add-svg" />
+                    <span className="span-tsk">Add a card</span>
+                </div>
+            </div>
+            </div>
+            <div className="col-3 mx-5">
+            <div className="task-status">In Progress</div>
+            <div className="list-board justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center">
+                    <img src="../../addboard.svg" alt="Card image" className="list-add-svg" />
+                    <span className="span-tsk">Add a card</span>
+                </div>
+            </div>
+            </div>
+            <div className="col-3 mx-5">
+            <div className="task-status">Done</div>
+            <div className="list-board justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center">
+                <img src="../../addboard.svg" alt="Card image" className="list-add-svg" />
+                    <span className="span-tsk">Add a card</span>
+                </div>
+            </div>
+            </div>
             {/*<Card className="text-white card-board bg-dark" onClick={() => handleNext()}>*/}
             {/*    <Card.Img src={boardBck} alt="Card image" className="card-img" />*/}
             {/*    <Card.ImgOverlay>*/}

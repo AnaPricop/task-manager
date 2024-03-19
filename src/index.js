@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     { path: "/dashboard", element: user ? <Dashboard /> : <Home />},
     { path: "/home", element: user ? <HomeLogin /> : <Home /> },
     { path: "/proj/:projectId", element: user ? <BoardWrapper /> : <Home /> },
-    { path: "/:projectId/:boardId", element: user ? <BoardWrapper /> : <Home /> },
+    { path: "/:projectId/:boardName", element: user ? <BoardWrapper /> : <Home /> },
     // { path: "/", element: user ? <ShowProjects /> :  <LogIn /> },
     // { path: "/", element: user ? <ShowProjects /> :  <LogIn /> },
     // { path: "/create-book", element: <CreateBook /> },
