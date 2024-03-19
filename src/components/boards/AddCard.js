@@ -10,70 +10,72 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const AddCard = ({setClicked, color}) => {
-     console.log(color);
-     const [startDate, setStartDate] = useState(new Date());
-    // var background = './color.svg';
-    // const navigate = useNavigate();
-    // const [projid, setProjId] = useState('');
-    // const [boardBck, setBoardBck] = useState('./../' + (board.background ? board.background : 'bck4') + '.svg');
-    // const handleNext = () => {
-    //     navigate(`/boards/${board._id}`);
-    // }
+const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
+    console.log(status);
+    const [startDate, setStartDate] = useState(new Date());
+    var token = localStorage.getItem("token");
     const [taskData, setTaskData] = useState({
         title: "",
         description: "",
         subject: [],
-        dueDate: ""
+        dueDate: "",
+        boardId: boardId,
+        status: status
     });
-    const [tasks, setTasks] = useState([]);
+    // const [tasks, setTasks] = useState([]);
     const onChange = (e) => {
         setTaskData({...taskData, [e.target.name]: e.target.value});
     };
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(taskData)
-        // axios
-        //     .post("http://localhost:8001/api/tasks", taskData)
-        //     .then((res) => {
-        //         setTaskData({
-        //             title: "",
-        //             description: "",
-        //             subject: "",
-        //             dueDate: ""
-        //         });
-        //         setTasks([...tasks, res.data.task]);
-        //         // setImage('./bck4.svg');
-        //         // handleCreate();
-        //     })
-        //     .catch((err) => {
-        //         console.log("Error in Create project!");
-        //     });
+        axios
+            .post("http://localhost:8001/api/tasks", taskData, {headers: {"Authorization": `Bearer ${token}`}})
+            .then((res) => {
+                setTaskData({
+                    title: "",
+                    description: "",
+                    subject: [],
+                    dueDate: "",
+                    boardId: boardId,
+                    status: status
+                });
+                setTasks([...tasks, res.data.task]);
+                setClicked(false);
+                // setImage('./bck4.svg');
+                // handleCreate();
+            })
+            .catch((err) => {
+                console.log("Error in Create project!");
+            });
     };
     const [tags, setTags] = useState([
         // "Daily task"
     ]);
-    function handleKeyDown(e){
+
+    function handleKeyDown(e) {
         // If user did not press enter key, return
-        if(e.key !== 'Enter') return
+        if (e.key !== 'Enter') return
         // Get the value of the input
         const value = e.target.value
         // If the value is empty, return
-        if(!value.trim()) return
+        if (!value.trim()) return
         // Add the value to the tags array
         setTags([...tags, value])
         // Clear the input
         e.target.value = ''
-        taskData.subject = tags;
+        taskData.subject = [...tags, value];
     }
-    function removeTag(index){
+
+    function removeTag(index) {
         setTags(tags.filter((el, i) => i !== index))
     }
+
     return (
         // <div className="col-3 mx-5">
         // <div className="task-status">To Do</div>
         <div className="add-card justify-content-center align-items-center">
-            <form className="form-create-task" onSubmit={onSubmit}>
+            <form className="form-create-task">
                 <span className="create-task">Create Task</span>
                 <div className="form-group py-1">
                     <label className='row px-2' htmlFor="titleOfTask">Title</label>
@@ -84,8 +86,8 @@ const AddCard = ({setClicked, color}) => {
                 <div className="form-group py-1">
                     <label className='row px-2' htmlFor="taskDescription">Description</label>
                     <textarea type="text" className="form-control" id="taskDescription"
-                           placeholder="What is this task about?" value={taskData.description} name="description"
-                           onChange={onChange}/>
+                              placeholder="What is this task about?" value={taskData.description} name="description"
+                              onChange={onChange}/>
                 </div>
                 <div className="form-group py-1">
                     <label className='row px-2' htmlFor="taskDueDate">Due Date</label>
@@ -96,23 +98,32 @@ const AddCard = ({setClicked, color}) => {
                         // onChange={handleDateChange}
                         showTimeSelect
                         dateFormat="Pp"
-                        selected={startDate} onChange={(date) => {setStartDate(date); taskData.dueDate = date.getUTCDate()  }}
+                        selected={startDate} onChange={(date) => {
+                        setStartDate(date);
+                        var dd = date;
+                        const offset = dd.getTimezoneOffset();
+                        dd = new Date(dd.getTime() + (offset * 60 * 1000));
+                        let modifiedDate = dd.toISOString().split('T')[0] + " " + dd.toLocaleTimeString();
+                        taskData.dueDate = modifiedDate
+                    }}
                         // value={taskData.description}
                     />
                 </div>
                 <div className="form-group py-1">
                     <label className='row px-2'>Labels</label>
                     <div className="tags-input-container">
-                        { tags.map((tag, index) => (
+                        {tags.map((tag, index) => (
                             <div className="tag-item" key={index}>
                                 <span className="text">{tag}</span>
                                 <span className="close" onClick={() => removeTag(index)}>&times;</span>
                             </div>
-                        )) }
-                        <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="What is the subject of the task?" />
+                        ))}
+                        <input onKeyDown={handleKeyDown} type="text" className="tags-input"
+                               placeholder="What is the subject of the task?"/>
                     </div>
                 </div>
-                <button type="submit" className={color ? color + " btn create-task-btn btn-sm" : " btn create-task-btn btn-sm"} >Create
+                <button type="button" onClick={onSubmit}
+                        className={color ? color + " btn create-task-btn btn-sm" : " btn create-task-btn btn-sm"}>Create
                 </button>
             </form>
         </div>

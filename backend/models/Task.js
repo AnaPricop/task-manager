@@ -12,14 +12,14 @@ const TaskSchema = new mongoose.Schema({
     status: {
         type: Number,
         required: true,
-        default: 0
+        // default: 0
     },
     dueDate: {
         type: Date,
         required: false
     },
     subject: {
-        type: String,
+        type: Array,
         required: false
     },
     boardId: {

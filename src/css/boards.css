@@ -113,6 +113,7 @@ margin-right: 15px;
     width: 380px;
     box-sizing: border-box;
     min-height:40px;
+    margin-bottom: 15px;
     /*vertical-align: top;*/
 }
 .task-status{
@@ -228,4 +229,69 @@ margin-right: 15px;
 .form-create-task .form-group input#taskDueDate{
     height:30px;
     padding-bottom:10px;
+}
+.label-task{
+    background-color: rgb(218, 216, 216);
+    display: inline-block;
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:3px;
+     /*padding: 0.5em 0.75em;*/
+    border-radius: 20px;
+    height: 22px;
+    font-size: 12px;
+    /* padding-bottom: 12px; */
+    /*padding-left: 5px;*/
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.span-task-title{
+    font-size:14px;
+    padding-left:5px;
+    font-weight: 600;
+    color: #272829;
+}
+.date-time-tsk{
+    font-size:12px;
+    padding-top: 3px;
+    padding-left:2px;
+}
+.settings-btn,
+.settings-menu-btn {
+    background: none;
+    border: 0 none;
+    line-height: normal;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    width: 99%;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    text-align:right;
+}
+
+.settings-dot {
+    background-color: #aab8c2;
+    margin: 0 auto;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 1px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    width: 6px;
+    height: 6px;
+}
+.svg-view{
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    text-align:right;
+    width:93%;
+}
+.svg-view svg{
+    margin-right:5px;
 }
