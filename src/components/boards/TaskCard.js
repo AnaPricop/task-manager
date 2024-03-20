@@ -6,10 +6,15 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import dateFormat from 'dateformat';
 import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
+import {Dropdown} from "react-bootstrap";
 
 const TaskCard = ({task}) => {
     console.log(task)
-
+    const evt = (e) => {
+        // setBoards({...boardData, 'background': e});
+        // setBoardBck(e)//set values for board form
+        console.log(e)
+    };
     return (
         <div className="list-board">
             <div className="d-flex px-2">
@@ -69,10 +74,33 @@ const TaskCard = ({task}) => {
                         </g>
                     </g>
                 </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#272829">
-                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                    {/*<Dropdown>*/}
+                    {/*    <Dropdown.Toggle variant="dark">*/}
+                    {/*        Open Menu*/}
+                    {/*    </Dropdown.Toggle>*/}
+                    {/*    <Dropdown.Menu>*/}
+                    {/*        <Dropdown.Item href="#">*/}
+                    {/*            Home Page*/}
+                    {/*        </Dropdown.Item>*/}
+                    {/*        <Dropdown.Item href="#">*/}
+                    {/*            Settings*/}
+                    {/*        </Dropdown.Item>*/}
+                    {/*        <Dropdown.Item href="#">*/}
+                    {/*            Logout*/}
+                    {/*        </Dropdown.Item>*/}
+                    {/*    </Dropdown.Menu>*/}
+                    {/*</Dropdown>*/}
+                    <Dropdown className="d-inline dropdown-status" onSelect={evt}>
+                        <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark" className="dropdown-status dropdown-fr">
+                            Status
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className="dropdown-status">
+                            <Dropdown.Item eventKey="0" active>To Do</Dropdown.Item>
+                            <Dropdown.Item eventKey="1">In Progress</Dropdown.Item>
+                            <Dropdown.Item eventKey="2">Done</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
             </div>
         </div>

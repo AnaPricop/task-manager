@@ -295,3 +295,11 @@ margin-right: 15px;
 .svg-view svg{
     margin-right:5px;
 }
+.dropdown-status{
+    font-size:13px;
+}
+.dropdown-fr{
+    /*height: 20px;*/
+    background-color: transparent;
+    color: #272829;
+}

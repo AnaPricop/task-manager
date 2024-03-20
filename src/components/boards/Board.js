@@ -22,15 +22,18 @@ const BoardCard = ({board, currentBoard}) => {
     // let list0 = [], list1 = [], list2 = [];
     const [list0, setList0] = useState([]);
 
-    async function fetchData() {
-        let res = await axios.get('http://localhost:8001/api/tasks/' + currentBoard._id)
+     function fetchData() {
+        let res =  axios.get('http://localhost:8001/api/tasks/' + currentBoard._id)
+        console.log(res.data)
         setTasks(res.data);
         setIsLoading(false);
     }
 
     useEffect(() => {
-        fetchData()
-    }, []);
+         axios.get('http://localhost:8001/api/tasks/' + currentBoard._id).then((res) => {        console.log(res.data)
+             setTasks(res.data);
+             setIsLoading(false);})
+    }, [currentBoard]);
     const list_0 = tasks.filter(task => task.status === 0).length === 0 ? '' : tasks.filter(task => task.status === 0).map((b, k) =>
         <TaskCard task={b} key={k}/>);
     const list_1 = tasks.filter(task => task.status === 1).length === 0 ? '' : tasks.filter(task => task.status === 1).map((b, k) =>

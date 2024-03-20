@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, Link} from "react-router-dom";
 import axios from "axios";
-import {Link} from "react-router-dom";
 import styles from "../../css/boards.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -34,9 +33,15 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
     const boardList =
         board !== 'undefined' && board.length === 0
             ? 'there are no projects!'
-            : board.map((b, k) => <a className={selected && b._id == selected ? "active nav-link link-dark1" : "nav-link link-dark1"} key={b._id}>
+            : board.map((b, k) =><Link to={{
+                pathname: `/${project._id}/${b.title}`
+            }}  state={b} key={b._id} active={false}> <a className={selected && b._id == selected ? "active nav-link link-dark1" : "nav-link link-dark1"} key={b._id}>
                 <svg className="bi me-2" width="16" height="16"></svg>
-                {b.title} </a>);
+                {b.title} </a></Link>);
+    // const boardList1 =
+    //     board !== 'undefined' && board.length === 0
+    //         ? 'there are no projects!'
+    //         : board.map((b, k) =>console.log(b));
     const [boardBck, setBoardBck] = useState('bck1');
 
 
