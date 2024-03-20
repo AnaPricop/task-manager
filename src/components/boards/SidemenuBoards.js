@@ -9,24 +9,13 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const SidemenuBoards = ({board, setBoard, project, selected}) => {
     let navigate = useNavigate();
-    // const {projectId} = useParams();
     console.log(selected, project)
-    const [active, setActive] = useState(0);
-    const handleCreate = () => {
-        setIsVisible(!isVisible);
-        //  children = true;
-        //  setChildren(<div><CreateProject projects={projects} setProjects={setProjects} isVisible={!isVisible} setIsVisible={setIsVisible}/></div>);
-        // {children}.setVal(true);
-        if (isVisibleBoard === true)
-            setIsVisibleBoard(!isVisibleBoard);
-        // console.log(children)
-    }
+    const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const handleCreateBoard = () => {
         setIsVisibleBoard(!isVisibleBoard);
-        if (isVisible === true)
-            setIsVisible(!isVisible);
+        // if (isVisible === true)
+        //     setIsVisible(!isVisible);
     }
-
     const [boardData, setBoards] = useState({  //board data
         title: "",
         idProject: project._id,
@@ -41,12 +30,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
     const onChangeBoard = (e) => {
         setBoards({...boardData, [e.target.name]: e.target.value});   //set values for board form
     };
-    const [isVisible, setIsVisible] = useState(false);
-    const [isVisibleBoard, setIsVisibleBoard] = useState(false);
-    const [projectData, setProject] = useState({
-        title: "",
-        image: ''
-    });
+
     const boardList =
         board !== 'undefined' && board.length === 0
             ? 'there are no projects!'
@@ -69,7 +53,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                 });
                 console.log(res.data.board)
                 setBoard([...board, res.data.board]);
-                handleCreateBoard();
+                setIsVisibleBoard(!isVisibleBoard);
             })
             .catch((err) => {
                 console.log("Error in Create project!");
@@ -98,7 +82,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                 {/*    </a>*/}
                 {/*</li>*/}
                 <li>
-                    <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>
+                    <a className="nav-link link-dark1" onClick={handleCreateBoard}>
                         <svg className="bi me-2" width="16" height="16">
                         </svg>
                         Create board
@@ -169,16 +153,3 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
 };
 
 export default SidemenuBoards;
-
-function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = () => {
-            resolve(fileReader.result)
-        };
-        fileReader.onerror = (error) => {
-            reject(error)
-        }
-    })
-}

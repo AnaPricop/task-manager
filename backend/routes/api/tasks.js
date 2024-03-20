@@ -28,8 +28,14 @@ router.post('/', (req, res) => {
     // let token = req.headers["authorization"].split(" ")[1];
     // const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
     // var tkn = decoded._id;
-    var arrTask={title: req.body.title, idProject: req.body.idProject, background: req.body.background};
-    Task.create(req.body)
+  //  var arrTask={title: req.body.title, idProject: req.body.idProject, background: req.body.background};
+    let token = req.headers["authorization"].split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+    var tkn = decoded._id;
+    var arrTask={ title: req.body.title, description: req.body.description, dueDate: req.body.dueDate, status: req.body.status,
+    subject: req.body.subject, boardId: req.body.boardId, createdBy: tkn};
+    console.log(arrTask)
+    Task.create(arrTask)
         .then(task => {res.json({ msg: 'Task added successfully', task: task })})
         .catch(err => res.status(400).json({ error: 'Unable to add this task' }));
 });

@@ -8,11 +8,11 @@ router.get('/', (req, res) => {
     let token = req.headers["authorization"].split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
     var tkn = decoded._id;
-     console.log(tkn)
+     // console.log(tkn)
 
     Project.find({user: tkn})
         .then(projects => {
-            console.log(projects)
+            // console.log(projects)
             res.json(projects)})
         .catch(err => res.status(404).json({ noprojectsfound: 'No Projects found' }));
 });

@@ -15,7 +15,7 @@ const BoardWrapper = () => {
     const {boardId} = useParams();
     // console.log(projectId, boardId);
     const { state } = useLocation();
-    console.log(state)
+    console.log(state, boardId)
     const [projects, setProjects] = useState([]);
     const [fProject, setFproject] = useState([]);
     const [currentProject, setCurrentProject] = useState([]);
