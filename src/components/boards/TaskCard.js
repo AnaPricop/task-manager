@@ -8,41 +8,27 @@ import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
 import {Dropdown} from "react-bootstrap";
 
-const TaskCard = ({task}) => {
-    console.log(task)
+const TaskCard = ({task, tasks, setTasks}) => {
+    // console.log(task)
     const [taskData, setTaskData] = useState({
         // status: ''
     });
-    const onUpdate = (e) => {
+    const onUpdate = async (e) => {
         // e.preventDefault();
-        console.log(taskData)
-        axios
-            .put("http://localhost:8001/api/tasks/" + task._id, taskData)
+        let sts = {status: e};
+        await axios
+            .put("http://localhost:8001/api/tasks/" + task._id, sts)
             .then((res) => {
-                console.log(res)
-                // setTaskData({
-                //     title: "",
-                //     description: "",
-                //     subject: [],
-                //     dueDate: "",
-                //     boardId: boardId,
-                //     status: status
-                // });
-                // setTasks([...tasks, res.data.task]);
-                // setClicked(false);
-                // setImage('./bck4.svg');
-                // handleCreate();
+                res.data.task.status = e;
+                setTasks([...tasks.filter(function(tsk) {
+                 return tsk._id !== task._id}), res.data.task]); //for going last on the list
             })
             .catch((err) => {
                 console.log("Error in Create project!");
             });
     };
     const evt = (e) => {
-        console.log(e)
-        setTaskData({
-            status: e
-        });
-        onUpdate();
+        onUpdate(e);
     };
 
 
@@ -71,40 +57,43 @@ const TaskCard = ({task}) => {
             </button>
             <span className="span-task-title px-2">{task.title}</span>
             <div className="d-flex px-2 py-3 ">
-                    <svg viewBox="0 0 24 24" width="22px" height="22px" fill="none" xmlns="http://www.w3.org/2000/svg" style={{verticalAlign:'middle'}}>
-                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <rect x="3" y="6" width="18" height="15" rx="2" stroke="#272829"></rect>
-                            <path
-                                d="M3 10C3 8.11438 3 7.17157 3.58579 6.58579C4.17157 6 5.11438 6 7 6H17C18.8856 6 19.8284 6 20.4142 6.58579C21 7.17157 21 8.11438 21 10H3Z"
-                                fill="#272829"></path>
-                            <path d="M7 3L7 6" stroke="#272829" strokeLinecap="round"></path>
-                            <path d="M17 3L17 6" stroke="#272829" strokeLinecap="round"></path>
-                            <rect x="7" y="12" width="4" height="2" rx="0.5" fill="#272829"></rect>
-                            <rect x="7" y="16" width="4" height="2" rx="0.5" fill="#272829"></rect>
-                            <rect x="13" y="12" width="4" height="2" rx="0.5" fill="#272829"></rect>
-                            <rect x="13" y="16" width="4" height="2" rx="0.5" fill="#272829"></rect>
-                        </g>
-                    </svg>
-                    <span className="date-time-tsk">{dateFormat(task.dueDate, "mmmm dS, h:MM TT")}</span>
+                <svg viewBox="0 0 24 24" width="22px" height="22px" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     style={{verticalAlign: 'middle'}}>
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <rect x="3" y="6" width="18" height="15" rx="2" stroke="#272829"></rect>
+                        <path
+                            d="M3 10C3 8.11438 3 7.17157 3.58579 6.58579C4.17157 6 5.11438 6 7 6H17C18.8856 6 19.8284 6 20.4142 6.58579C21 7.17157 21 8.11438 21 10H3Z"
+                            fill="#272829"></path>
+                        <path d="M7 3L7 6" stroke="#272829" strokeLinecap="round"></path>
+                        <path d="M17 3L17 6" stroke="#272829" strokeLinecap="round"></path>
+                        <rect x="7" y="12" width="4" height="2" rx="0.5" fill="#272829"></rect>
+                        <rect x="7" y="16" width="4" height="2" rx="0.5" fill="#272829"></rect>
+                        <rect x="13" y="12" width="4" height="2" rx="0.5" fill="#272829"></rect>
+                        <rect x="13" y="16" width="4" height="2" rx="0.5" fill="#272829"></rect>
+                    </g>
+                </svg>
+                <span className="date-time-tsk">{dateFormat(task.dueDate, "mmmm dS, h:MM TT")}</span>
                 <div className="svg-view">
                     <Dropdown className="d-inline dropdown-status" onSelect={evt}>
-                        <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark" className="dropdown-status dropdown-fr" size="sm">
+                        <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark"
+                                         className="dropdown-status dropdown-fr" size="sm">
                             Status
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="dropdown-status">
-                            { task.status === 0 ? '' : <Dropdown.Item eventKey="0">To Do</Dropdown.Item> }
-                            { task.status === 1 ? '' : <Dropdown.Item eventKey="1">In Progress</Dropdown.Item> }
-                            { task.status === 2 ? '' : <Dropdown.Item eventKey="2">Done</Dropdown.Item> }
+                            {parseInt(task.status) === 0 ? '' : <Dropdown.Item eventKey="0">To Do</Dropdown.Item>}
+                            {parseInt(task.status) === 1 ? '' : <Dropdown.Item eventKey="1">In Progress</Dropdown.Item>}
+                            {parseInt(task.status) === 2 ? '' : <Dropdown.Item eventKey="2">Done</Dropdown.Item>}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1" className="si-glyph si-glyph-view" fill="#000000">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1"
+                         className="si-glyph si-glyph-view" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                         <g id="SVGRepo_iconCarrier"><title>1127</title>
                             <defs></defs>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                 <g transform="translate(1.000000, 4.000000)" fill="#272829">
                                     <path
                                         d="M8,0 C3.598,0 0.031,2.66 0.031,3.969 C0.031,5.278 3.597,7.938 8,7.938 C12.4,7.938 15.969,5.32 15.969,3.969 C15.969,2.618 12.4,0 8,0 L8,0 Z M7.99,7.062 C4.342,7.062 2.869,5.011 2.869,4 C2.869,2.989 4.342,0.938 7.99,0.938 C11.636,0.938 13.109,2.958 13.109,4 C13.109,5.042 11.637,7.062 7.99,7.062 L7.99,7.062 Z"

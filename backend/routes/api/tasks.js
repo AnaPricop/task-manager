@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     Task.findByIdAndUpdate(req.params.id, req.body)
-        .then(project => res.json({ msg: 'Updated successfully' }))
+        .then(task => {res.json({ msg: 'Updated successfully' , task: task})})
         .catch(err =>
             res.status(400).json({ error: 'Unable to update the Database' })
         );

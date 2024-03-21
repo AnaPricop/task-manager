@@ -24,22 +24,24 @@ const BoardCard = ({board, currentBoard}) => {
 
      function fetchData() {
         let res =  axios.get('http://localhost:8001/api/tasks/' + currentBoard._id)
-        console.log(res.data)
+       // console.log(res.data)
         setTasks(res.data);
         setIsLoading(false);
     }
-
+//console.log(tasks)
     useEffect(() => {
-         axios.get('http://localhost:8001/api/tasks/' + currentBoard._id).then((res) => {        console.log(res.data)
+        setIsLoading(true);
+         axios.get('http://localhost:8001/api/tasks/' + currentBoard._id).then((res) => {
              setTasks(res.data);
              setIsLoading(false);})
     }, [currentBoard]);
-    const list_0 = tasks.filter(task => task.status === 0).length === 0 ? '' : tasks.filter(task => task.status === 0).map((b, k) =>
-        <TaskCard task={b} key={k}/>);
-    const list_1 = tasks.filter(task => task.status === 1).length === 0 ? '' : tasks.filter(task => task.status === 1).map((b, k) =>
-        <TaskCard task={b} key={k}/>);
-    const list_2 = tasks.filter(task => task.status === 2).length === 0 ? '' : tasks.filter(task => task.status === 2).map((b, k) =>
-        <TaskCard task={b} key={k}/>);
+    useEffect(() => {}, []);
+    const list_0 = tasks.filter(task => parseInt(task.status) === 0).length === 0 ? '' : tasks.filter(task => parseInt(task.status) === 0).map((b, k) =>
+        <TaskCard task={b} key={k} tasks={tasks} setTasks={setTasks}/>);
+    const list_1 = tasks.filter(task => parseInt(task.status) === 1).length === 0 ? '' : tasks.filter(task => parseInt(task.status) === 1).map((b, k) =>
+        <TaskCard task={b} key={k} tasks={tasks} setTasks={setTasks}/>);
+    const list_2 = tasks.filter(task => parseInt(task.status) === 2).length === 0 ? '' : tasks.filter(task => parseInt(task.status) === 2).map((b, k) =>
+        <TaskCard task={b} key={k} tasks={tasks} setTasks={setTasks}/>);
     return (
         <div className=" w-100 h-90 row my-3">
             {isLoading ? (
