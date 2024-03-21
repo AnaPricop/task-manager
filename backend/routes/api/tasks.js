@@ -40,13 +40,13 @@ router.post('/', (req, res) => {
         .catch(err => res.status(400).json({ error: 'Unable to add this task' }));
 });
 
-// router.put('/:id', (req, res) => {
-//     Project.findByIdAndUpdate(req.params.id, req.body)
-//         .then(project => res.json({ msg: 'Updated successfully' }))
-//         .catch(err =>
-//             res.status(400).json({ error: 'Unable to update the Database' })
-//         );
-// });
+router.put('/:id', (req, res) => {
+    Task.findByIdAndUpdate(req.params.id, req.body)
+        .then(project => res.json({ msg: 'Updated successfully' }))
+        .catch(err =>
+            res.status(400).json({ error: 'Unable to update the Database' })
+        );
+});
 //
 // router.delete('/:id', (req, res) => {
 //     Project.findByIdAndDelete(req.params.id)

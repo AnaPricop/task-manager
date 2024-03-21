@@ -10,11 +10,42 @@ import {Dropdown} from "react-bootstrap";
 
 const TaskCard = ({task}) => {
     console.log(task)
-    const evt = (e) => {
-        // setBoards({...boardData, 'background': e});
-        // setBoardBck(e)//set values for board form
-        console.log(e)
+    const [taskData, setTaskData] = useState({
+        // status: ''
+    });
+    const onUpdate = (e) => {
+        // e.preventDefault();
+        console.log(taskData)
+        axios
+            .put("http://localhost:8001/api/tasks/" + task._id, taskData)
+            .then((res) => {
+                console.log(res)
+                // setTaskData({
+                //     title: "",
+                //     description: "",
+                //     subject: [],
+                //     dueDate: "",
+                //     boardId: boardId,
+                //     status: status
+                // });
+                // setTasks([...tasks, res.data.task]);
+                // setClicked(false);
+                // setImage('./bck4.svg');
+                // handleCreate();
+            })
+            .catch((err) => {
+                console.log("Error in Create project!");
+            });
     };
+    const evt = (e) => {
+        console.log(e)
+        setTaskData({
+            status: e
+        });
+        onUpdate();
+    };
+
+
     return (
         <div className="list-board">
             <div className="d-flex px-2">
@@ -58,49 +89,32 @@ const TaskCard = ({task}) => {
                     </svg>
                     <span className="date-time-tsk">{dateFormat(task.dueDate, "mmmm dS, h:MM TT")}</span>
                 <div className="svg-view">
-                <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1" className="si-glyph si-glyph-view" fill="#000000">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier"><title>1127</title>
-                        <defs></defs>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(1.000000, 4.000000)" fill="#272829">
-                                <path
-                                    d="M8,0 C3.598,0 0.031,2.66 0.031,3.969 C0.031,5.278 3.597,7.938 8,7.938 C12.4,7.938 15.969,5.32 15.969,3.969 C15.969,2.618 12.4,0 8,0 L8,0 Z M7.99,7.062 C4.342,7.062 2.869,5.011 2.869,4 C2.869,2.989 4.342,0.938 7.99,0.938 C11.636,0.938 13.109,2.958 13.109,4 C13.109,5.042 11.637,7.062 7.99,7.062 L7.99,7.062 Z"
-                                    className="si-glyph-fill"></path>
-                                <ellipse cx="7.932" cy="3.963" rx="1.932" ry="1.963"
-                                         className="si-glyph-fill"></ellipse>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                    {/*<Dropdown>*/}
-                    {/*    <Dropdown.Toggle variant="dark">*/}
-                    {/*        Open Menu*/}
-                    {/*    </Dropdown.Toggle>*/}
-                    {/*    <Dropdown.Menu>*/}
-                    {/*        <Dropdown.Item href="#">*/}
-                    {/*            Home Page*/}
-                    {/*        </Dropdown.Item>*/}
-                    {/*        <Dropdown.Item href="#">*/}
-                    {/*            Settings*/}
-                    {/*        </Dropdown.Item>*/}
-                    {/*        <Dropdown.Item href="#">*/}
-                    {/*            Logout*/}
-                    {/*        </Dropdown.Item>*/}
-                    {/*    </Dropdown.Menu>*/}
-                    {/*</Dropdown>*/}
                     <Dropdown className="d-inline dropdown-status" onSelect={evt}>
-                        <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark" className="dropdown-status dropdown-fr">
+                        <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark" className="dropdown-status dropdown-fr" size="sm">
                             Status
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu className="dropdown-status">
-                            <Dropdown.Item eventKey="0" active>To Do</Dropdown.Item>
-                            <Dropdown.Item eventKey="1">In Progress</Dropdown.Item>
-                            <Dropdown.Item eventKey="2">Done</Dropdown.Item>
+                            { task.status === 0 ? '' : <Dropdown.Item eventKey="0">To Do</Dropdown.Item> }
+                            { task.status === 1 ? '' : <Dropdown.Item eventKey="1">In Progress</Dropdown.Item> }
+                            { task.status === 2 ? '' : <Dropdown.Item eventKey="2">Done</Dropdown.Item> }
                         </Dropdown.Menu>
                     </Dropdown>
+                    <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1" className="si-glyph si-glyph-view" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier"><title>1127</title>
+                            <defs></defs>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(1.000000, 4.000000)" fill="#272829">
+                                    <path
+                                        d="M8,0 C3.598,0 0.031,2.66 0.031,3.969 C0.031,5.278 3.597,7.938 8,7.938 C12.4,7.938 15.969,5.32 15.969,3.969 C15.969,2.618 12.4,0 8,0 L8,0 Z M7.99,7.062 C4.342,7.062 2.869,5.011 2.869,4 C2.869,2.989 4.342,0.938 7.99,0.938 C11.636,0.938 13.109,2.958 13.109,4 C13.109,5.042 11.637,7.062 7.99,7.062 L7.99,7.062 Z"
+                                        className="si-glyph-fill"></path>
+                                    <ellipse cx="7.932" cy="3.963" rx="1.932" ry="1.963"
+                                             className="si-glyph-fill"></ellipse>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
             </div>
         </div>

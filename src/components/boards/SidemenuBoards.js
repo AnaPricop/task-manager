@@ -147,7 +147,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                     {/*<img className="header-logo" src="/myprojects.svg"/>*/}
                     My Boards
                 </a>
-                <ul className="nav nav-pills flex-column mb-auto">
+                <ul className="nav nav-pills flex-column mb-auto text-decoration-none">
                     {/*{board}*/}
                     {boardList}
                 </ul>
