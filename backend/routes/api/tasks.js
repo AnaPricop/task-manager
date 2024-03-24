@@ -48,10 +48,11 @@ router.put('/:id', (req, res) => {
         );
 });
 //
-// router.delete('/:id', (req, res) => {
-//     Project.findByIdAndDelete(req.params.id)
-//         .then(project => res.json({ mgs: 'Project entry deleted successfully' }))
-//         .catch(err => res.status(404).json({ error: 'No such a project' }));
-// });
+router.delete('/:id', (req, res) => {
+    console.log(req.params.id)
+    Task.findByIdAndDelete(req.params.id)
+        .then(task => res.json({ mgs: 'Task deleted successfully' }))
+        .catch(err => res.status(404).json({ error: 'No such a task' }));
+});
 
 module.exports = router;
