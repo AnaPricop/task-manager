@@ -265,12 +265,14 @@ margin-right: 15px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    width: 99%;
+    /*width: 99%;*/
     outline: none;
     cursor: pointer;
     position: absolute;
     float: right;
     text-align:right;
+    top: -40px;
+    right: 0px;
 }
 
 .settings-dot {
@@ -308,3 +310,77 @@ margin-right: 15px;
 .nav a{
     text-decoration: none;
 }
+/*.settings-btn-sidemenu{*/
+/*    background-color: #aab8c2;*/
+/*    margin: 0 auto;*/
+/*    display: inline-block;*/
+/*    width: 7px;*/
+/*    height: 7px;*/
+/*    margin-right: 1px;*/
+/*    border-radius: 50%;*/
+/*    transition: background-color 0.3s;*/
+/*    width: 6px;*/
+/*    height: 6px;*/
+/*}*/
+.settings-btn-sidemenu {
+    background: none;
+    border: 0 none;
+    line-height: normal;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /*width: 90%;*/
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    text-align:right;
+    /*vertical-align: middle;*/
+    vertical-align: middle;
+    top: -32px;
+    /*top: -40px;*/
+    right: 0px;
+    z-index: 1000;
+
+}
+.nav-link.link-dark1{
+    z-index:1000;
+}
+.nav-link.link-dark1:hover, .nav-link.link-dark1:hover{
+    background-color: rgba(97, 103, 122, 0.32) !important;
+    color: #D8D9DA !important;
+}
+.display-dots{
+    display:block;
+}
+.not-display-dots{
+    display:none;
+}
+.dropdown:not(.open) ul.dropdown-menu{
+    display:block !important;
+    opacity:0;
+    pointer-events:none;
+}
+.dropdown-toggle::after {
+    display: none !important;
+}
+.btn-primary:hover {
+    /*color: #fff !important;*/
+    color: #272829!important;
+    background-color: inherit !important;
+    text-decoration: none;
+}
+.btn.show
+{
+    color: #272829!important;
+    background-color: inherit !important;
+    z-index: 1000;
+}
+.dropdown-menu{
+    z-index: 1001;
+}
+/*.active-link{*/
+/*    background-color: rgba(97, 103, 122, 0.32) !important;*/
+/*    color: #D8D9DA !important;*/
+/*}*/

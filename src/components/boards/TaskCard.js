@@ -7,12 +7,14 @@ import dateFormat from 'dateformat';
 import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
 import {Dropdown} from "react-bootstrap";
+import Modal from "./ModalTask";
 
 const TaskCard = ({task, tasks, setTasks}) => {
     // console.log(task)
     const [taskData, setTaskData] = useState({
         // status: ''
     });
+    const [show, setShow] = useState(false);
     const onUpdate = async (e) => {
         // e.preventDefault();
         let sts = {status: e};
@@ -20,8 +22,9 @@ const TaskCard = ({task, tasks, setTasks}) => {
             .put("http://localhost:8001/api/tasks/" + task._id, sts)
             .then((res) => {
                 res.data.task.status = e;
-                setTasks([...tasks.filter(function(tsk) {
-                 return tsk._id !== task._id}), res.data.task]); //for going last on the list
+                setTasks([...tasks.filter(function (tsk) {
+                    return tsk._id !== task._id
+                }), res.data.task]); //for going last on the list
             })
             .catch((err) => {
                 console.log("Error in Create project!");
@@ -30,7 +33,28 @@ const TaskCard = ({task, tasks, setTasks}) => {
     const evt = (e) => {
         onUpdate(e);
     };
-
+    const approveDelete = (value) => {
+        if (value === 1) {
+            confirmedDelete();
+        }
+    };
+    const confirmedDelete = () => {
+        axios.delete(`http://localhost:8001/api/tasks/${task._id}`)
+            .then((res) => {
+                setTasks([...tasks.filter(function (tsk) {
+                    return tsk._id !== task._id
+                })]);
+            })
+            .catch((err) => {
+                console.log("Error in Create project!");
+            });
+    }
+    const dropdowndel = (e) => {
+        // console.log(e, task._id)
+        if (e === '0') {
+            setShow(true);
+        }
+    };
 
     return (
         <div className="list-board">
@@ -38,23 +62,22 @@ const TaskCard = ({task, tasks, setTasks}) => {
                 {task.subject.length > 0 ? task.subject.map((tag, index) => (
                     <div className="label-task justify-content-center align-items-center" key={index}>
                         <span className="text">{tag}</span>
-                        {/*<span className="close" onClick={() => removeTag(index)}>&times;</span>*/}
                     </div>
                 )) : <div className="label-task justify-content-center align-items-center">
                     <span className="text">Default</span>
-                    {/*<span className="close" onClick={() => removeTag(index)}>&times;</span>*/}
                 </div>}
-                {/*<button className="more-btn">*/}
-                {/*    <span className="more-dot"></span>*/}
-                {/*    <span className="more-dot"></span>*/}
-                {/*    <span className="more-dot"></span>*/}
-                {/*</button>*/}
             </div>
-            <button className="settings-btn py-3 px-3">
-                <span className="settings-dot"></span>
-                <span className="settings-dot"></span>
-                <span className="settings-dot"></span>
-            </button>
+            <Dropdown onSelect={dropdowndel}>
+                <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
+                                 className="dropdown-status dropdown-fr settings-btn py-3 px-3" size="sm">
+                    <span className="settings-dot"></span>
+                    <span className="settings-dot"></span>
+                    <span className="settings-dot"></span>
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="dropdown-status">
+                    <Dropdown.Item eventKey="0">Delete</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
             <span className="span-task-title px-2">{task.title}</span>
             <div className="d-flex px-2 py-3 ">
                 <svg viewBox="0 0 24 24" width="22px" height="22px" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -106,6 +129,7 @@ const TaskCard = ({task, tasks, setTasks}) => {
                     </svg>
                 </div>
             </div>
+            <Modal approveDelete={approveDelete} taskName={task.title} show={show} setShow={setShow}/>
         </div>
     );
 };

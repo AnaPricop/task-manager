@@ -4,11 +4,12 @@ import axios from "axios";
 import styles from "../../css/boards.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-
+import {Dropdown} from "react-bootstrap";
+import Modal from './ModalBoard';
 
 const SidemenuBoards = ({board, setBoard, project, selected}) => {
     let navigate = useNavigate();
-    console.log(selected, project)
+    const [show, setShow] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const handleCreateBoard = () => {
         setIsVisibleBoard(!isVisibleBoard);
@@ -24,20 +25,66 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
     const onChangeBck = (e) => {
         setBoards({...boardData, 'background': e});
         setBoardBck(e)//set values for board form
-        console.log(boardData)
     };
     const onChangeBoard = (e) => {
         setBoards({...boardData, [e.target.name]: e.target.value});   //set values for board form
     };
+    const approveDelete = (value) => {
+        if (value === 1) {
+            confirmedDelete();
+        }
+    };
+    const confirmedDelete = () => {
+        axios.delete(`http://localhost:8001/api/boards/${selected}`)
+            .then((res) => {
+                setBoard([...board.filter(function (tsk) {
+                    return tsk._id !== selected
+                })]);
+            })
+            .catch((err) => {
+                console.log("Error in Create project!");
+            });
+    }
+    const dropdowndel = (e, key, name) => {
+        console.log(e, key, name)
+        if (e === '0') {
 
+            // setShow(true);
+        }
+    };
+    const [dotsStyle, setDotsStyle] = useState('')
     const boardList =
         board !== 'undefined' && board.length === 0
             ? 'there are no projects!'
-            : board.map((b, k) =><Link to={{
+            : board.map((b, k) => <Link to={{
                 pathname: `/${project._id}/${b.title}`
-            }}  state={b} key={b._id} active={false}> <a className={selected && b._id == selected ? "active nav-link link-dark1" : "nav-link link-dark1"} key={b._id}>
-                <svg className="bi me-2" width="16" height="16"></svg>
-                {b.title} </a></Link>);
+            }} state={b} key={b._id} className="row"
+                                        onMouseEnter={e => {
+                                            setDotsStyle(b._id);
+                                        }}
+                                        onMouseLeave={e => {
+                                            setDotsStyle('')
+                                        }}> <a
+                className={selected && b._id === selected ? "active nav-link link-dark1" : "nav-link link-dark1"}
+                key={b._id} style={{paddingLeft: '30px'}}
+            >
+                {b.title} </a>
+                <Dropdown onSelect={dropdowndel}>
+                    <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
+                                     className={b._id === dotsStyle || (selected && b._id === selected) ? ' display-dots settings-btn-sidemenu' : 'not-display-dots settings-btn-sidemenu'}
+                                     size="sm"
+                    >
+                        <span className="settings-dot"></span>
+                        <span className="settings-dot"></span>
+                        <span className="settings-dot"></span>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="dropdown-status">
+                        <Dropdown.Item eventKey="0" >Delete</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <Modal approveDelete={approveDelete} boardName={b.title} show={show} setShow={setShow}/>
+            </Link>);
     // const boardList1 =
     //     board !== 'undefined' && board.length === 0
     //         ? 'there are no projects!'
@@ -131,7 +178,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                             <div className="form-group">
                                 <label htmlFor="selectProject">Project</label>
                                 <input className="form-select" name="idProject" id="selectProject"
-                                        onChange={onChangeBoard} value={project.title}>
+                                       onChange={onChangeBoard} value={project.title}>
                                     {/*{projectListSelect}*/}
                                 </input>
                             </div>
@@ -142,8 +189,11 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                 <hr/>
                 {/*<hr/>*/}
                 <a
-                   className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none" style={{fontWeight: '700',
-                    paddingLeft: '10px', paddingBottom: '10px'}}>
+                    className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none"
+                    style={{
+                        fontWeight: '700',
+                        paddingLeft: '10px', paddingBottom: '10px'
+                    }}>
                     {/*<img className="header-logo" src="/myprojects.svg"/>*/}
                     My Boards
                 </a>
