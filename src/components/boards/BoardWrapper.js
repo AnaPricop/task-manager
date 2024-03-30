@@ -48,7 +48,7 @@ const BoardWrapper = () => {
                 console.log('Error from Projectslist');
             });
     }, []);
-
+    const [createBoard, setCreateBoard] = useState(false);
     return (
         // <Col md={8}>
         //     <BoardView project={projects.find(m => m._id === projectId)} />
@@ -59,10 +59,10 @@ const BoardWrapper = () => {
             ) : ( <>
                     <div className={!state ? " col-10 col-sm-11 my-3 proj-list-margin" : state.background + " col-10 col-sm-11 my-3 proj-list-margin"}
                          style={{paddingLeft: '210px', overflowX: 'hidden'}} >
-                        {!state ? (<BoardView  board={board} project={currentProject} />) : (<Board  board={board} currentBoard={state}  />)}
+                        {!state ? (<BoardView  board={board} project={currentProject} setCreateBoard={setCreateBoard} createBoard={createBoard}/>) : (<Board  board={board} currentBoard={state}  />)}
                     </div>
                     <div className="col">
-                        <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!state ? 'none' : state._id}>
+                        <SidemenuBoards board={board} setBoard={setBoard} project={currentProject} selected={!state ? 'none' : state._id} createBoard={createBoard} setCreateBoard={setCreateBoard}>
                             {/*<CreateProject/>*/}
                         </SidemenuBoards>
                     </div></>

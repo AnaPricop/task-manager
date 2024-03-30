@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styles from "../../css/dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -10,7 +10,7 @@ import Loading from "../Loading";
 
 const Sidemenu = ({projects, setProjects}) => {
     const [isLoading, setIsLoading] = useState(false);
-
+    let navigate = useNavigate();
     const [active, setActive] = useState(0);
     const fileInput = React.createRef();
     const handleLogout = () => {
@@ -82,10 +82,14 @@ const Sidemenu = ({projects, setProjects}) => {
     const onChange = (e) => {
         setProject({ ...projectData, [e.target.name]: e.target.value });
     };
+    const handleNext = (id) => {
+        navigate(`/proj/${id}`);
+    }
+
     const projectList =
         projects.length === 0
             ? 'there are no projects!'
-            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id}>
+            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id} onClick={() => handleNext(project._id)}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {project.title} </a>);
     const projectListSelect =
@@ -103,6 +107,8 @@ const Sidemenu = ({projects, setProjects}) => {
         setProject({...projectData, image: base64});
     }
     const [style, setStyle] = useState({display: 'none'});
+   // const navigate = useNavigate();
+
     //submit create project
     const onSubmit = (e) => {
         e.preventDefault();

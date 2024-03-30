@@ -7,21 +7,28 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import {Dropdown} from "react-bootstrap";
 import Modal from './ModalBoard';
 
-const SidemenuBoards = ({board, setBoard, project, selected}) => {
+const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCreateBoard}) => {
     let navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const handleCreateBoard = () => {
-        setIsVisibleBoard(!isVisibleBoard);
-        // if (isVisible === true)
-        //     setIsVisible(!isVisible);
+        if (createBoard && isVisibleBoard)
+        {
+            setCreateBoard(!createBoard);
+            setIsVisibleBoard(!isVisibleBoard);
+        }
+        else if (!createBoard && isVisibleBoard)
+                setIsVisibleBoard(!isVisibleBoard);
+            else if (createBoard && !isVisibleBoard)
+            setCreateBoard(!createBoard);
+        else if (!createBoard && !isVisibleBoard)
+            setCreateBoard(!createBoard);
     }
     const [boardData, setBoards] = useState({  //board data
         title: "",
         idProject: project._id,
         background: ""
     });
-    //background board
     const onChangeBck = (e) => {
         setBoards({...boardData, 'background': e});
         setBoardBck(e)//set values for board form
@@ -40,22 +47,25 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                 setBoard([...board.filter(function (tsk) {
                     return tsk._id !== selected
                 })]);
+                let length = board.length - 2;
+                navigate(`/${project._id}/${board[length].title}`, {state: board[length]});
             })
             .catch((err) => {
                 console.log("Error in Create project!");
             });
     }
-    const dropdowndel = (e, key, name) => {
-        console.log(e, key, name)
-        if (e === '0') {
+    const [selectedItem, setSelectedItem] = useState('');
+    const dropdowndel = (e) => {
 
-            // setShow(true);
+        if (e === '0') {
+            setShow(true);
         }
     };
-    const [dotsStyle, setDotsStyle] = useState('')
+    const [dotsStyle, setDotsStyle] = useState('');
+
     const boardList =
         board !== 'undefined' && board.length === 0
-            ? 'there are no projects!'
+            ? <a style={{paddingLeft: '20px'}}>No boards.</a>
             : board.map((b, k) => <Link to={{
                 pathname: `/${project._id}/${b.title}`
             }} state={b} key={b._id} className="row"
@@ -69,7 +79,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                 key={b._id} style={{paddingLeft: '30px'}}
             >
                 {b.title} </a>
-                <Dropdown onSelect={dropdowndel}>
+                <Dropdown onSelect={dropdowndel} onClick={() => setSelectedItem(b.title)}>
                     <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
                                      className={b._id === dotsStyle || (selected && b._id === selected) ? ' display-dots settings-btn-sidemenu' : 'not-display-dots settings-btn-sidemenu'}
                                      size="sm"
@@ -79,11 +89,9 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                         <span className="settings-dot"></span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="dropdown-status">
-                        <Dropdown.Item eventKey="0" >Delete</Dropdown.Item>
+                        <Dropdown.Item eventKey="0">Delete</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-
-                <Modal approveDelete={approveDelete} boardName={b.title} show={show} setShow={setShow}/>
             </Link>);
     // const boardList1 =
     //     board !== 'undefined' && board.length === 0
@@ -117,6 +125,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
         >
             <button className="btn btn-lg text-center button-d" onClick={() => navigate(-1)}><span>Back</span>
             </button>
+            <Modal approveDelete={approveDelete} boardName={selectedItem} show={show} setShow={setShow}/>
             <a href="/"
                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                 <img className="img-style-board" src={project.image ? project.image : '/bck5.svg'}/>
@@ -140,7 +149,7 @@ const SidemenuBoards = ({board, setBoard, project, selected}) => {
                         Create board
                     </a>
                     <section
-                        className={isVisibleBoard ? 'create_project_visible section_board' : 'create_project_hidden section_board'}
+                        className={isVisibleBoard || createBoard ? 'create_project_visible section_board' : 'create_project_hidden section_board'}
                         style={styles.section_setting}>
                         <div className="section_header justify-content-center" style={styles.section_header}>
                             <div className="">Create board</div>

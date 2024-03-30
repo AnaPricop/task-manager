@@ -8,7 +8,7 @@ import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
 import {Dropdown} from "react-bootstrap";
 import Modal from "./ModalTask";
-
+import OffCanvasExample from "./TaskView";
 const TaskCard = ({task, tasks, setTasks}) => {
     // console.log(task)
     const [taskData, setTaskData] = useState({
@@ -54,6 +54,10 @@ const TaskCard = ({task, tasks, setTasks}) => {
         if (e === '0') {
             setShow(true);
         }
+    };
+    const [showTaskView, setShowTaskView] = useState(false);
+    const openTask = () => {
+setShowTaskView(true);
     };
 
     return (
@@ -110,7 +114,7 @@ const TaskCard = ({task, tasks, setTasks}) => {
                             {parseInt(task.status) === 2 ? '' : <Dropdown.Item eventKey="2">Done</Dropdown.Item>}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1"
+                    <svg viewBox="0 -0.5 17 17" width="25px" height="25px" version="1.1" onClick={() => openTask()}
                          className="si-glyph si-glyph-view" fill="#000000">
                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -127,6 +131,7 @@ const TaskCard = ({task, tasks, setTasks}) => {
                             </g>
                         </g>
                     </svg>
+                    <OffCanvasExample placement={'end'} name={'end'} show={showTaskView} setShowTaskView={setShowTaskView} task={task} setTasks={setTasks} tasks={tasks}/>
                 </div>
             </div>
             <Modal approveDelete={approveDelete} taskName={task.title} show={show} setShow={setShow}/>
