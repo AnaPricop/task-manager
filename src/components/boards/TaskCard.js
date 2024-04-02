@@ -73,7 +73,7 @@ setShowTaskView(true);
             </div>
             <Dropdown onSelect={dropdowndel}>
                 <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
-                                 className="dropdown-status dropdown-fr settings-btn py-3 px-3" size="sm">
+                                 className="dropdown-status settings-btn py-3 px-3" size="sm">
                     <span className="settings-dot"></span>
                     <span className="settings-dot"></span>
                     <span className="settings-dot"></span>

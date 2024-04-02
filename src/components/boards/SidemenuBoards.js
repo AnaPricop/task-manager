@@ -12,6 +12,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
     const [show, setShow] = useState(false);
     const [isVisibleBoard, setIsVisibleBoard] = useState(false);
     const handleCreateBoard = () => {
+        console.log(createBoard, isVisibleBoard)
         if (createBoard && isVisibleBoard)
         {
             setCreateBoard(!createBoard);
@@ -102,7 +103,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
 
     const onSubmitBoard = (e) => {
         e.preventDefault();
-        console.log(boardData)
+        //console.log(boardData)
         axios
             .post("http://localhost:8001/api/boards", boardData)
             .then((res) => {
@@ -111,9 +112,11 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                     idProject: project._id,
                     background: ""
                 });
-                console.log(res.data.board)
+             //   console.log(res.data.board)
                 setBoard([...board, res.data.board]);
-                setIsVisibleBoard(!isVisibleBoard);
+                console.log(isVisibleBoard, createBoard)
+                setIsVisibleBoard(false);
+               setCreateBoard(false);
             })
             .catch((err) => {
                 console.log("Error in Create project!");

@@ -302,10 +302,27 @@ margin-right: 15px;
 }
 .dropdown-fr{
     /*height: 20px;*/
-    background-color: transparent;
-    color: #272829;
-    border-radius:7px;
     margin-right:10px;
+    line-height: 20px;
+    /*font-weight: 400;*/
+    font-display: swap;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px 12px;
+    text-decoration: none;
+    white-space: normal;
+    background-color: rgb(218, 216, 216);
+    box-shadow: none;
+    border: none;
+    color: var(--ds-text, #172b4d);
+    font-weight: 500;
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
 }
 .nav a{
     text-decoration: none;

@@ -19,17 +19,11 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
     console.log(task)
     const onUpdate = async (e) => {
         // e.preventDefault();
-        let sts = {status: e};
+       let sts = {status: e};
         await axios
             .put("http://localhost:8001/api/tasks/" + task._id, sts)
             .then((res) => {
                 res.data.task.status = e;
-                // setTasks(tasks.filter(function (tsk) {
-                //     if (tsk._id!== task._id)
-                //     return tsk
-                //     else
-                //         return res.data.task;
-                // })); //for going last on the list
                 var index1 = '';
                 tasks.map((datum, index) => {
                     console.log(datum)
@@ -38,19 +32,31 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                 })
                 console.log(index1)
                 let newArr = [...tasks]; // copying the old datas array
-                // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
                 newArr[index1] = res.data.task;
                 setTasks(newArr);
-                // setShowTaskView(true);
             })
             .catch((err) => {
-                console.log("Error in Create project!");
+                console.log("Error in update task!");
             });
     };
+
+    const [edit, setEdit] = useState(true);
+    const [saveTask, setSaveTask] = useState(false);
+    //const [descriptionTask, setDescriptionTask] = useState(false);
+    const onTodoChange = (value) =>{
+        // console.log(value)
+        // setDescriptionTask(value);
+        setTaskData({...taskData, 'description': value})
+    }
+    const [taskData, setTaskData] = useState({  //board data
+        description: '',
+        status: task.status
+    });
     const evt = (e) => {
+        setTaskData({...taskData, 'status': e})
         onUpdate(e);
     };
-    const [edit, setEdit] = useState(false);
+
     return (
         <>
             {/*<Button variant="primary" onClick={handleShow} className="me-2">*/}
@@ -87,11 +93,24 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                      <span className="label-t">{dateFormat(task.dueDate, "mmmm dS, h:MM TT")}</span>
                     </div>
                     <div className="labels-task py-2"><FaInfoCircle style={{marginTop:'-6px'}}/> <span className="label-t">Description</span>
-                        <span className="label-t" style={{marginLeft:'-38px'}}><button className="edit-task btn btn-dark" onClick={() => setEdit(true)}>Edit</button></span>
+                        <span className="label-t" style={{marginLeft:'-38px'}}><button className="edit-task btn btn-dark" onClick={() => {setEdit(!edit);
+                        setSaveTask(!saveTask)}}>Edit</button></span>
                     </div>
                     <div className="labels-task py-2">
-                    <div contentEditable={edit} className="labels-task py-2 px-3"> {task.description}
-                    </div></div>
+                    {/*<div contentEditable={edit} className="labels-task py-2 px-3"> {task.description}*/}
+                    {/*</div>*/}
+                        <input
+                            className="labels-task py-2 px-3 form-control"
+                            type="text"
+                            defaultValue={task.description}
+                            disabled={edit}
+                            onChange={e => onTodoChange(e.target.value)}
+                        />
+                    </div>
+                    <div className={saveTask ? "labels-task py-2" : "not-vis labels-task py-2"}>
+                        <span><button className="save-task btn btn-dark" onClick={() => setEdit(!edit)}>Save</button></span>
+                        <span><button className="cancel-task btn" onClick={() => setEdit(!edit)}>Cancel</button></span>
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
         </>
