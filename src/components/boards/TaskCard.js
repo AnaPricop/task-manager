@@ -83,6 +83,7 @@ setShowTaskView(true);
                 </Dropdown.Menu>
             </Dropdown>
             <span className="span-task-title px-2">{task.title}</span>
+            <br className="task-br"/>
             <div className="d-flex px-2 py-3 ">
                 <svg viewBox="0 0 24 24" width="22px" height="22px" fill="none" xmlns="http://www.w3.org/2000/svg"
                      style={{verticalAlign: 'middle'}}>

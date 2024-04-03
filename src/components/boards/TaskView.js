@@ -7,7 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {FaTags, FaTasks, FaCalendarAlt,FaFileAlt,FaInfoCircle } from "react-icons/fa";
+import {FaTags, FaTasks, FaCalendarAlt,FaFileAlt,FaInfoCircle,FaComments } from "react-icons/fa";
 import {Dropdown} from "react-bootstrap";
 import dateFormat from "dateformat";
 
@@ -19,9 +19,9 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
     console.log(task)
     const onUpdate = async (e) => {
         // e.preventDefault();
-       let sts = {status: e};
+       // let sts = {status: e};
         await axios
-            .put("http://localhost:8001/api/tasks/" + task._id, sts)
+            .put("http://localhost:8001/api/tasks/" + task._id, taskData)
             .then((res) => {
                 res.data.task.status = e;
                 var index1 = '';
@@ -31,9 +31,14 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                         index1 = index;
                 })
                 console.log(index1)
-                let newArr = [...tasks]; // copying the old datas array
-                newArr[index1] = res.data.task;
-                setTasks(newArr);
+              //  let newArr = [...tasks]; // copying the old datas array
+               // console.log(tasks)
+               // newArr[index1] = res.data.task;
+               // console.log(newArr)
+                task.description = taskData.description;
+                task.status = taskData.status;
+              //  setTasks(newArr);
+                setSaveTask(!saveTask)
             })
             .catch((err) => {
                 console.log("Error in update task!");
@@ -49,7 +54,7 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
         setTaskData({...taskData, 'description': value})
     }
     const [taskData, setTaskData] = useState({  //board data
-        description: '',
+        description: task.description,
         status: task.status
     });
     const evt = (e) => {
@@ -74,7 +79,10 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                             </div>
                         )) : <div className="label-task justify-content-center align-items-center">
                             <span className="text">Default</span>
-                        </div>} </div>
+                        </div> }
+                            <div className="label-task justify-content-center align-items-center">
+                            <span className="text">+</span>
+                            </div> </div>
                     <div className="labels-task"><FaTasks style={{marginTop:'-2px'}}/> <span className="label-t">Status</span>
                         <Dropdown className="d-inline dropdown-status" onSelect={evt}>
                             <Dropdown.Toggle id="dropdown-autoclose-true" variant="dark"
@@ -108,8 +116,11 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                         />
                     </div>
                     <div className={saveTask ? "labels-task py-2" : "not-vis labels-task py-2"}>
-                        <span><button className="save-task btn btn-dark" onClick={() => setEdit(!edit)}>Save</button></span>
-                        <span><button className="cancel-task btn" onClick={() => setEdit(!edit)}>Cancel</button></span>
+                        <span><button className="save-task btn btn-dark" onClick={() =>  onUpdate()}>Save</button></span>
+                        <span><button className="cancel-task btn" onClick={() => {setSaveTask(!saveTask); setEdit(!edit)}}>Cancel</button></span>
+                    </div>
+                    <div className="labels-task py-2"><FaComments style={{marginTop:'-6px'}}/> <span className="label-t">Comments</span>
+
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>

@@ -1,31 +1,32 @@
-.labels-task{
-    font-size:14px;
+.labels-task {
+    font-size: 14px;
     /*display:flex;*/
     /*padding-top:10px;*/
 }
-.label-task{
+
+.label-task {
     background-color: rgb(218, 216, 216);
     display: inline-block;
-    padding-left:8px;
-height:25px;
-    padding-right:8px;
+    padding-left: 8px;
+    height: 25px;
+    padding-right: 8px;
     /*padding-top:3px;*/
     /*padding: 0.5em 0.75em;*/
-    border-radius: 20px;
+    border-radius: 3px;
     /*height: 22px;*/
     font-size: 12px;
-     padding-bottom: 6px;
-
-    /*padding-left: 5px;*/
-    /*margin-top: 10px;*/
-    /*margin-bottom: 10px;*/
-
+    padding-bottom: 6px;
+    cursor: pointer;
+    margin-right:5px;
+    margin-left:4px;
 }
-.label-t{
-    padding-right:50px;
-    padding-left:5px;
+
+.label-t {
+    padding-right: 50px;
+    padding-left: 5px;
 }
-.edit-task{
+
+.edit-task {
     background-color: transparent;
     color: #272829;
     border-radius: 7px;
@@ -57,7 +58,7 @@ height:25px;
     transition-timing-function: ease;
 }
 
-.save-task{
+.save-task {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
     line-height: 20px;
@@ -80,9 +81,27 @@ height:25px;
     transition-duration: 85ms;
     transition-timing-function: ease;
 }
-.cancel-task{
+
+.cancel-task {
     font-size: 14px;
 }
-.not-vis{
-    display:none;
+
+.not-vis {
+    display: none;
+}
+
+.task-br {
+    border: 1px solid rgb(218 216 216);
+    content: "A" !important;
+    /* display: block !important; */
+    /* margin-bottom: 1.5em !important; */
+    margin-top: 20px;
+    margin-bottom: -10px;
+    /*width:80%;*/
+    text-align: center;
+}
+
+.form-control:disabled {
+    background-color: transparent;
+    opacity: 1;
 }
