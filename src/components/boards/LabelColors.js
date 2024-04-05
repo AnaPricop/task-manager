@@ -11,13 +11,52 @@ import Card from "react-bootstrap/Card";
 import Modal from "./ModalTask";
 
 
-const LabelColors = ({show,  setShow, task, label}) => {
+const LabelColors = ({show, task, label, labels, changeColor}) => {
     const [boardBck, setBoardBck] = useState('bck1');
-    console.log(label);
-
+    console.log(label, labels)
+    const updateTask = async (e) => {
+        // console.log(taskDescription, e)
+        console.log(e)
+        let upd_label = {subject: JSON.stringify(e)}
+        await axios
+            .put("http://localhost:8001/api/tasks/" + task._id, upd_label)
+            .then((res) => {
+                console.log(res.data.task)
+                task = res.data.task;
+                changeColor(upd_label);
+                // res.data.task.status = e;
+                // task.description = taskDescription;
+                // setSaveTask(!saveTask)
+            })
+            .catch((err) => {
+                console.log("Error in update task!");
+            });
+    };
     const onChangeBck = (e) => {
         // setBoards({...boardData, 'background': e});
-      setBoardBck(e)//set values for board form
+        setBoardBck(e);//set values for board form
+        let label_new = [{
+            title: label && label.title ? label.title : label,
+            color: e
+        }]
+        let labelss = JSON.parse(labels);
+        // for (var i in labelss) {
+        //     if (labelss[i] === label_new[0].title) {
+        //      console.log(labelss[i])
+        //     }
+        // }
+        labelss.map(function(object, i){
+            console.log(object)
+            if (object.title === label_new[0].title)
+            {
+                // console.log(label_new[0].color)
+                object.color = label_new[0].color;
+            }
+        })
+        updateTask(labelss);
+        //  changeColor(label_new);
+
+        //  setLabel(label_new);
     };
     const onSubmitBoard = (e) => {
         e.preventDefault();
@@ -43,7 +82,7 @@ const LabelColors = ({show,  setShow, task, label}) => {
     return (
         <section
             className={show ? 'create_project_visible section_label' : 'create_project_hidden section_label'}
-           >
+        >
             <form className="form-update-label" onSubmit={onSubmitBoard}>
                 <div className="form-group row ">
                     {/*<div className={boardBck + " background-div"} value={boardBck}>*/}

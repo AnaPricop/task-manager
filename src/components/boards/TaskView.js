@@ -18,7 +18,8 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
 
     const handleClose = () => setShowTaskView(false);
     //const handleShow = () => setShowTaskView(true);
-    console.log(task)
+    // console.log(JSON.parse(task.subject))
+
     const updateTask = async (e) => {
         console.log(taskDescription, e)
         await axios
@@ -68,15 +69,22 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
     }
     const [colorLabel, setColorLabel] = useState(false);
     const [label, setLabel] = useState('');
+    const [labels, setLabels] = useState(JSON.parse(task.subject));
     const labelColor = (tag) => {
         setColorLabel(!colorLabel);
         setLabel(tag);
     }
+   // const [colorL, changeColorL] = useState("");
     // const approveDelete = (value) => {
     //     if (value === 1) {
     //         confirmedDelete();
     //     }
     // };
+    // const [currCol]
+    const changeColorL = (value) => {
+console.log(value)
+        setLabels(JSON.parse(value.subject))
+    };
     return (
         <>
             {/*<Button variant="primary" onClick={handleShow} className="me-2">*/}
@@ -89,15 +97,15 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
                 <Offcanvas.Body>
                     <div className="labels-task"><FaTags style={{marginTop: '-2px'}}/> <span className="label-t"
                                                                                              style={{marginRight: '-6px'}}>Labels</span>
-                        {task.subject.length > 0 ? task.subject.map((tag, index) => (
-                            <div className="label-task justify-content-center align-items-center" key={index} onClick={() => {labelColor(tag);}}>
-                                <span className="text">{tag}</span>
+                        {labels.length > 0 ? labels.map((tag, index) => (
+                            <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center" : " label-task justify-content-center align-items-center"} key={index} onClick={() => {labelColor(tag);}}>
+                                <span className="text">{tag.title}</span>
                             </div>
 
                         )) : <div className="label-task justify-content-center align-items-center">
                             <span className="text">Default</span>
                         </div>}
-                        <LabelColors show={colorLabel}  setShow={setColorLabel} task={task} label={label}/>
+                        <LabelColors show={colorLabel} task={task} label={label} labels={task.subject} changeColor={changeColorL}/>
                         <div className="label-task justify-content-center align-items-center">
                             <span className="text">+</span>
                         </div>

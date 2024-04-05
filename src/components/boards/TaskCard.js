@@ -59,13 +59,13 @@ const TaskCard = ({task, tasks, setTasks}) => {
     const openTask = () => {
 setShowTaskView(true);
     };
-
+    const [labels, setLabels] = useState(JSON.parse(task.subject));
     return (
         <div className="list-board">
             <div className="d-flex px-2">
-                {task.subject.length > 0 ? task.subject.map((tag, index) => (
+                {labels.length > 0 ? labels.map((tag, index) => (
                     <div className="label-task justify-content-center align-items-center" key={index}>
-                        <span className="text">{tag}</span>
+                        <span className="text">{tag.title}</span>
                     </div>
                 )) : <div className="label-task justify-content-center align-items-center">
                     <span className="text">Default</span>

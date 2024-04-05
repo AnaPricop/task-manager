@@ -29,6 +29,8 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(taskData)
+        let subj = {subject: JSON.stringify(taskData.subject)};
+        setTaskData({...taskData, subj});
         axios
             .post("http://localhost:8001/api/tasks", taskData, {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
@@ -49,9 +51,7 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
                 console.log("Error in Create project!");
             });
     };
-    const [tags, setTags] = useState([
-        // "Daily task"
-    ]);
+    const [tags, setTags] = useState([]);
 
     function handleKeyDown(e) {
         // If user did not press enter key, return
@@ -61,10 +61,14 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
         // If the value is empty, return
         if (!value.trim()) return
         // Add the value to the tags array
-        setTags([...tags, value])
+        let newTag = {title: value, color: ''};
+        console.log(newTag)
+        setTags([...tags, newTag])
+
+        console.log(tags)
         // Clear the input
         e.target.value = ''
-        taskData.subject = [...tags, value];
+       taskData.subject = JSON.stringify([...tags, newTag]);
     }
 
     function removeTag(index) {
@@ -114,7 +118,7 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
                     <div className="tags-input-container">
                         {tags.map((tag, index) => (
                             <div className="tag-item" key={index}>
-                                <span className="text">{tag}</span>
+                                <span className="text">{tag.title}</span>
                                 <span className="close" onClick={() => removeTag(index)}>&times;</span>
                             </div>
                         ))}
