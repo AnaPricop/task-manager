@@ -11,7 +11,7 @@ import Card from "react-bootstrap/Card";
 import Modal from "./ModalTask";
 
 
-const LabelColors = ({show, task, label, labels, changeColor}) => {
+const LabelColors = ({show, task, label, labels, setLabels, changeColor}) => {
     const [boardBck, setBoardBck] = useState('bck1');
     console.log(label, labels)
     const updateTask = async (e) => {
@@ -22,8 +22,9 @@ const LabelColors = ({show, task, label, labels, changeColor}) => {
             .put("http://localhost:8001/api/tasks/" + task._id, upd_label)
             .then((res) => {
                 console.log(res.data.task)
-                task = res.data.task;
+                task.subject = upd_label.subject;
                 changeColor(upd_label);
+                setLabels(e)
                 // res.data.task.status = e;
                 // task.description = taskDescription;
                 // setSaveTask(!saveTask)
@@ -45,6 +46,7 @@ const LabelColors = ({show, task, label, labels, changeColor}) => {
         //      console.log(labelss[i])
         //     }
         // }
+        console.log(labelss)
         labelss.map(function(object, i){
             console.log(object)
             if (object.title === label_new[0].title)

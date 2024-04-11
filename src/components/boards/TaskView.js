@@ -83,7 +83,7 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
     // const [currCol]
     const changeColorL = (value) => {
 console.log(value)
-        setLabels(JSON.parse(value.subject))
+     //   setLabels(JSON.parse(value.subject))
     };
     return (
         <>
@@ -105,7 +105,7 @@ console.log(value)
                         )) : <div className="label-task justify-content-center align-items-center">
                             <span className="text">Default</span>
                         </div>}
-                        <LabelColors show={colorLabel} task={task} label={label} labels={task.subject} changeColor={changeColorL}/>
+                        <LabelColors show={colorLabel} task={task} label={label} labels={task.subject} setLabels={setLabels} changeColor={changeColorL}/>
                         <div className="label-task justify-content-center align-items-center">
                             <span className="text">+</span>
                         </div>
