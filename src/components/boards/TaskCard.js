@@ -10,7 +10,7 @@ import {Dropdown} from "react-bootstrap";
 import Modal from "./ModalTask";
 import OffCanvasExample from "./TaskView";
 const TaskCard = ({task, tasks, setTasks}) => {
-    // console.log(task)
+   console.log(task, tasks, tasks.filter(e => e._id === task._id))
     const [taskData, setTaskData] = useState({
         // status: ''
     });
@@ -59,14 +59,15 @@ const TaskCard = ({task, tasks, setTasks}) => {
     const openTask = () => {
 setShowTaskView(true);
     };
-    const [labels, setLabels] = useState(JSON.parse(task.subject));
+    const [labels, setLabels] = useState(JSON.parse(tasks.filter(e => e._id === task._id)[0].subject));
     return (
         <div className="list-board">
             <div className="d-flex px-2">
-                {labels.length > 0 ? labels.map((tag, index) => (
-                    <div className="label-task justify-content-center align-items-center" key={index}>
+                {JSON.parse(tasks.filter(e => e._id === task._id)[0].subject).length > 0 ? JSON.parse(tasks.filter(e => e._id === task._id)[0].subject).map((tag, index) => (
+                    <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center label-task-clr" : " label-task justify-content-center align-items-center"} key={index} >
                         <span className="text">{tag.title}</span>
                     </div>
+
                 )) : <div className="label-task justify-content-center align-items-center">
                     <span className="text">Default</span>
                 </div>}

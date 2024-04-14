@@ -98,14 +98,14 @@ console.log(value)
                     <div className="labels-task"><FaTags style={{marginTop: '-2px'}}/> <span className="label-t"
                                                                                              style={{marginRight: '-6px'}}>Labels</span>
                         {labels.length > 0 ? labels.map((tag, index) => (
-                            <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center" : " label-task justify-content-center align-items-center"} key={index} onClick={() => {labelColor(tag);}}>
+                            <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center label-task-clr" : " label-task justify-content-center align-items-center"} key={index} onClick={() => {labelColor(tag);}}>
                                 <span className="text">{tag.title}</span>
                             </div>
 
                         )) : <div className="label-task justify-content-center align-items-center">
                             <span className="text">Default</span>
                         </div>}
-                        <LabelColors show={colorLabel} task={task} label={label} labels={task.subject} setLabels={setLabels} changeColor={changeColorL}/>
+                        <LabelColors show={colorLabel} task={task} tasks={tasks} setTasks={setTasks} label={label} labels={task.subject} setLabels={setLabels} changeColor={changeColorL}/>
                         <div className="label-task justify-content-center align-items-center">
                             <span className="text">+</span>
                         </div>

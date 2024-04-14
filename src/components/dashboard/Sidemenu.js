@@ -88,7 +88,7 @@ const Sidemenu = ({projects, setProjects}) => {
 
     const projectList =
         projects.length === 0
-            ? 'there are no projects!'
+            ? <a className="nav-link link-dark1">No projects.</a>
             : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id} onClick={() => handleNext(project._id)}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {project.title} </a>);
@@ -140,7 +140,7 @@ const Sidemenu = ({projects, setProjects}) => {
                 TaskAcc
             </a>
             <hr/>
-            <ul className="nav nav-pills flex-column mb-auto">
+            <ul className="nav nav-pills flex-column mb-auto" style={{height: '90%'}}>
                 <li className="nav-item">
                     <a className={(active === 0 ? 'active ' : 'null ') + "nav-link link-dark1"}
                        onClick={() => setActive(0)}>
@@ -267,7 +267,7 @@ const Sidemenu = ({projects, setProjects}) => {
                     <img className="header-logo" src="/myprojects.svg"/>
                     My projects
                 </a>
-                <ul className="nav nav-pills flex-column mb-auto">
+                <ul className="nav nav-pills flex-column mb-auto" >
                     {projectList}
 
                 </ul>

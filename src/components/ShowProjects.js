@@ -20,7 +20,7 @@ function ShowProjects({projects, setProjects}) {
 
     const projectList =
         projects.length === 0
-            ? 'No proj'
+            ? 'There are no projects.'
             : projects.map((project, k) => <ProjectCard project={project} setProjectsDel={setProjectsDel} key={k}/>);
     // if (projects.length === 0)
     //     setIsLoading(true)
