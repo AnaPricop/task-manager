@@ -1,9 +1,9 @@
 .proj-list{
     padding-top:40px;
-    color: #D8D9DA;
+    color: #222831;
 }
 .ShowBookList{
-    color: #D8D9DA;
+    color: #222831;
     flex-shrink: 0;
     flex-grow: 2;
     /*width: 1000px;float:right;*/
@@ -38,7 +38,8 @@
 }
 .card{
     min-width: 300px;
-    background-color: #FFF6E0;
+    background-color: rgba(114, 125, 113, 0.72);
+    border:none;
 }
 .card-title{
     font-size:16px;

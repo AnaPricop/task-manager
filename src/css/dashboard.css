@@ -1,6 +1,6 @@
 .sidebar_dsh {
     width: 280px;
-    background-color: #272829 !important;
+    background-color:#F2F4F3 !important;
     color: #D8D9DA;
     /*font-family: Roboto, serif;*/
     font-family: Poppins, sans-serif;
@@ -12,15 +12,25 @@
 .svg_navbar {
 
 }
-
+li:hover{
+    background-color:  #25283D !important;
+    border-radius: 3px;
+}
 .nav-link.active {
-    background-color: rgba(97, 103, 122, 0.32) !important;
-    color: #D8D9DA !important;
+    background-color:#25283D !important;
+    color: #EEEEEE  !important;
+    border-radius: 3px;
+}
+.nav-link:hover, .nav-item:hover, ul .nav-link.link-dark1:hover {
+    background-color:  #25283D !important;
+    color: #EEEEEE  !important;
+    border-radius: 3px;
 }
 
 .nav-link, .link-dark1 {
-    color: #D8D9DA !important;
+    color: #262626 !important;
     font-size: 15px;
+    /*font-weight: 400;*/
 }
 
 .header-logo {
@@ -29,7 +39,7 @@
 }
 
 .header-sidemenu {
-    color: #D8D9DA !important;
+    color: #222831 !important;
     font-size: 20px;
 }
 

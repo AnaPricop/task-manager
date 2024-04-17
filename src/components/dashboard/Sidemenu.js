@@ -151,7 +151,7 @@ const Sidemenu = ({projects, setProjects}) => {
                     </a>
                 </li>
                 <li>
-                    <div className="d-flex">
+
                         <a href="#" onClick={handleCreate}
                            className="nav-link link-dark1 ">
                             {/*// className={(active === 1 ? 'active ': 'null ') + "nav-link link-dark"}*/}
@@ -197,7 +197,7 @@ const Sidemenu = ({projects, setProjects}) => {
                                 <button type="submit" className="btn create-project-btn btn-sm">Create</button>
                             </form>
                         </section>
-                    </div>
+
                 </li>
                 <li>
                     <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>

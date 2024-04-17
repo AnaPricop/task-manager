@@ -1,6 +1,7 @@
 .svg_navbar {
-    width: 50px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
+    margin-right:5px;
 }
 
 .svg_navbar2 {
@@ -18,12 +19,15 @@
 }
 
 .nav_link {
-    font-size: 1.3em;
+    font-size: 1em;
     padding-right: 40px !important;
+    color: black;
+    text-decoration: none;
 }
 
 .nav_brand {
-    font-size: 1.7em;
+    font-size: 1.4em;
+    padding-left:5px;
 }
 
 .nav_menu {
@@ -50,9 +54,10 @@
 }
 
 .bck-pr {
-    background-color: #272829;
+    background-color: #F2F4F3;
     height:100%;
     display: flex;
+    color: #222831;
     /*display: flex; */
     flex-flow: row nowrap;
     /*flex-direction:row;*/
