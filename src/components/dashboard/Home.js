@@ -15,14 +15,22 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     var token = localStorage.getItem("token");
     async function fetchData() {
-        let res = await axios.get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
-        console.log(res.data);
-        setProjects(res.data);
+        let res = await axios.get('http://localhost:8001/api/projects/1', { headers: {"Authorization" : `Bearer ${token}`} })
+       // console.log(res.data);
+        setProjects(res.data.projects);
+        var nb_proj_done = 0;
+        var nb_proj_all = res.data.length;
+        var nb_proj_inprogress = 0;
+        var nb_boards = 0;
+        var nb_tasks = 0;
+
         setIsLoading(false);
     }
+
     useEffect(() => {
 
-        fetchData()
+        fetchData();
+       // fetchDataStatus();
         console.log('i fire once');
 
     }, []);

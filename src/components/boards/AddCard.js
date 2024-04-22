@@ -28,9 +28,16 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
     };
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(taskData)
-        let subj = {subject: JSON.stringify(taskData.subject)};
+        console.log(taskData.subject, JSON.stringify(taskData.subject), JSON.stringify(taskData.subject) === '[]');
+        let subj;
+        let default1 = [{title: 'Default', color: ''}];
+        if (JSON.stringify(taskData.subject) === '[]')
+           subj = {subject: JSON.stringify(default1)};
+        else
+            subj = {subject: JSON.stringify(taskData.subject)};
         setTaskData({...taskData, subj});
+        taskData.subject = JSON.stringify(default1);
+        console.log(subj, taskData)
         axios
             .post("http://localhost:8001/api/tasks", taskData, {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {

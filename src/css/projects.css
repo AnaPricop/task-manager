@@ -38,7 +38,7 @@
 }
 .card{
     min-width: 300px;
-    background-color: rgba(114, 125, 113, 0.72);
+    background-color: #5b6c5d85;
     border:none;
 }
 .card-title{

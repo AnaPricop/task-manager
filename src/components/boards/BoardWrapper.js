@@ -36,12 +36,12 @@ const BoardWrapper = () => {
                 console.log('Error from Projectslist');
             });
         axios
-            .get('http://localhost:8001/api/projects', {headers: {"Authorization": `Bearer ${token}`}})
+            .get('http://localhost:8001/api/projects/2', {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
                 //  console.log(res.data);
-                setProjects(res.data);
-                setFproject(res.data.find(m => m._id === projectId))
-                setCurrentProject(res.data.find(m => m._id === projectId))
+                setProjects(res.data.projects);
+                setFproject(res.data.projects.find(m => m._id === projectId))
+                setCurrentProject(res.data.projects.find(m => m._id === projectId))
                 setIsLoading(false);
             })
             .catch((err) => {
