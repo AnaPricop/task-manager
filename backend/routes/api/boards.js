@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Board = require('../../models/Board');
 const jwt = require("jsonwebtoken");
-
+const Project = require('../../models/Project');
 // router.get('/', (req, res) => {
 //     //   console.log("aaa", req.headers["authorization"], "aaa")
 //     let token = req.headers["authorization"].split(" ")[1];
@@ -30,7 +30,18 @@ router.post('/', (req, res) => {
     // var tkn = decoded._id;
     var arrBoard={title: req.body.title, idProject: req.body.idProject, background: req.body.background};
     Board.create(arrBoard)
-        .then(board => {res.json({ msg: 'Board added successfully', board: board })})
+        .then(board => {
+            Project.findById(req.body.idProject).then(proj => {
+                let ids = proj.idBoards;
+               // console.log(ids)
+                ids.push(board._id.toHexString());
+               // console.log(ids, typeof ids)
+                let to_upd = {'idBoards': ids}
+                Project.findByIdAndUpdate(req.body.idProject, to_upd).then(task => {});
+                res.json({ msg: 'Board added successfully', board: board })
+            })
+
+        })
         .catch(err => res.status(400).json({ error: 'Unable to add this board' }));
 });
 
