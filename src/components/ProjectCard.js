@@ -9,6 +9,14 @@ import Modal from './dashboard/Modal';
 
 const ProjectCard = ({project, setProjectsDel}) => {
     var background = './color.svg';
+    const [saveTask, setSaveTask] = useState(false);
+    const [taskDescription, setDescription] = useState(project.title);
+    const onTodoChange = (value) => {
+        setDescription(value)
+    }
+    const [edit, setEdit] = useState(true);
+
+
     const navigate = useNavigate();
     const [projid, setProjId] = useState('');
     const approveDelete = (value) => {
@@ -38,23 +46,26 @@ const ProjectCard = ({project, setProjectsDel}) => {
     }
     return (
         <div className="card mx-3 my-3 col-lg-2 col-md-8 justify-content-center" key={project._id}>
-            <div className="progress_top">
-                <svg viewBox="0 0 36 36" width="10px" xmlns="http://www.w3.org/2000/svg"
-                     aria-hidden="true" role="img" className="iconify iconify--twemoji"
-                     preserveAspectRatio="xMidYMid meet" fill="#000000">
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <circle fill="#f5a447" cx="18" cy="18" r="18"></circle>
-                    </g>
-                </svg>
-                <span className="span_progress">In Progress</span>
-            </div>
+            {/*<div className="progress_top">*/}
+            {/*    <svg viewBox="0 0 36 36" width="10px" xmlns="http://www.w3.org/2000/svg"*/}
+            {/*         aria-hidden="true" role="img" className="iconify iconify--twemoji"*/}
+            {/*         preserveAspectRatio="xMidYMid meet" fill="#000000">*/}
+            {/*        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>*/}
+            {/*        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>*/}
+            {/*        <g id="SVGRepo_iconCarrier">*/}
+            {/*            <circle fill="#f5a447" cx="18" cy="18" r="18"></circle>*/}
+            {/*        </g>*/}
+            {/*    </svg>*/}
+            {/*    <span className="span_progress">In Progress</span>*/}
+            {/*</div>*/}
             <div className="row justify-content-center">
                 <img className="img-style-proj" src={project.image ? project.image : background} alt="Card image cap"/>
             </div>
             <div className="card-body ">
-                <h5 className="card-title">{project.title}</h5>
+                <input className="card-title"
+                       defaultValue={project.title}
+                       disabled={edit}
+                       onChange={e => onTodoChange(e.target.value)}></input>
                 <div className="row justify-content-center py-3">
                     <div className="col col-lg-2" style={{textAlign: 'center'}} onClick={() => handleNext()}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -66,7 +77,11 @@ const ProjectCard = ({project, setProjectsDel}) => {
                             </g>
                         </svg>
                     </div>
-                    <div className="col col-lg-2" style={{textAlign: 'center'}}>
+                    <div className="col col-lg-2" style={{textAlign: 'center'}}
+                         onClick={() => {
+                             setEdit(!edit);
+                             setSaveTask(!saveTask)
+                         }}>
                         <svg viewBox="0 0 24 24" width="25px" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

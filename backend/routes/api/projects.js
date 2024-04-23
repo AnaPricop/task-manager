@@ -5,7 +5,7 @@ const Board = require('../../models/Board');
 const Task = require('../../models/Task');
 const jwt = require("jsonwebtoken");
 
-router.get('/:aux', (req, res) => {
+router.get('/', (req, res) => {
     //   console.log("aaa", req.headers["authorization"], "aaa")
     let token = req.headers["authorization"].split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
@@ -15,54 +15,66 @@ router.get('/:aux', (req, res) => {
     var nb_proj_all = 0;
     var nb_proj_inprogress = 0;
     var nb_boards = 0;
+    var projects;
     Project.find({user: tkn})
-        .then(function (projects) {
-            // console.log(projects)
-            // res.json(projects)})
-            if (req.params.aux === '1') {
-                nb_proj_all = projects.length;
-                var done = 1;
-                // for (var j in projects) {
-                    projects.forEach(function (proj) {
-                        proj.idBoards.forEach(async function (id) {
-
-                            //  for (var k in proj.idBoards) {
-                            Task.find({boardId: id}).then(await function (task) {
-                                for (var k in task) {
-                                    if (task.status !== 2 && task.status !== '2') {
-                                        done = 0;
-                                        console.log(task)
-                                        break;
-                                    }
-                                }
-                            })
-                        })
-                        //  }
-
-
-                        nb_boards = nb_boards + projects[j].idBoards.length;
-                        if (done === 1)
-                            nb_proj_done++;
-                    })
-                    nb_proj_inprogress = nb_proj_all - nb_proj_done;
-                    res.json({
-                        'done': nb_proj_done,
-                        'inprogress': nb_proj_inprogress,
-                        'all': nb_proj_all,
-                        'boards': nb_boards,
-                        'projects': projects
-                    })
-                }
-            else
-                {
-                    res.json({
-                        'projects': projects
-                    })
-                }
-
-            }
-        )
-            .catch(err => res.status(404).json({noprojectsfound: 'No Projects found'}));
+        .then(projects => {
+            //console.log(projects)
+            res.json({'projects': projects})})
+        .catch(err => res.status(404).json({ noprojectsfound: 'No Projects found' }));
+    // Project.find({user: tkn}).exec()
+    //     .then(projects => {
+    //             // console.log(projects)
+    //             // res.json(projects)})
+    //             if (req.params.aux === '1') {
+    //                 nb_proj_all = projects.length;
+    //
+    //                 //   let livePromises = [];
+    //                 for (var j in projects) {
+    //                     var done = 1;
+    //                     //projects.forEach(function (proj) {
+    //                    // console.log(projects[j].idBoards)
+    //                     //for (var k in projects[j].idBoards) {
+    //                     //ivePromises.push(new Promise(resolve => {
+    //                     Task.find({boardId: {$in: projects[j].idBoards}}).then(task => {
+    //                         //console.log(task, "%%%")
+    //                         for (var kk in task) {
+    //                             if (task[kk].status !== 2 && task[kk].status !== '2') {
+    //                                 done = 0;
+    //                                // console.log(task[kk])
+    //                                 //   break;
+    //                             }
+    //                         }
+    //                         //resolve(task);
+    //                     })
+    //                     // }))
+    //                     //  }
+    //                     //  }
+    //
+    //
+    //                     nb_boards = nb_boards + projects[j].idBoards.length;
+    //                     if (done === 1)
+    //                         nb_proj_done++;
+    //                 }
+    //                 //let lives = await Promise.all(livePromises);
+    //                 //  console.log(lives)
+    //                 nb_proj_inprogress = nb_proj_all - nb_proj_done;
+    //                 res.json({
+    //                     'done': nb_proj_done,
+    //                     'inprogress': nb_proj_inprogress,
+    //                     'all': nb_proj_all,
+    //                     'boards': nb_boards,
+    //                     'projects': projects,
+    //                     // 'lives': lives
+    //                 })
+    //             } else {
+    //                 res.json({
+    //                     'projects': projects
+    //                 })
+    //             }
+    //
+    //         }
+    //     )
+    //     .catch(err => res.status(404).json({noprojectsfound: 'No Projects found'}));
 })
 ;
 
@@ -117,51 +129,5 @@ router.delete('/:id', (req, res) => {
     //     .catch(err => res.status(404).json({ error: 'No such a project' }));
 });
 
-// router.get('/sts', (req, res) => {
-//     let token = req.headers["authorization"].split(" ")[1];
-//     const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
-//     var tkn = decoded._id;
-//     console.log(tkn)
-//
-//     Project.find({user: tkn})
-//         .then(projects => {
-//             // console.log(projects)
-//             // res.json(projects)
-//             var nb_proj_done = 0;
-//             var nb_proj_all = 0;
-//             var nb_proj_inprogress = 0;
-//             var nb_boards = 0;
-//             for (var i in projects) {
-//                 var done = 1;
-//                 Board.find({idProject: projects[i]._id}).then(board => {
-//
-//                     for (var j in board) {
-//                         Task.find({boardId: board[j]._id}).then(task => {
-//                             for (var k in task) {
-//                                 if (task.status !== 2) {
-//                                     done = 0;
-//                                     break;
-//                                 }
-//                             }
-//                         })
-//                         nb_boards++;
-//                     }
-//
-//                 });
-//                 nb_proj_all++;
-//                 if (done === 1)
-//                     nb_proj_done++;
-//             }
-//             nb_proj_inprogress = nb_proj_all - nb_proj_done;
-//             res.json({
-//                 'done': nb_proj_done,
-//                 'inprogress': nb_proj_inprogress,
-//                 'all': nb_proj_all,
-//                 'boards': nb_boards,
-//                 'projects': projects
-//             })
-//         })
-//         .catch(err => res.status(404).json({noprojectsfound: 'No Projects found'}));
-// });
 
 module.exports = router;
