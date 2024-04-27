@@ -74,7 +74,7 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
         setColorLabel(!colorLabel);
         setLabel(tag);
     }
-   // const [colorL, changeColorL] = useState("");
+    // const [colorL, changeColorL] = useState("");
     // const approveDelete = (value) => {
     //     if (value === 1) {
     //         confirmedDelete();
@@ -82,8 +82,8 @@ const TaskView = ({name, show, setShowTaskView, task, setTasks, tasks, ...props}
     // };
     // const [currCol]
     const changeColorL = (value) => {
-console.log(value)
-     //   setLabels(JSON.parse(value.subject))
+        console.log(value)
+        //   setLabels(JSON.parse(value.subject))
     };
     return (
         <>
@@ -98,14 +98,19 @@ console.log(value)
                     <div className="labels-task"><FaTags style={{marginTop: '-2px'}}/> <span className="label-t"
                                                                                              style={{marginRight: '-6px'}}>Labels</span>
                         {labels.length > 0 ? labels.map((tag, index) => (
-                            <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center label-task-clr" : " label-task justify-content-center align-items-center"} key={index} onClick={() => {labelColor(tag);}}>
+                            <div
+                                className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center label-task-clr" : " label-task justify-content-center align-items-center"}
+                                key={index} onClick={() => {
+                                labelColor(tag);
+                            }}>
                                 <span className="text">{tag.title}</span>
                             </div>
 
                         )) : <div className="label-task justify-content-center align-items-center">
                             <span className="text">Default</span>
                         </div>}
-                        <LabelColors show={colorLabel} task={task} tasks={tasks} setTasks={setTasks} label={label} labels={task.subject} setLabels={setLabels} changeColor={changeColorL}/>
+                        <LabelColors show={colorLabel} task={task} tasks={tasks} setTasks={setTasks} label={label}
+                                     labels={task.subject} setLabels={setLabels} changeColor={changeColorL}/>
                         <div className="label-task justify-content-center align-items-center">
                             <span className="text">+</span>
                         </div>
@@ -119,7 +124,8 @@ console.log(value)
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-status">
                                 {parseInt(task.status) === 0 ? '' : <Dropdown.Item eventKey="0">To Do</Dropdown.Item>}
-                                {parseInt(task.status) === 1 ? '' : <Dropdown.Item eventKey="1">In Progress</Dropdown.Item>}
+                                {parseInt(task.status) === 1 ? '' :
+                                    <Dropdown.Item eventKey="1">In Progress</Dropdown.Item>}
                                 {parseInt(task.status) === 2 ? '' : <Dropdown.Item eventKey="2">Done</Dropdown.Item>}
                             </Dropdown.Menu>
                         </Dropdown>
@@ -148,7 +154,8 @@ console.log(value)
                         />
                     </div>
                     <div className={saveTask ? "labels-task py-2" : "not-vis labels-task py-2"}>
-                        <span><button className="save-task btn btn-dark" onClick={() => updateTask()}>Save</button></span>
+                        <span><button className="save-task btn btn-dark"
+                                      onClick={() => updateTask()}>Save</button></span>
                         <span><button className="cancel-task btn" onClick={() => {
                             setSaveTask(!saveTask);
                             setEdit(!edit)

@@ -265,3 +265,21 @@ select option{
     align-items: center;
     justify-content: center;
 }
+.change-img-proj
+{
+    display: none;
+    /*color: var(--ds-text-inverse, #ffffff);*/
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    /*bottom: 0;*/
+    width: 200px;
+    height: 125px;
+    top:20px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 52px;
+    align-items: center;
+    justify-content: center;
+    /*text-align:center;*/
+    padding-top:30px;
+}

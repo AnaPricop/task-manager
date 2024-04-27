@@ -14,7 +14,7 @@ function Modal1({approveDelete, taskName, show, setShow}) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Project</Modal.Title>
+                <Modal.Title>Delete Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>Are you sure you want to delete the task "{taskName}"?</Modal.Body>
             <Modal.Footer>

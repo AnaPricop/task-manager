@@ -32,7 +32,7 @@ const Sidemenu = ({projects, setProjects}) => {
     const handleCreate = () => {
         setIsVisible(!isVisible);
         //  children = true;
-      //  setChildren(<div><CreateProject projects={projects} setProjects={setProjects} isVisible={!isVisible} setIsVisible={setIsVisible}/></div>);
+        //  setChildren(<div><CreateProject projects={projects} setProjects={setProjects} isVisible={!isVisible} setIsVisible={setIsVisible}/></div>);
         // {children}.setVal(true);
         if (isVisibleBoard === true)
             setIsVisibleBoard(!isVisibleBoard);
@@ -80,7 +80,7 @@ const Sidemenu = ({projects, setProjects}) => {
             });
     };
     const onChange = (e) => {
-        setProject({ ...projectData, [e.target.name]: e.target.value });
+        setProject({...projectData, [e.target.name]: e.target.value});
     };
     const handleNext = (id) => {
         navigate(`/proj/${id}`);
@@ -89,7 +89,8 @@ const Sidemenu = ({projects, setProjects}) => {
     const projectList =
         projects.length === 0
             ? <a className="nav-link link-dark1">No projects.</a>
-            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id} onClick={() => handleNext(project._id)}>
+            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id}
+                                              onClick={() => handleNext(project._id)}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {project.title} </a>);
     const projectListSelect =
@@ -107,13 +108,13 @@ const Sidemenu = ({projects, setProjects}) => {
         setProject({...projectData, image: base64});
     }
     const [style, setStyle] = useState({display: 'none'});
-   // const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     //submit create project
     const onSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8001/api/projects", projectData, { headers: {"Authorization" : `Bearer ${token}`} })
+            .post("http://localhost:8001/api/projects", projectData, {headers: {"Authorization": `Bearer ${token}`}})
             .then((res) => {
                 setProject({
                     title: "",
@@ -133,166 +134,169 @@ const Sidemenu = ({projects, setProjects}) => {
         >
             {isLoading ? (
                 <Loading/>
-            ) : ( <>
-            <a href="/"
-               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
-                <img className="header-logo" src="/taskmng.svg"/>
-                TaskAcc
-            </a>
-            <hr/>
-            <ul className="nav nav-pills flex-column mb-auto" style={{height: '90%'}}>
-                <li className="nav-item">
-                    <a className={(active === 0 ? 'active ' : 'null ') + "nav-link link-dark1"}
-                       onClick={() => setActive(0)}>
-                        <svg className="bi me-2" width="16" height="16">
-                            {/*<use xlink:href="#table"/>*/}
-                        </svg>
-                        Home
+            ) : (<>
+                    <a href="/"
+                       className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
+                        <img className="header-logo" src="/taskmng.svg"/>
+                        TaskAcc
                     </a>
-                </li>
-                <li>
+                    <hr/>
+                    <ul className="nav nav-pills flex-column mb-auto" style={{height: '90%'}}>
+                        <li className="nav-item">
+                            <a className={(active === 0 ? 'active ' : 'null ') + "nav-link link-dark1"}
+                               onClick={() => setActive(0)}>
+                                <svg className="bi me-2" width="16" height="16">
+                                    {/*<use xlink:href="#table"/>*/}
+                                </svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
 
-                        <a href="#" onClick={handleCreate}
-                           className="nav-link link-dark1 ">
-                            {/*// className={(active === 1 ? 'active ': 'null ') + "nav-link link-dark"}*/}
-                            {/*// onClick={() => setActive(1)}>*/}
-                            <svg className="bi me-2" width="16" height="16">
-                                {/*<use xlink:href="#speedometer2"/>*/}
-                            </svg>
-                            Create project
+                            <a href="#" onClick={handleCreate}
+                               className="nav-link link-dark1 ">
+                                {/*// className={(active === 1 ? 'active ': 'null ') + "nav-link link-dark"}*/}
+                                {/*// onClick={() => setActive(1)}>*/}
+                                <svg className="bi me-2" width="16" height="16">
+                                    {/*<use xlink:href="#speedometer2"/>*/}
+                                </svg>
+                                Create project
+                            </a>
+                            <section
+                                className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
+                                style={styles.section_setting}>
+                                <div className="section_header row" style={styles.section_header}>
+                                    <div className=" justify-content-center">Create a project</div>
+                                </div>
+                                {/*<div className="row">*/}
+                                {/*    <div className="col-xs-12">Name of Section</div>*/}
+                                {/*</div>*/}
+                                <form className="form-create-project" onSubmit={onSubmit}>
+                                    <div className="form-group justify-content-center row py-4"
+                                    >
+                                        {/*{boardBck + " background-div"}*/}
+                                        <div className="select-img"
+                                             onMouseEnter={e => {
+                                                 setStyle({display: 'block'});
+                                             }}
+                                             onMouseLeave={e => {
+                                                 setStyle({display: 'none'})
+                                             }}>
+                                            <img className="background-div-img" src={image} onChange={onImageChange}/>
+
+                                            {/*<img src="./bck1.svg"/>*/}
+                                            {/*</img>*/}
+                                            <input type="file" onChange={onImageChange}
+                                                   className="filetype input-select"/>
+                                            <span className="change-img" style={style}>Change Image</span>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="titleOfProject">Project title</label>
+                                        <input type="text" className="form-control" id="titleOfProject"
+                                               placeholder="" value={projectData.title} name="title"
+                                               onChange={onChange}/>
+                                    </div>
+                                    <button type="submit" className="btn create-project-btn btn-sm">Create</button>
+                                </form>
+                            </section>
+
+                        </li>
+                        <li>
+                            <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>
+                                {/*// className={(active === 2 ? 'active ': 'null ') + "nav-link link-dark"}*/}
+                                {/*// onClick={() => setActive(2)}>*/}
+                                <svg className="bi me-2" width="16" height="16">
+                                </svg>
+                                Create board
+                            </a>
+                            <section
+                                className={isVisibleBoard ? 'create_project_visible section_board' : 'create_project_hidden section_board'}
+                                style={styles.section_setting}>
+                                <div className="section_header justify-content-center" style={styles.section_header}>
+                                    <div className="">Create board</div>
+                                </div>
+                                {/*<div className="row">*/}
+                                {/*    <div className="col-xs-12">Name of Section</div>*/}
+                                {/*</div>*/}
+                                <form className="form-create-board" onSubmit={onSubmitBoard}>
+                                    <div className="form-group row justify-content-center">
+                                        <div className={boardBck + " background-div"} value={boardBck}>
+                                            {/*<img src="./bck1.svg"/>*/}
+                                        </div>
+                                        <a className="row bck-title">Background</a>
+                                        <ul className="ul-little-div">
+                                            <li className="li-little-div" onClick={() => onChangeBck('bck2')}>
+                                                <a className="little-bck-div bck2"></a>
+                                            </li>
+                                            <li className="li-little-div" onClick={() => onChangeBck('bck3')}>
+                                                <a className="little-bck-div bck3"></a>
+                                            </li>
+                                            <li className="li-little-div" onClick={() => onChangeBck('bck4')}>
+                                                <a className="little-bck-div bck4"></a>
+                                            </li>
+                                            <li className="li-little-div" onClick={() => onChangeBck('bck5')}>
+                                                <a className="little-bck-div bck5"></a>
+                                            </li>
+                                            <li className="li-little-div" onClick={() => onChangeBck('bck6')}>
+                                                <a className="little-bck-div bck6"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="titleOfProject">Board title</label>
+                                        <input type="text" className="form-control" id="titleOfProject"
+                                               placeholder="" value={boardData.title} name="title"
+                                               onChange={onChangeBoard}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="selectProject">Project</label>
+                                        <select className="form-select" name="idProject" id="selectProject"
+                                                value={boardData.idProject} onChange={onChangeBoard}>
+                                            {projectListSelect}
+                                        </select>
+                                        {/*<input type="text" className="form-control" id="selectProject"*/}
+                                        {/*       placeholder="" value={boardData.title} name="title"*/}
+                                        {/*       onChange={onChangeBoard}/>*/}
+                                    </div>
+                                    <button type="submit" className="btn create-project-btn btn-sm">Create</button>
+                                </form>
+                            </section>
+                        </li>
+                        <hr/>
+                        {/*<hr/>*/}
+                        <a href="/"
+                           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none">
+                            <img className="header-logo" src="/myprojects.svg"/>
+                            My projects
                         </a>
-                        <section
-                            className={isVisible ? 'create_project_visible section_setting' : 'create_project_hidden section_setting'}
-                            style={styles.section_setting}>
-                            <div className="section_header row" style={styles.section_header}>
-                                <div className=" justify-content-center">Create a project</div>
-                            </div>
-                            {/*<div className="row">*/}
-                            {/*    <div className="col-xs-12">Name of Section</div>*/}
-                            {/*</div>*/}
-                            <form className="form-create-project" onSubmit={onSubmit}>
-                                <div className="form-group justify-content-center row py-4"
-                                >
-                                    {/*{boardBck + " background-div"}*/}
-                                    <div className="select-img"
-                                         onMouseEnter={e => {
-                                             setStyle({display: 'block'});
-                                         }}
-                                         onMouseLeave={e => {
-                                             setStyle({display: 'none'})
-                                         }}>
-                                        <img className="background-div-img" src={image} onChange={onImageChange}  />
+                        <ul className="nav nav-pills flex-column mb-auto">
+                            {projectList}
 
-                                        {/*<img src="./bck1.svg"/>*/}
-                                        {/*</img>*/}
-                                        <input type="file" onChange={onImageChange} className="filetype input-select" />
-                                        <span className="change-img"  style={style}>Change Image</span></div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="titleOfProject">Project title</label>
-                                    <input type="text" className="form-control" id="titleOfProject"
-                                           placeholder="" value={projectData.title} name="title"
-                                           onChange={onChange}/>
-                                </div>
-                                <button type="submit" className="btn create-project-btn btn-sm">Create</button>
-                            </form>
-                        </section>
-
-                </li>
-                <li>
-                    <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>
-                        {/*// className={(active === 2 ? 'active ': 'null ') + "nav-link link-dark"}*/}
-                        {/*// onClick={() => setActive(2)}>*/}
-                        <svg className="bi me-2" width="16" height="16">
-                        </svg>
-                        Create board
-                    </a>
-                    <section
-                        className={isVisibleBoard ? 'create_project_visible section_board' : 'create_project_hidden section_board'}
-                        style={styles.section_setting}>
-                        <div className="section_header justify-content-center" style={styles.section_header}>
-                            <div className="">Create board</div>
-                        </div>
-                        {/*<div className="row">*/}
-                        {/*    <div className="col-xs-12">Name of Section</div>*/}
-                        {/*</div>*/}
-                        <form className="form-create-board" onSubmit={onSubmitBoard}>
-                            <div className="form-group row justify-content-center">
-                                <div className={boardBck + " background-div"} value={boardBck}>
-                                    {/*<img src="./bck1.svg"/>*/}
-                                </div>
-                                <a className="row bck-title">Background</a>
-                                <ul className="ul-little-div">
-                                    <li className="li-little-div" onClick={() => onChangeBck('bck2')}>
-                                        <a className="little-bck-div bck2"></a>
-                                    </li>
-                                    <li className="li-little-div" onClick={() => onChangeBck('bck3')}>
-                                        <a className="little-bck-div bck3"></a>
-                                    </li>
-                                    <li className="li-little-div" onClick={() => onChangeBck('bck4')}>
-                                        <a className="little-bck-div bck4"></a>
-                                    </li>
-                                    <li className="li-little-div" onClick={() => onChangeBck('bck5')}>
-                                        <a className="little-bck-div bck5"></a>
-                                    </li>
-                                    <li className="li-little-div" onClick={() => onChangeBck('bck6')}>
-                                        <a className="little-bck-div bck6"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="titleOfProject">Board title</label>
-                                <input type="text" className="form-control" id="titleOfProject"
-                                       placeholder="" value={boardData.title} name="title"
-                                       onChange={onChangeBoard}/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="selectProject">Project</label>
-                                <select className="form-select" name="idProject" id="selectProject"
-                                        value={boardData.idProject} onChange={onChangeBoard}>
-                                    {projectListSelect}
-                                </select>
-                                {/*<input type="text" className="form-control" id="selectProject"*/}
-                                {/*       placeholder="" value={boardData.title} name="title"*/}
-                                {/*       onChange={onChangeBoard}/>*/}
-                            </div>
-                            <button type="submit" className="btn create-project-btn btn-sm">Create</button>
-                        </form>
-                    </section>
-                </li>
-                <hr/>
-                {/*<hr/>*/}
-                <a href="/"
-                   className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none">
-                    <img className="header-logo" src="/myprojects.svg"/>
-                    My projects
-                </a>
-                <ul className="nav nav-pills flex-column mb-auto" >
-                    {projectList}
-
-                </ul>
-            </ul>
+                        </ul>
+                    </ul>
 
 
-            <div className="dropdown">
-                <a href="#" className="d-flex align-items-center link-dark1 text-decoration-none dropdown-toggle"
-                   id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                         className="rounded-circle me-2"/>
-                    <strong>mdo</strong>
-                </a>
-                <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                    <li><a className="dropdown-item" href="#">Settings</a></li>
-                    {/*<li><a className="dropdown-item" href="#">Profile</a></li>*/}
-                    <li>
-                        <hr className="dropdown-divider"/>
-                    </li>
-                    <li><a className="dropdown-item" onClick={handleLogout}>Sign out</a></li>
-                </ul>
-            </div>
-            </>
-                )}
+                    <div className="dropdown">
+                        <a href="#"
+                           className="d-flex align-items-center link-dark1 text-decoration-none dropdown-toggle"
+                           id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                 className="rounded-circle me-2"/>
+                            <strong>mdo</strong>
+                        </a>
+                        <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a className="dropdown-item" href="#">Profile</a></li>
+                            <li><a className="dropdown-item" href="#">Settings</a></li>
+                            {/*<li><a className="dropdown-item" href="#">Profile</a></li>*/}
+                            <li>
+                                <hr className="dropdown-divider"/>
+                            </li>
+                            <li><a className="dropdown-item" onClick={handleLogout}>Sign out</a></li>
+                        </ul>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
