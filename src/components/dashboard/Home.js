@@ -6,24 +6,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Sidemenu from './Sidemenu';
 import Projects from '../ShowProjects';
+import Statistic from '../ShowStatistic';
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 import Loading from "../Loading";
 
 const Home = () => {
     const [projects, setProjects] = useState([]);
+    const [info, setInfo] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     var token = localStorage.getItem("token");
     async function fetchData() {
         let res = await axios.get('http://localhost:8001/api/projects', { headers: {"Authorization" : `Bearer ${token}`} })
        // console.log(res.data);
         setProjects(res.data.projects);
-        var nb_proj_done = 0;
-        var nb_proj_all = res.data.length;
-        var nb_proj_inprogrsess = 0;
-        var nb_boards = 0;
-        var nb_tasks = 0;
-       //  let arrids = [];
+        let information = {all: '', boards: '', done: '', inprogress: ''};
+        information.all = res.data.all;
+        information.boards = res.data.boards;
+        information.done = res.data.done;
+        information.inprogress = res.data.inprogress;
+        setInfo(information);
+        //  let arrids = [];
        //  for (let i of res.data.projects){
        //      for (let j of i.idBoards) {
        //          arrids.push(j);
@@ -51,6 +54,7 @@ const Home = () => {
             ) : ( <>
             <div className="col-10
              col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
+                <Statistic info={info}  style={{zIndex: 500}}/>
             <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}}/>
             </div>
             <div className="col">

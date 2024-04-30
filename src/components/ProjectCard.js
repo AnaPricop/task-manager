@@ -120,8 +120,9 @@ const ProjectCard = ({project, setProjectsDel}) => {
                         <span><button className="save-task btn btn-dark"
                                       onClick={() => {updateProject();}}>Save</button></span>
                     <span><button className="cancel-task btn" onClick={() => {
-                        setSaveProject(!saveProject);
-                        setEdit(!edit)
+                        setSaveProject(false);
+                        setEdit(true);
+                        setFocus(false);
                     }}>Cancel</button></span>
                 {/*</div>*/}
                 </div>
