@@ -13,10 +13,10 @@
 
 }
 
-li:hover {
-    background-color: #25283D !important;
-    border-radius: 3px;
-}
+/*li:hover {*/
+/*    background-color: #25283D !important;*/
+/*    border-radius: 3px;*/
+/*}*/
 
 .nav {
     height: 400px;
@@ -25,25 +25,51 @@ li:hover {
     overflow-y: auto;
 }
 
-.nav-link.active {
-    background-color: #25283D !important;
-    color: #EEEEEE !important;
-    border-radius: 3px;
-}
-
-.nav-link:hover, .nav-item:hover, ul .nav-link.link-dark1:hover {
-    background-color: #25283D !important;
-    color: #EEEEEE !important;
-    border-radius: 3px;
-}
-
-.nav-proj.link-dark1:hover, .projects-list li:hover a {
+.nav-proj.active {
     background-color: #25283D !important;
     color: #EEEEEE !important;
     border-radius: 3px;
     height: 40px;
+    width:100%;
+    align-content: center;
+    text-align: left;
+    margin-left: 10px;
 }
 
+.nav-link:hover, .nav-item:hover, ul .nav-link.link-dark1:hover{
+    background-color: #25283D !important;
+    color: #EEEEEE !important;
+    border-radius: 3px;
+}
+
+.nav-proj.link-dark1:hover, .projects-list li:hover, *:not(section)li:hover a, ul li:hover {
+    background-color: #25283D !important;
+    color: #EEEEEE !important;
+    border-radius: 3px;
+    height: 40px;
+    width:100%;
+}
+.hover-project:hover{
+    background-color: #25283D !important;
+    color: #EEEEEE !important;
+    border-radius: 3px;
+    height: 40px;
+    width:180px;
+}
+.hover-project{
+    margin-left: -25px;
+    border-radius: 5px;
+    /* width: 300px; */
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.hover-project:hover a{
+    /*background-color: #25283D !important;*/
+    color: #EEEEEE !important;
+    /*border-radius: 3px;*/
+    /*height: 40px;*/
+}
 /*.nav-proj{*/
 /*    !*height:40px;*!*/
 /*    padding-top:7px;*/
@@ -51,8 +77,8 @@ li:hover {
 .nav-link, .link-dark1 {
     color: #262626 !important;
     font-size: 15px;
-    background-color:#EEEEEE !important;
-    border-radius: 0;
+    /*background-color:#EEEEEE !important;*/
+    /*border-radius: 0;*/
     /*font-weight: 400;*/
 }
 
@@ -72,7 +98,7 @@ li:hover {
     font-size: 15px;
     line-height: 20px;
     font-weight: 400;
-    background-color: #61677A;
+    background-color:#25283D;
     box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
     box-sizing: border-box;
     outline: 0;
@@ -80,9 +106,10 @@ li:hover {
     left: 220px;
     width: 300px;
     position: absolute;
-    margin-top: 20px;
-    border-radius: 10px;
+    /*margin-top: 20px;*/
+    border-radius: 5px;
     z-index: 100;
+    margin-top: -20px;
 }
 
 .section_board {
@@ -91,7 +118,7 @@ li:hover {
     font-size: 15px;
     line-height: 20px;
     font-weight: 400;
-    background-color: #61677A;
+    background-color: #25283D;
     box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
     box-sizing: border-box;
     outline: 0;
@@ -100,7 +127,7 @@ li:hover {
     width: 300px;
     position: absolute;
     margin-top: -20px;
-    border-radius: 10px;
+    border-radius: 5px;
     z-index: 1002;
 }
 
@@ -120,7 +147,7 @@ li:hover {
 
 #titleOfProject {
     height: 30px;
-    background-color: #61677A;
+    background-color: #F2F4F3;
 }
 
 #titleOfProject:focus {
@@ -136,8 +163,8 @@ li:hover {
     margin-top: 20px;
     /*padding-bottom:20px;*/
     /*height:20px;*/
-    background-color: rgba(170, 172, 180, 0.46) !important;
-    color: #D8D9DA;
+    background-color: #F2F4F3;
+    color: #25283D;
 }
 
 .create_project_hidden {
@@ -281,13 +308,6 @@ select option {
     width: 200px;
     height: 120px;
     cursor: pointer;
-    z-index: 1000;
-    /*top:0;*/
-    /*left: 0;*/
-    /*bottom: 0;*/
-    /*right:0;*/
-    /*width: 100%;*/
-    /*height:100%;*/
 }
 
 .change-img {
@@ -329,6 +349,7 @@ select option {
     overflow: auto;
     list-style: none;
     margin-top: 20px;
+
 }
 .projects-list::-webkit-scrollbar {
     width: 10px;

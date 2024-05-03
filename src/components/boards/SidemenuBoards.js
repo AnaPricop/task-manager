@@ -67,7 +67,8 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
     const boardList =
         board !== 'undefined' && board.length === 0
             ? <a style={{paddingLeft: '20px'}}>No boards.</a>
-            : board.map((b, k) => <Link to={{
+            : board.map((b, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
+                                      className="hover-project" ><Link to={{
                 pathname: `/${project._id}/${b.title}`
             }} state={b} key={b._id} className="row"
                                         onMouseEnter={e => {
@@ -76,7 +77,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                                         onMouseLeave={e => {
                                             setDotsStyle('')
                                         }}> <a
-                className={selected && b._id === selected ? "active nav-link link-dark1" : "nav-link link-dark1"}
+                className={selected && b._id === selected ? "active nav-proj link-dark1 align-center justify-content-center" : "nav-proj link-dark1 align-center justify-content-center"}
                 key={b._id} style={{paddingLeft: '30px'}}
             >
                 {b.title} </a>
@@ -93,7 +94,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                         <Dropdown.Item eventKey="0">Delete</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            </Link>);
+            </Link></li>);
     // const boardList1 =
     //     board !== 'undefined' && board.length === 0
     //         ? 'there are no projects!'
@@ -209,7 +210,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                     {/*<img className="header-logo" src="/myprojects.svg"/>*/}
                     My Boards
                 </a>
-                <ul className="nav nav-pills flex-column mb-auto text-decoration-none">
+                <ul className=" flex-column mb-auto text-decoration-none projects-list">
                     {/*{board}*/}
                     {boardList}
                 </ul>

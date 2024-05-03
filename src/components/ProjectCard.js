@@ -104,7 +104,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
             {/*    </svg>*/}
             {/*    <span className="span_progress">In Progress</span>*/}
             {/*</div>*/}
-            <div className="row justify-content-center" style={{paddingTop: '20px'}}>
+            <div className="row justify-content-center" style={{paddingTop: '20px'}} title="Change Image">
                 <div className="select-img"
                      onMouseEnter={e => {
                          setStyle({display: 'block'});
@@ -150,7 +150,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                     {/*</div>*/}
                 </div>
                 <div className="row justify-content-center py-3">
-                    <div className="col col-lg-2" style={{textAlign: 'center'}} onClick={() => {
+                    <div className="col col-lg-2" style={{textAlign: 'center' , cursor: 'pointer'}} title="Open Project" onClick={() => {
                         handleNext();
                     }}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -162,7 +162,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                             </g>
                         </svg>
                     </div>
-                    <div className="col col-lg-2" style={{textAlign: 'center'}}
+                    <div className="col col-lg-2" style={{textAlign: 'center', cursor: 'pointer'}}  title="Edit Project"
                          onClick={() => {
                              setEdit(!edit);
                              setSaveProject(!saveProject);
@@ -184,7 +184,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                             </g>
                         </svg>
                     </div>
-                    <div className="col col-lg-2" style={{textAlign: 'center'}}
+                    <div className="col col-lg-2" style={{textAlign: 'center', cursor: 'pointer'}}  title="Delete Project"
                          onClick={() => deleteProject(project._id)}>
                         <svg viewBox="0 0 1024 1024" width="25px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

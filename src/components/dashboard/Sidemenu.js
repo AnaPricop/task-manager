@@ -9,6 +9,18 @@ import CreateProject from "./CreateProject";
 import Loading from "../Loading";
 
 const Sidemenu = ({projects, setProjects, information, setInfo}) => {
+    const [isHover, setIsHover] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    };
+    const boxStyle = {
+        backgroundColor: isHover ? '#25283D' : ''
+    };
     const [isLoading, setIsLoading] = useState(false);
     let navigate = useNavigate();
     const [active, setActive] = useState(0);
@@ -74,7 +86,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                 console.log(information)
                 setBoards([...boards, res.data.board]);
                 information.boards = information.boards + 1;
-                 setInfo(information)
+                setInfo(information)
                 handleCreateBoard();
             })
             .catch((err) => {
@@ -91,8 +103,10 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const projectList =
         projects.length === 0
             ? <a className="nav-link link-dark1">No projects.</a>
-            : projects.map((project, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center'}} className=""><a className="nav-proj link-dark1 align-center justify-content-center" key={project._id}
-                                              onClick={() => handleNext(project._id)}>
+            : projects.map((project, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
+                                               className="hover-project" ><a
+                className="nav-proj link-dark1 align-center justify-content-center"
+                onClick={() => handleNext(project._id)}>
                 <svg className="bi me-2" width="16" height="16"></svg>
                 {project.title} </a></li>);
     const projectListSelect =
@@ -193,7 +207,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                                             {/*<img src="./bck1.svg"/>*/}
                                             {/*</img>*/}
                                             <input type="file" onChange={onImageChange}
-                                                   className="filetype input-select" id="file-input-id"  value=''/>
+                                                   className="filetype input-select" id="file-input-id" value=''/>
                                             <span className="change-img" style={style} onChange={onImageChange}>Change Image</span>
                                         </div>
                                     </div>
