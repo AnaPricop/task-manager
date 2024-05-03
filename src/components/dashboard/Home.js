@@ -55,10 +55,10 @@ const Home = () => {
             <div className="col-10
              col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
                 <Statistic info={info}  style={{zIndex: 500}}/>
-            <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}}/>
+            <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}} info={info} setInfo={setInfo}/>
             </div>
             <div className="col">
-                <Sidemenu projects={projects} setProjects={setProjects} style={{zIndex: 1000}}>
+                <Sidemenu projects={projects} setProjects={setProjects} information={info} setInfo={setInfo} style={{zIndex: 1000}}>
                     {/*<CreateProject/>*/}
                 </Sidemenu>
             </div>

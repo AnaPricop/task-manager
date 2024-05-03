@@ -8,7 +8,7 @@ import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 import Loading from "../Loading";
 
-const Sidemenu = ({projects, setProjects}) => {
+const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const [isLoading, setIsLoading] = useState(false);
     let navigate = useNavigate();
     const [active, setActive] = useState(0);
@@ -71,8 +71,10 @@ const Sidemenu = ({projects, setProjects}) => {
                     idProject: "",
                     background: ""
                 });
-                console.log(res.data.board)
+                console.log(information)
                 setBoards([...boards, res.data.board]);
+                information.boards = information.boards + 1;
+                 setInfo(information)
                 handleCreateBoard();
             })
             .catch((err) => {
@@ -89,10 +91,10 @@ const Sidemenu = ({projects, setProjects}) => {
     const projectList =
         projects.length === 0
             ? <a className="nav-link link-dark1">No projects.</a>
-            : projects.map((project, k) => <a className="nav-link link-dark1" key={project._id}
+            : projects.map((project, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center'}} className=""><a className="nav-proj link-dark1 align-center justify-content-center" key={project._id}
                                               onClick={() => handleNext(project._id)}>
                 <svg className="bi me-2" width="16" height="16"></svg>
-                {project.title} </a>);
+                {project.title} </a></li>);
     const projectListSelect =
         projects.length === 0
             ? 'there are no projects!'
@@ -103,6 +105,7 @@ const Sidemenu = ({projects, setProjects}) => {
     const [image, setImage] = useState('./bck4.svg')
     const onImageChange = async (e) => {
         const file = e.target.files[0];
+        console.log(file)
         const base64 = await convertToBase64(file);
         setImage(base64);
         setProject({...projectData, image: base64});
@@ -122,6 +125,9 @@ const Sidemenu = ({projects, setProjects}) => {
                 });
                 setProjects([...projects, res.data.project]);
                 setImage('./bck4.svg');
+                information.all = information.all + 1;
+                information.inprogress = information.inprogress + 1;
+                setInfo(information)
                 handleCreate();
             })
             .catch((err) => {
@@ -187,8 +193,8 @@ const Sidemenu = ({projects, setProjects}) => {
                                             {/*<img src="./bck1.svg"/>*/}
                                             {/*</img>*/}
                                             <input type="file" onChange={onImageChange}
-                                                   className="filetype input-select"/>
-                                            <span className="change-img" style={style}>Change Image</span>
+                                                   className="filetype input-select" id="file-input-id"  value=''/>
+                                            <span className="change-img" style={style} onChange={onImageChange}>Change Image</span>
                                         </div>
                                     </div>
                                     <div className="form-group">
@@ -270,7 +276,7 @@ const Sidemenu = ({projects, setProjects}) => {
                             <img className="header-logo" src="/myprojects.svg"/>
                             My projects
                         </a>
-                        <ul className="nav nav-pills flex-column mb-auto">
+                        <ul className=" flex-column mb-auto projects-list">
                             {projectList}
 
                         </ul>
@@ -307,6 +313,7 @@ function convertToBase64(file) {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
+        console.log(file)
         fileReader.onload = () => {
             resolve(fileReader.result)
         };

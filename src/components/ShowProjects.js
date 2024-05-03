@@ -10,7 +10,7 @@ import Loading from './Loading';
 
 // import Sidemenu from './dashboard/Sidemenu';
 
-function ShowProjects({projects, setProjects}) {
+function ShowProjects({projects, setProjects, info, setInfo}) {
     const [isLoading, setIsLoading] = useState(false);
     const setProjectsDel = (projectid) => {
         const del = projects.filter(project => projectid !== project._id)
@@ -21,7 +21,7 @@ function ShowProjects({projects, setProjects}) {
     const projectList =
         projects.length === 0
             ? 'There are no projects.'
-            : projects.map((project, k) => <ProjectCard project={project} setProjectsDel={setProjectsDel} key={k}/>);
+            : projects.map((project, k) => <ProjectCard project={project} projects={projects} setProjects={setProjects} setProjectsDel={setProjectsDel} info={info} setInfo={setInfo}/>);
     // if (projects.length === 0)
     //     setIsLoading(true)
     // else {
