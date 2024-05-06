@@ -300,6 +300,9 @@ margin-right: 15px;
 .dropdown-status{
     font-size:12px;
 }
+.hover-project .dropdown-menu{
+    width:50px;
+}
 .dropdown-fr{
     /*height: 20px;*/
     margin-right:10px;
@@ -355,7 +358,7 @@ margin-right: 15px;
     text-align:right;
     /*vertical-align: middle;*/
     vertical-align: middle;
-    top: -32px;
+    top: -26px;
     /*top: -40px;*/
     right: 0px;
     z-index: 1000;

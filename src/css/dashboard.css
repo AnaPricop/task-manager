@@ -30,16 +30,32 @@
     color: #EEEEEE !important;
     border-radius: 3px;
     height: 40px;
-    width:100%;
+    /*width:100%;*/
+    display: block;
     align-content: center;
-    text-align: left;
-    margin-left: 10px;
+    /*text-align: left;*/
+    /*margin-left: 10px;*/
+}
+.hover-project:has(.active) {
+    background-color: #25283D !important;
+    color: #EEEEEE !important;
+    border-radius: 3px;
+    height: 40px;
+    /*width:100%;*/
+    align-content: center;
+    /*text-align: left;*/
+    /*margin-left: 10px;*/
 }
 
 .nav-link:hover, .nav-item:hover, ul .nav-link.link-dark1:hover{
     background-color: #25283D !important;
     color: #EEEEEE !important;
     border-radius: 3px;
+    height: 40px;
+    /*width: 100%;*/
+    /*align-content: center;*/
+    /*text-align: left;*/
+    /*margin-left: 10px;*/
 }
 
 .nav-proj.link-dark1:hover, .projects-list li:hover, *:not(section)li:hover a, ul li:hover {
@@ -53,16 +69,20 @@
     background-color: #25283D !important;
     color: #EEEEEE !important;
     border-radius: 3px;
-    height: 40px;
-    width:180px;
+    /*height: 40px;*/
+    display:block;
+    /*width:180px;*/
 }
 .hover-project{
     margin-left: -25px;
     border-radius: 5px;
     /* width: 300px; */
-    width: 100%;
-    text-align: center;
+    /*width: 100%;*/
+    /*text-align: center;*/
+    align-content: center;
     cursor: pointer;
+    display: block;
+    height: 40px;
 }
 .hover-project:hover a{
     /*background-color: #25283D !important;*/
@@ -81,7 +101,10 @@
     /*border-radius: 0;*/
     /*font-weight: 400;*/
 }
-
+.nav-link.active{
+    color: #EEEEEE !important;
+    background-color: #25283D !important;
+}
 .header-logo {
     width: 40px;
     padding-right: 10px;

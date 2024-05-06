@@ -67,20 +67,23 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
     const boardList =
         board !== 'undefined' && board.length === 0
             ? <a style={{paddingLeft: '20px'}}>No boards.</a>
-            : board.map((b, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
-                                      className="hover-project" ><Link to={{
+            : board.map((b, k) => <Link to={{
                 pathname: `/${project._id}/${b.title}`
-            }} state={b} key={b._id} className="row"
+            }} state={b} key={b._id} className={selected && b._id === selected ? "active nav-proj hover-project link-dark1 align-center justify-content-center" : "hover-project nav-proj link-dark1 align-center justify-content-center"}
+                                        style={{paddingLeft: '30px'}}
                                         onMouseEnter={e => {
                                             setDotsStyle(b._id);
+                                            console.log(b._id, dotsStyle)
                                         }}
                                         onMouseLeave={e => {
                                             setDotsStyle('')
-                                        }}> <a
-                className={selected && b._id === selected ? "active nav-proj link-dark1 align-center justify-content-center" : "nav-proj link-dark1 align-center justify-content-center"}
-                key={b._id} style={{paddingLeft: '30px'}}
-            >
-                {b.title} </a>
+                                        }}> {b.title}<li style={{textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
+                                      className="" >
+            {/*    <a*/}
+            {/*    className={selected && b._id === selected ? "active nav-proj link-dark1 align-center justify-content-center" : "nav-proj link-dark1 align-center justify-content-center"}*/}
+            {/*     style={{paddingLeft: '30px'}}*/}
+            {/*>*/}
+            {/*    {b.title} </a>*/}
                 <Dropdown onSelect={dropdowndel} onClick={() => setSelectedItem(b.title)}>
                     <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
                                      className={b._id === dotsStyle || (selected && b._id === selected) ? ' display-dots settings-btn-sidemenu' : 'not-display-dots settings-btn-sidemenu'}
@@ -94,7 +97,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                         <Dropdown.Item eventKey="0">Delete</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            </Link></li>);
+            </li></Link>);
     // const boardList1 =
     //     board !== 'undefined' && board.length === 0
     //         ? 'there are no projects!'
