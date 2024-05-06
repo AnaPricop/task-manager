@@ -24,7 +24,9 @@ router.post("/", async (req, res) => {
 
         // console.log(user, user._id)
     store.set('user_id', user._id);
-        res.status(200).send({ data: token, message: "logged in successfully" });
+    // store.set('firstname', user.firstName);
+    // store.set('lastname', user.lastName);
+        res.status(200).send({ data: token, firstname: user.firstName, lastname: user.lastName, message: "logged in successfully" });
     // } catch (error) {
     //     res.status(500).send({ message: "Internal Server Error", error: error });
     // }

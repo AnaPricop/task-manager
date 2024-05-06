@@ -107,7 +107,8 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
 
     const onSubmitBoard = (e) => {
         e.preventDefault();
-        //console.log(boardData)
+        console.log(boardData)
+        // if (boardData.idProject == )
         axios
             .post("http://localhost:8001/api/boards", boardData)
             .then((res) => {

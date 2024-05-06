@@ -48,10 +48,7 @@ margin-right: 15px;
 .button-d:hover {
      background: darken(#61677A,7%);
  }
-/*.button-d:active, .button-d:after {*/
-/*     width: 300px;*/
-/*     height: 300px;*/
-/* }*/
+
 .loading{
     position: absolute;
     height: 100vh;
@@ -72,6 +69,18 @@ margin-right: 15px;
     height:100px;
     object-fit: cover;
     width:300px;
+
+}
+/*.card-board{*/
+/*    opacity: 0.7;*/
+/*    transition: opacity 0.6s ease-out;*/
+/*}*/
+.card-board:hover > .card-img{
+    transition: opacity 1s ease-in-out;
+    opacity: 0.3;
+}
+.card-board:hover{
+    opacity: 1;
 }
 .card-svg{
     height:30px;
@@ -303,6 +312,31 @@ margin-right: 15px;
 .hover-project .dropdown-menu{
     width:50px;
 }
+.dropdown-fr-user{
+    /*height: 20px;*/
+    margin-right:10px;
+    line-height: 20px;
+    /*font-weight: 400;*/
+    font-display: swap;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px 12px;
+    text-decoration: none;
+    white-space: normal;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    color: var(--ds-text, #172b4d);
+    font-weight: 500;
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
+    margin-left: -10px;
+}
 .dropdown-fr{
     /*height: 20px;*/
     margin-right:10px;
@@ -405,3 +439,14 @@ margin-right: 15px;
 /*    background-color: rgba(97, 103, 122, 0.32) !important;*/
 /*    color: #D8D9DA !important;*/
 /*}*/
+.nav-proj .dropdown-status.show
+{
+    background-color:#F2F4F3;
+    color: #25283D;
+    border-radius:3px;
+}
+.nav-proj .dropdown-status.show .dropdown-item:hover
+{
+    background-color: rgba(37, 40, 61, 0.6);
+    color: #F2F4F3;
+}

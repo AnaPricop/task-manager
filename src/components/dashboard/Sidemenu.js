@@ -7,10 +7,11 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import ProjectCard from "../ProjectCard";
 import CreateProject from "./CreateProject";
 import Loading from "../Loading";
+import Alert from 'react-bootstrap/Alert';
+import {Dropdown} from "react-bootstrap";
 
 const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const [isHover, setIsHover] = useState(false);
-
     const handleMouseEnter = () => {
         setIsHover(true);
     };
@@ -28,6 +29,14 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
+    };
+    console.log(localStorage.getItem("firstname"))
+    const [firstname, setFirstname] = useState(localStorage.getItem("firstname"));
+    const evt = (e) => {
+        // onUpdate(e);
+        console.log(e)
+        if (e === '2')
+            handleLogout();
     };
     var token = localStorage.getItem("token");
     //const [prevProject, setNewProjects] = useState([]);
@@ -58,7 +67,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
 
     const [boardData, setBoard] = useState({  //board data
         title: "",
-        idProject: "",
+        idProject: projects[0]._id,
         background: ""
     });
     //background board
@@ -70,6 +79,8 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const onChangeBoard = (e) => {
         setBoard({...boardData, [e.target.name]: e.target.value});   //set values for board form
     };
+    const [alertBoard, setAlertBoard] = useState(false);
+    const [alertProject, setAlertProject] = useState(false);
     //submit board
     const [boards, setBoards] = useState([]);  //boards
     const onSubmitBoard = (e) => {
@@ -80,13 +91,14 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
             .then((res) => {
                 setBoard({
                     title: "",
-                    idProject: "",
+                    idProject:  projects[0]._id,
                     background: ""
                 });
                 console.log(information)
                 setBoards([...boards, res.data.board]);
                 information.boards = information.boards + 1;
-                setInfo(information)
+                setInfo(information);
+                setAlertBoard(true);
                 handleCreateBoard();
             })
             .catch((err) => {
@@ -142,6 +154,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                 information.all = information.all + 1;
                 information.inprogress = information.inprogress + 1;
                 setInfo(information)
+                setAlertProject(true);
                 handleCreate();
             })
             .catch((err) => {
@@ -155,6 +168,11 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
             {isLoading ? (
                 <Loading/>
             ) : (<>
+                    {alertBoard ? <Alert key="success" variant="success" onClose={() => setAlertBoard(false)} dismissible>
+                        Board created successfully.
+                    </Alert> : (alertProject ? <Alert key="success" variant="success" onClose={() => setAlertProject(false)} dismissible>
+                        Project created successfully.
+                    </Alert> : '')}
                     <a href="/"
                        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                         <img className="header-logo" src="/taskmng.svg"/>
@@ -295,26 +313,41 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
 
                         </ul>
                     </ul>
+                    <div className="dropdown d-flex">
+                        <Dropdown className="d-inline dropdown-status" onSelect={evt}>
+                            <Dropdown.Toggle
+                               className="dropdown-status dropdown-fr-user d-flex align-items-center link-dark1 text-decoration-none "
+                                 id="dropdown-autoclose-true" >
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                     className="rounded-circle me-2"/>
+                                <strong>{firstname}</strong>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="dropdown-status">
+                                <Dropdown.Item eventKey="0" disabled>Profile</Dropdown.Item>
+                                <Dropdown.Item eventKey="1" disabled>Settings</Dropdown.Item>
+                                <Dropdown.Item eventKey="2">Sign out</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
 
-
-                    <div className="dropdown">
-                        <a href="#"
-                           className="d-flex align-items-center link-dark1 text-decoration-none dropdown-toggle"
-                           id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                                 className="rounded-circle me-2"/>
-                            <strong>mdo</strong>
-                        </a>
-                        <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
-                            {/*<li><a className="dropdown-item" href="#">Profile</a></li>*/}
-                            <li>
-                                <hr className="dropdown-divider"/>
-                            </li>
-                            <li><a className="dropdown-item" onClick={handleLogout}>Sign out</a></li>
-                        </ul>
                     </div>
+                    {/*<div className="dropdown">*/}
+                    {/*    <a href="#"*/}
+                    {/*       className="d-flex align-items-center link-dark1 text-decoration-none dropdown-toggle"*/}
+                    {/*       id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">*/}
+                    {/*        <img src="https://github.com/mdo.png" alt="" width="32" height="32"*/}
+                    {/*             className="rounded-circle me-2"/>*/}
+                    {/*        <strong>mdo</strong>*/}
+                    {/*    </a>*/}
+                    {/*    <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">*/}
+                    {/*        <li><a className="dropdown-item" href="#">Profile</a></li>*/}
+                    {/*        <li><a className="dropdown-item" href="#">Settings</a></li>*/}
+                    {/*        /!*<li><a className="dropdown-item" href="#">Profile</a></li>*!/*/}
+                    {/*        <li>*/}
+                    {/*            <hr className="dropdown-divider"/>*/}
+                    {/*        </li>*/}
+                    {/*        <li><a className="dropdown-item" onClick={handleLogout}>Sign out</a></li>*/}
+                    {/*    </ul>*/}
+                    {/*</div>*/}
                 </>
             )}
         </div>
