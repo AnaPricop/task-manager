@@ -22,7 +22,7 @@ const LabelColors = ({show, task, tasks, setTasks, label, labels, setLabels, cha
             .put("http://localhost:8001/api/tasks/" + task._id, upd_label)
             .then((res) => {
                 console.log(res.data.task)
-                task.subject = upd_label.subject;
+                task.subject[0] = upd_label.subject;
                 changeColor(upd_label);
                 setLabels(e)
 let index1;

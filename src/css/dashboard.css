@@ -334,6 +334,7 @@ select option {
     width: 200px;
     height: 120px;
     cursor: pointer;
+    z-index: 2000;
 }
 
 .change-img {

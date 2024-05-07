@@ -9,7 +9,8 @@ import TaskCard from './TaskCard';
 import Loading from '../Loading';
 import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
-
+import tasks from "../../css/tasks.css";
+import {FaInfoCircle} from "react-icons/fa";
 const BoardCard = ({board, currentBoard}) => {
     console.log(currentBoard)
 
@@ -47,7 +48,14 @@ const BoardCard = ({board, currentBoard}) => {
             {isLoading ? (
                 <Loading/>
             ) : (<>
-                    <h2 className="boards-h2 row">{currentBoard.title}</h2>
+                <div className="d-flex py-2  align-center" style={{alignItems:'center'}}>
+                    <h2 className="boards-h2 ">{currentBoard.title}</h2>
+                    <button
+                    className="edit-board btn btn-dark" onClick={() => {
+                    // setEdit(!edit);
+                    // setSaveTask(!saveTask)
+                }}>Edit</button>
+                </div>
                     <div className="my-5 w-100 row h-90">
                         <div className="col-3 mx-5">
                             <div className="task-status">To Do</div>

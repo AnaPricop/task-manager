@@ -211,3 +211,14 @@ li.li-little-div{
 .label-task-clr {
     color:white;
 }
+.add-label-none{
+    display: none;
+}
+.input-label-task{
+    width:50px;
+    position: relative;
+    /* margin-bottom: -30px; */
+    top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

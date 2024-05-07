@@ -62,7 +62,7 @@ setShowTaskView(true);
     const [labels, setLabels] = useState(JSON.parse(tasks.filter(e => e._id === task._id)[0].subject));
     return (
         <div className="list-board">
-            <div className="d-flex px-2">
+            <div className="d-flex px-2" style={{width: '350px', flexWrap: 'wrap'}}>
                 {JSON.parse(tasks.filter(e => e._id === task._id)[0].subject).length > 0 ? JSON.parse(tasks.filter(e => e._id === task._id)[0].subject).map((tag, index) => (
                     <div className={tag.color !== '' ? tag.color + " label-task justify-content-center align-items-center label-task-clr" : " label-task justify-content-center align-items-center"} key={index} >
                         <span className="text">{tag.title}</span>

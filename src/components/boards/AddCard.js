@@ -34,9 +34,9 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
         if (JSON.stringify(taskData.subject) === '[]')
            subj = {subject: JSON.stringify(default1)};
         else
-            subj = {subject: JSON.stringify(taskData.subject)};
+            subj = taskData.subject;
         setTaskData({...taskData, subj});
-        taskData.subject = JSON.stringify(default1);
+        taskData.subject = subj;
         console.log(subj, taskData)
         axios
             .post("http://localhost:8001/api/tasks", taskData, {headers: {"Authorization": `Bearer ${token}`}})
