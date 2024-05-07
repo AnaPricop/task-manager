@@ -143,9 +143,9 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                                           updateProject();
                                       }}>Save</button></span>
                     <span><button className="cancel-task btn" onClick={() => {
-                        setSaveProject(false);
-                        setEdit(true);
-                        setFocus(false);
+                        setSaveProject(!saveProject);
+                        setEdit(!edit);
+                        setFocus(!focus);
                     }}>Cancel</button></span>
                     {/*</div>*/}
                 </div>

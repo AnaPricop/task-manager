@@ -48,6 +48,16 @@
     font-size:16px;
     margin-top: -10px;
 }
+.board-title{
+    color: #272829;
+    /*margin-bottom:-10px!important;*/
+    font-size: 20px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    border: none;
+    /*padding-top: 20px;*/
+    background-color: transparent;
+}
 .progress_top{
     display:flex;
     padding-top:10px;
@@ -59,6 +69,10 @@
 }
 .card-title1{
     border: 2px solid #5B6C5D;
+    border-radius: 5px;
+}
+.board-title1{
+    border: 2px solid #25283D;
     border-radius: 5px;
 }
 .list2{

@@ -13,6 +13,14 @@ import tasks from "../../css/tasks.css";
 import {FaInfoCircle} from "react-icons/fa";
 const BoardCard = ({board, currentBoard}) => {
     console.log(currentBoard)
+    const [edit, setEdit] = useState(true);
+    const [saveBoard, setSaveBoard] = useState(false);
+    const [title, setTitle] = useState(currentBoard.title)
+    const [focus, setFocus] = useState(false);
+    const onTodoChange = (value) => {
+        console.log(value)
+        setTitle({title: value})
+    }
 
     const [isClicked, setClicked] = useState(0);
     const [isClicked1, setClicked1] = useState(0);
@@ -49,12 +57,13 @@ const BoardCard = ({board, currentBoard}) => {
                 <Loading/>
             ) : (<>
                 <div className="d-flex py-2  align-center" style={{alignItems:'center'}}>
-                    <h2 className="boards-h2 ">{currentBoard.title}</h2>
+                    <input className={focus ? "board-title board-title1" : "board-title"} placeholder={currentBoard.title}  defaultValue={currentBoard.title} disabled={edit} onChange={e => onTodoChange(e.target.value)}/>
                     <button
-                    className="edit-board btn btn-dark" onClick={() => {
-                    // setEdit(!edit);
-                    // setSaveTask(!saveTask)
-                }}>Edit</button>
+                    className="edit-board btn btn-dark"  onClick={() => {
+                         setSaveBoard(!saveBoard);
+                        setEdit(!edit);
+                         setFocus(!focus);
+                    }}>Edit</button>
                 </div>
                     <div className="my-5 w-100 row h-90">
                         <div className="col-3 mx-5">
