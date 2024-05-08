@@ -111,15 +111,16 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const handleNext = (id) => {
         navigate(`/proj/${id}`);
     }
-
+    var background = './color.svg';
     const projectList =
         projects.length === 0
-            ? <a className="nav-link link-dark1">No projects.</a>
-            : projects.map((project, k) => <li style={{height: '40px', textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
+            ? <a className="link-dark1">No projects.</a>
+            : projects.map((project, k) => <li style={{textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
                                                className="hover-project" ><a
                 className="nav-proj link-dark1 align-center justify-content-center"
                 onClick={() => handleNext(project._id)}>
-                <svg className="bi me-2" width="16" height="16"></svg>
+                <img className="img-style-proj-sidebar" src={project.image ? project.image : background}
+                     alt="Card image cap"/>
                 {project.title} </a></li>);
     const projectListSelect =
         projects.length === 0
@@ -163,7 +164,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     };
 
     return (
-        <div className="p-3 bg-light sidebar_dsh h-100  px-3 position-fixed"
+        <div className=" bg-light sidebar_dsh h-100  position-fixed"
         >
             {isLoading ? (
                 <Loading/>
@@ -173,31 +174,28 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                     </Alert> : (alertProject ? <Alert key="success" variant="success" onClose={() => setAlertProject(false)} dismissible>
                         Project created successfully.
                     </Alert> : '')}
+                    <div className="sidebar-header">
                     <a href="/"
                        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none header-sidemenu">
                         <img className="header-logo" src="/taskmng.svg"/>
                         TaskAcc
                     </a>
-                    <hr/>
-                    <ul className="nav nav-pills flex-column mb-auto" style={{height: '90%'}}>
+                    </div>
+
+                    <ul className="nav nav-pills flex-column mb-auto" style={{height: '87%'}}>
+                        <div className="nothover">
                         <li className="nav-item">
-                            <a className={(active === 0 ? 'active ' : 'null ') + "nav-link link-dark1"}
+                            <a className={(active === 0 ? 'active ' : 'null ') + " link-dark1"}
                                onClick={() => setActive(0)}>
-                                <svg className="bi me-2" width="16" height="16">
-                                    {/*<use xlink:href="#table"/>*/}
-                                </svg>
                                 Home
                             </a>
                         </li>
                         <li>
 
                             <a href="#" onClick={handleCreate}
-                               className="nav-link link-dark1 ">
+                               className="link-dark1 ">
                                 {/*// className={(active === 1 ? 'active ': 'null ') + "nav-link link-dark"}*/}
                                 {/*// onClick={() => setActive(1)}>*/}
-                                <svg className="bi me-2" width="16" height="16">
-                                    {/*<use xlink:href="#speedometer2"/>*/}
-                                </svg>
                                 Create project
                             </a>
                             <section
@@ -241,11 +239,10 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
 
                         </li>
                         <li>
-                            <a href="#" className="nav-link link-dark1" onClick={handleCreateBoard}>
+                            <a href="#" className="link-dark1" onClick={handleCreateBoard}>
                                 {/*// className={(active === 2 ? 'active ': 'null ') + "nav-link link-dark"}*/}
                                 {/*// onClick={() => setActive(2)}>*/}
-                                <svg className="bi me-2" width="16" height="16">
-                                </svg>
+
                                 Create board
                             </a>
                             <section
@@ -301,11 +298,12 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                                 </form>
                             </section>
                         </li>
-                        <hr/>
+                        </div>
+                        {/*<hr/>*/}
                         {/*<hr/>*/}
                         <a href="/"
-                           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none">
-                            <img className="header-logo" src="/myprojects.svg"/>
+                           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark1 text-decoration-none my-proj">
+                            {/*<img className="header-logo" src="/myprojects.svg"/>*/}
                             My projects
                         </a>
                         <ul className=" flex-column mb-auto projects-list">

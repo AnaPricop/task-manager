@@ -36,7 +36,7 @@ function ShowProjects({projects, setProjects, info, setInfo}) {
             {isLoading ? (
                 <Loading/>
             ) : (<>
-                <h3>Your Projects</h3>
+                <h5>Your Projects</h5>
                 <div className='list row py-2'>{projectList}</div>
             </>)}
         </div>

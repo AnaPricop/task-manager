@@ -34,11 +34,11 @@ function ShowStatistic({info}) {
     return (
         <div className='ShowBookList p-3 row '>
 
-            <h3>Dashboard</h3>
+            <h5>Dashboard</h5>
             <div className="list row py-2">
                 <div className=' list2 mx-3 my-3 col-lg-2 col-md-8 justify-content-center d-flex'>
                     <div className="col-4 px-2 py-2 icon-statistic">
-                        <svg viewBox="0 0 24 24" width="40px" height="40px" xmlns="http://www.w3.org/2000/svg"
+                        <svg viewBox="0 0 24 24" width="35px" height="35px" xmlns="http://www.w3.org/2000/svg"
                              mirrorinrtl="true" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -53,13 +53,13 @@ function ShowStatistic({info}) {
                         </svg>
                     </div>
                     <div className="justify-content-center col-8 total-statistic">
-                        <span className="row" style={{fontSize: "20px"}}>{info.all}</span>
-                        <span className=" row" style={{fontSize: "15px"}}> Total Projects</span>
+                        <span className="row" style={{fontSize: "16px"}}>{info.all}</span>
+                        <span className=" row" style={{fontSize: "13px"}}> Total Projects</span>
                     </div>
                 </div>
                 <div className=' list2 mx-3 my-3 col-lg-2 col-md-8 justify-content-center d-flex'>
                     <div className="col-4 px-2 py-2 icon-statistic">
-                        <svg viewBox="0 0 24 24" width="40px" height="40px" xmlns="http://www.w3.org/2000/svg"
+                        <svg viewBox="0 0 24 24" width="35px" height="35px" xmlns="http://www.w3.org/2000/svg"
                              mirror-in-rtl="true" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -70,13 +70,13 @@ function ShowStatistic({info}) {
                         </svg>
                     </div>
                     <div className="justify-content-center col-8 total-statistic">
-                        <span className="row" style={{fontSize: "20px"}}>{info.boards}</span>
-                        <span className=" row" style={{fontSize: "15px"}}> Total Boards</span>
+                        <span className="row" style={{fontSize: "16px"}}>{info.boards}</span>
+                        <span className=" row" style={{fontSize: "13px"}}> Total Boards</span>
                     </div>
                 </div>
                 <div className=' list2 mx-3 my-3 col-lg-2 col-md-8 justify-content-center d-flex'>
                     <div className="col-4 px-2 py-2 icon-statistic">
-                        <svg viewBox="0 0 24 24" width="40px" height="40px" xmlns="http://www.w3.org/2000/svg"
+                        <svg viewBox="0 0 24 24" width="35px" height="35px" xmlns="http://www.w3.org/2000/svg"
                              mirror-in-rtl="true" fill="#000000">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -91,14 +91,14 @@ function ShowStatistic({info}) {
                         </svg>
                     </div>
                     <div className="justify-content-center col-8 total-statistic">
-                        <span className="row" style={{fontSize: "20px"}}>{info.inprogress}</span>
-                        <span className=" row" style={{fontSize: "15px"}}>In Progress</span>
+                        <span className="row" style={{fontSize: "16px"}}>{info.inprogress}</span>
+                        <span className=" row" style={{fontSize: "13px"}}>In Progress</span>
 
                     </div>
                 </div>
                 <div className=' list2 mx-3 my-3 col-lg-2 col-md-8 justify-content-center d-flex'>
                     <div className="col-4 px-2 py-2 icon-statistic">
-                        <svg fill="#25283D" width="40px" height="40px" viewBox="0 0 1024 1024"
+                        <svg fill="#25283D" width="35px" height="35px" viewBox="0 0 1024 1024"
                              xmlns="http://www.w3.org/2000/svg" className="icon">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -109,8 +109,8 @@ function ShowStatistic({info}) {
                         </svg>
                     </div>
                     <div className="col-8 align-center total-statistic">
-                        <span className="row" style={{fontSize: "20px"}}>{info.done}</span>
-                        <span className=" row" style={{fontSize: "15px"}}>  Done</span>
+                        <span className="row" style={{fontSize: "16px"}}>{info.done}</span>
+                        <span className=" row" style={{fontSize: "13px"}}>  Done</span>
 
                     </div>
                 </div>

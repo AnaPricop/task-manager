@@ -43,6 +43,7 @@
     min-width: 300px;
     background-color: #5b6c5d85;
     border:none;
+    border-radius: 2px;
 }
 .card-title{
     font-size:16px;
@@ -83,12 +84,13 @@
 .icon-statistic{
     background-color: #D66853;
     border-radius: 5px;
-    width: 55px;
+    width: 50px;
     /* padding-right: 10px; */
     margin-right: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 .total-statistic{
-    padding-top: 10px;
+    padding-top: 14px;
+    font-weight:550;
 }
