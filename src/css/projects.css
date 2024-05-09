@@ -9,8 +9,8 @@
     /*width: 1000px;float:right;*/
 }
 .img-style-proj{
-    width: 200px;
-    height: 125px;
+    width: 120px;
+    height: 85px;
     object-fit: cover;
     /*margin-top:20px;*/
     margin-bottom:20px;
@@ -21,6 +21,9 @@
     align-items: center;
     justify-content: center;
     margin-top: 25px;
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #25283d6e;
 }
 .blob-to-image{
     width:50px;
@@ -29,6 +32,16 @@
 /*.ShowBookList{*/
 /*    flex: 1;*/
 /*}*/
+.card-title-proj{
+    font-size:18px;
+    margin-top: -10px;
+    /*text-align: left;*/
+    background-color: transparent;
+    border: none;
+    width: 240px;
+    color: #25283D;
+    /*padding-left: 6px;*/
+}
 .card-title{
     text-align: center;
     background-color: transparent;
@@ -40,10 +53,12 @@
     height:25px;
 }
 .card{
-    min-width: 300px;
+    min-width: 280px;
     background-color: #5b6c5d85;
+    /*background-color: #d668533d;*/
     border:none;
     border-radius: 2px;
+    /*border: 1px solid #25283d6e;*/
 }
 .card-title{
     font-size:16px;
@@ -79,7 +94,7 @@
 .list2{
     background-color: white;
     border-radius: 5px;
-    min-width: 300px;
+    min-width: 280px;
 }
 .icon-statistic{
     background-color: #D66853;
@@ -93,4 +108,56 @@
 .total-statistic{
     padding-top: 14px;
     font-weight:550;
+}
+.display-dots-proj{
+
+}
+.icons li {
+    background: none repeat scroll 0 0 #25283D;
+    height: 6px;
+    width: 6px;
+    line-height: 0;
+    list-style: none outside none;
+    margin-right: 15px;
+    margin-top: 3px;
+    vertical-align: top;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.settings-btn-proj {
+    background: none;
+    border: 0 none;
+    line-height: normal;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* width: 90%; */
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    text-align: right;
+    /* vertical-align: middle; */
+    vertical-align: middle;
+    top: 20px;
+    /*!* top: -40px; *!*/
+    right: -10px;
+    z-index: 1000;
+}
+.progress-bar1{
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.nb-prog{
+    padding-left:15px;
+}
+ .progress-bar{
+    background-color:#25283D;
+
+}
+.progress{
+    border-radius: 2px;
+    height:8px;
 }

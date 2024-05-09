@@ -14,6 +14,7 @@ import Loading from "../Loading";
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [info, setInfo] = useState({});
+    const [status, setStatus] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     var token = localStorage.getItem("token");
     async function fetchData() {
@@ -25,7 +26,9 @@ const Home = () => {
         information.boards = res.data.boards;
         information.done = res.data.done;
         information.inprogress = res.data.inprogress;
+        information.alltasks = res.data.all_tsks;
         setInfo(information);
+        setStatus(res.data.to_send);
         //  let arrids = [];
        //  for (let i of res.data.projects){
        //      for (let j of i.idBoards) {
@@ -53,9 +56,9 @@ const Home = () => {
                 <Loading/>
             ) : ( <>
             <div className="col-10
-             col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '210px', overflowX: 'hidden'}}>
+             col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '110px', overflowX: 'hidden'}}>
                 <Statistic info={info}  style={{zIndex: 500}}/>
-            <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}} info={info} setInfo={setInfo}/>
+            <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}} info={info} setInfo={setInfo} status={status}/>
             </div>
             <div className="col">
                 <Sidemenu projects={projects} setProjects={setProjects} information={info} setInfo={setInfo} style={{zIndex: 1000}}>

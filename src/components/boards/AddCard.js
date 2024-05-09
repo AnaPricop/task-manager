@@ -32,7 +32,7 @@ const AddCard = ({setClicked, color, boardId, tasks, setTasks, status}) => {
         let subj;
         let default1 = [{title: 'Default', color: ''}];
         if (JSON.stringify(taskData.subject) === '[]')
-           subj = {subject: JSON.stringify(default1)};
+           subj = JSON.stringify(default1);
         else
             subj = taskData.subject;
         setTaskData({...taskData, subj});

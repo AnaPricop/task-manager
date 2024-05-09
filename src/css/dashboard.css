@@ -389,8 +389,8 @@ select option {
     background: rgba(255, 255, 255, 0.5);
     position: absolute;
     /*bottom: 0;*/
-    width: 200px;
-    height: 125px;
+    width: 120px;
+    height: 85px;
     top: 20px;
     text-align: center;
     font-weight: bold;
@@ -398,7 +398,7 @@ select option {
     align-items: center;
     justify-content: center;
     /*text-align:center;*/
-    padding-top: 30px;
+    padding-top: 15px;
 }
 
 .projects-list {

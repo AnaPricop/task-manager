@@ -19,97 +19,46 @@ router.get('/', async (req, res) => {
 
 
     var promise = await Project.find({user: tkn});
-
-    var promise_task = [];
-    // .then(projects => {
-    //     //console.log(projects)
-    //     res.json({'projects': projects})})
-    // .catch(err => res.status(404).json({ noprojectsfound: 'No Projects found' }));
-    // promise.then(function (doc) {
-
-
-    //  res.json({'projects': doc});
-
+var to_send = [];
+var alltsks = 0;
     for (var j in promise) {
         var done = 1;
         let data = await Task.find({boardId: {$in: promise[j].idBoards}}).exec();
-        // then(function (task) {
-        promise_task.push(data);
+let done_tasks = 0;
         for (var kk in data) {
-            //promise_task.push(task[kk]);
             if (data[kk].status !== 2 && data[kk].status !== '2') {
                 done = 0;
-                break;
+                // break;
             }
-            // console.log(promise_task, "^^^^");
+            else
+                done_tasks ++ ;
         }
-        //  })
-
-
+        // let nb_of_tasks = data.length;
+        alltsks = alltsks + data.length;
+        let alltasks = {allTasks: data.length, doneTasks: done_tasks};
+        to_send.push(alltasks)
+        // to_send[j]['allTasks'] = data.length;
+        // to_send[j]['doneTasks'] =done_tasks;
+        // promise[j]['allTasks'] = data.length;
+        // promise[j]['doneTasks'] = done_tasks;
+        // console.log(done_tasks)
         nb_boards = nb_boards + promise[j].idBoards.length;
         if (done === 1 && promise[j].idBoards.length > 0)
             nb_proj_done++;
 
-        // console.log(done, "done", j)
-        // if (j == (promise.length - 1))
-        //     console.log(nb_proj_done, "nb_proj_done")
     }
     nb_proj_all = promise.length;
     nb_proj_inprogress = nb_proj_all - nb_proj_done;
-    //  console.log(promise_task, "^^^^")
+
     res.json({
         'done': nb_proj_done,
         'inprogress': nb_proj_inprogress,
         'all': nb_proj_all,
         'boards': nb_boards,
         'projects': promise,
+        'to_send': to_send,
+        'all_tsks': alltsks
     })
-
-    // });
-
-    // Project.find({user: tkn}).exec()
-    //     .then(projects => {
-    //             // console.log(projects)
-    //             // res.json(projects)})
-    //             if (req.params.aux === '1') {
-    //                 nb_proj_all = projects.length;
-    //
-    //                 //   let livePromises = [];
-    //                 for (var j in projects) {
-    //                     var done = 1;
-    //                     Task.find({boardId: {$in: projects[j].idBoards}}).then(task => {
-    //                         for (var kk in task) {
-    //                             if (task[kk].status !== 2 && task[kk].status !== '2') {
-    //                                 done = 0;
-    //                             }
-    //                         }
-    //                     })
-    //
-    //
-    //                     nb_boards = nb_boards + projects[j].idBoards.length;
-    //                     if (done === 1)
-    //                         nb_proj_done++;
-    //                 }
-    //                 //let lives = await Promise.all(livePromises);
-    //                 //  console.log(lives)
-    //                 nb_proj_inprogress = nb_proj_all - nb_proj_done;
-    //                 res.json({
-    //                     'done': nb_proj_done,
-    //                     'inprogress': nb_proj_inprogress,
-    //                     'all': nb_proj_all,
-    //                     'boards': nb_boards,
-    //                     'projects': projects,
-    //                     // 'lives': lives
-    //                 })
-    //             } else {
-    //                 res.json({
-    //                     'projects': projects
-    //                 })
-    //             }
-    //
-    //         }
-    //     )
-    //     .catch(err => res.status(404).json({noprojectsfound: 'No Projects found'}));
 })
 ;
 

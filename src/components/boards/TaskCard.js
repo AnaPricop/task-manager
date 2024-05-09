@@ -10,7 +10,7 @@ import {Dropdown} from "react-bootstrap";
 import Modal from "./ModalTask";
 import OffCanvasExample from "./TaskView";
 const TaskCard = ({task, tasks, setTasks}) => {
-   console.log(task, tasks, tasks.filter(e => e._id === task._id))
+   console.log(task, tasks, tasks.filter(e => e._id === task._id), tasks.filter(e => e._id === task._id)[0].subject[0], JSON.parse(tasks.filter(e => e._id === task._id)[0].subject[0]))
     const [taskData, setTaskData] = useState({
         // status: ''
     });
@@ -59,7 +59,7 @@ const TaskCard = ({task, tasks, setTasks}) => {
     const openTask = () => {
 setShowTaskView(true);
     };
-    const [labels, setLabels] = useState(JSON.parse(tasks.filter(e => e._id === task._id)[0].subject));
+    const [labels, setLabels] = useState(tasks.filter(e => e._id === task._id)[0].subject[0] ? JSON.parse(tasks.filter(e => e._id === task._id)[0].subject[0]) : JSON.parse(tasks.filter(e => e._id === task._id).subject));
     return (
         <div className="list-board">
             <div className="d-flex px-2" style={{width: '350px', flexWrap: 'wrap'}}>
