@@ -208,8 +208,9 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                                 {/*    <div className="col-xs-12">Name of Section</div>*/}
                                 {/*</div>*/}
                                 <form className="form-create-project" onSubmit={onSubmit}>
-                                    <div className="form-group justify-content-center row py-4"
+                                    <div className="form-group "
                                     >
+                                        <label htmlFor="file-input-id" style={{paddingBottom: '12px'}}>Select Image</label>
                                         {/*{boardBck + " background-div"}*/}
                                         <div className="select-img"
                                              onMouseEnter={e => {
@@ -228,7 +229,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="titleOfProject">Project title</label>
+                                        <label htmlFor="titleOfProject" style={{paddingBottom: '12px'}}>Project title</label>
                                         <input type="text" className="form-control" id="titleOfProject"
                                                placeholder="" value={projectData.title} name="title"
                                                onChange={onChange}/>

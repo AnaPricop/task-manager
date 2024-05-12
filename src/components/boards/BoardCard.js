@@ -22,7 +22,7 @@ const BoardCard = ({board, project}) => {
             <Link  to={{
                 pathname: `/${project._id}/${board.title}`
             }}  state={board}>
-            <Card className="text-white card-board" >
+            <Card className=" card-board" >
                 <Card.Img src={boardBck} alt="Card image" className="card-img" />
                 <Card.ImgOverlay>
                     <Card.Title className="card-title-board">{board.title}</Card.Title>

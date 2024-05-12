@@ -84,12 +84,16 @@
 .card-board:hover > .card-img {
     transition: opacity 1s ease-in-out;
     opacity: 0.3;
+    color: rgb(34, 40, 49);
 }
 
 .card-board:hover {
     opacity: 1;
+    color: rgb(34, 40, 49);
 }
-
+.card-board{
+    color: white;
+}
 .card-svg {
     height: 30px;
     object-fit: cover;
@@ -440,8 +444,6 @@
     cursor: pointer;
     /*margin-top:7px;*/
     padding:3px;
-
-    padding-left: 30px;
 }
 
 /*.link-dark1:hover, .link-dark1:hover {*/
@@ -495,8 +497,8 @@
 }
 
 .nav-proj .dropdown-status.show .dropdown-item:hover {
-    background-color: rgba(37, 40, 61, 0.6);
-    color: #F2F4F3;
+    background-color: #f5f5f5;
+    color: #3C40C6;
 }
 
 .nav-proj .dropdown-status:hover {

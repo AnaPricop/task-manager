@@ -116,7 +116,7 @@
 
 }
 .icons li {
-    background: none repeat scroll 0 0 #4d483d;
+    background: none repeat scroll 0 0 #212133;
     height: 6px;
     width: 6px;
     line-height: 0;
@@ -157,7 +157,7 @@
     padding-left:15px;
 }
  .progress-bar{
-    background-color:#4d483d;
+    background-color:#3C40C6;
 
 }
 .progress{

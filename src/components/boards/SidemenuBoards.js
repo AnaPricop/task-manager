@@ -151,9 +151,7 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                 {/*    </a>*/}
                 {/*</li>*/}
                 <li>
-                    <a className="nav-link link-dark1" onClick={handleCreateBoard}>
-                        <svg className="bi me-2" width="16" height="16">
-                        </svg>
+                    <a className="nav-link link-dark1 hover-board" style={{paddingLeft: '15px'}} onClick={handleCreateBoard}>
                         Create board
                     </a>
                     <section

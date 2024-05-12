@@ -207,6 +207,7 @@ li.li-little-div{
     width: 40px;
     height: 32px;
     margin-top:10px;
+    z-index: 2333;
 }
 .label-task-clr {
     color:white;
