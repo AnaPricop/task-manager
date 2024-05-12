@@ -1,17 +1,18 @@
 .sidebar_dsh {
     width: 230px;
-    background-color: #F2F4F3 !important;
+    background-color: #dde0d4 !important;
     color: #D8D9DA;
     /*font-family: Roboto, serif;*/
     font-family: Poppins, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     flex-grow: 2;
     /*font-weight: 300;*/
-    box-shadow: 1px 0px 0px 0px #25283d6e;
+    /*box-shadow: 0px 0px 10px 0px #354f52eb;*/
+    /*border: 1px solid #354f52eb;*/
 }
 .sidebar-header{
     padding-top:10px;
-    border-bottom: 1px solid #25283d6e;
+    border-bottom: 1px solid #4d483d;
     padding-bottom:10px;
     margin-bottom: 20px;
     /*width:110%;*/
@@ -65,10 +66,10 @@
     /*width:100%;*/
 }
 .nothover .link-dark1:hover, .nav-item:hover{
-    background-color: #25283dcc !important;
+    background-color: #4d483d !important;
     color: #EEEEEE !important;
     display: block;
-    border-radius: 2px;
+    border-radius: 10px;
     width:100%;
     /*height: 40px;*/
     /*width: 100%;*/
@@ -78,9 +79,9 @@
 }
 
  .projects-list li:hover {
-    background-color: #25283D !important;
+    background-color: #4d483d !important;
     color: #EEEEEE !important;
-    border-radius: 2px;
+    border-radius: 10px;
     display: block;
     /*border-radius: 3px;*/
     /*width:100%;*/
@@ -93,9 +94,9 @@
 }
 .hover-project:hover{
     box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
-    background-color: #25283D !important;
+    background-color: #4d483d !important;
     color: #EEEEEE !important;
-    border-radius: 2px;
+    border-radius: 10px;
     /*height: 40px;*/
     display:block;
     /*transition: background-color .3s ease;*/
@@ -105,7 +106,7 @@
     /*width:180px;*/
 }
 .hover-project{
-    margin-left: -40px;
+    margin-left: -32px;
     border-radius: 5px;
     /* width: 300px; */
     /*width: 100%;*/
@@ -118,7 +119,7 @@
     /*height: 35px;*/
 }
 .hover-project:hover a{
-    /*background-color: #25283D !important;*/
+    /*background-color: #4d483d !important;*/
     color: #EEEEEE !important;
     /*border-radius: 3px;*/
     /*height: 40px;*/
@@ -126,16 +127,16 @@
 
 .link-dark1 {
     color: #262626 !important;
-    font-size: 14px;
+    font-size: 15px;
     /*background-color:#EEEEEE !important;*/
     /*border-radius: 0;*/
     /*font-weight: 400;*/
 }
 .link-dark1.active{
     color: #EEEEEE !important;
-    background-color: #25283D !important;
+    background-color: #4d483d !important;
     display: block;
-    border-radius: 2px;
+    border-radius: 10px;
     width:100%;
 }
 .header-logo {
@@ -154,7 +155,7 @@
     font-size: 15px;
     line-height: 20px;
     font-weight: 400;
-    background-color:#25283D;
+    background-color:#4d483d;
     box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
     box-sizing: border-box;
     outline: 0;
@@ -174,7 +175,7 @@
     font-size: 15px;
     line-height: 20px;
     font-weight: 400;
-    background-color: #25283D;
+    background-color: #4d483d;
     box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
     box-sizing: border-box;
     outline: 0;
@@ -220,7 +221,7 @@
     /*padding-bottom:20px;*/
     /*height:20px;*/
     background-color: #F2F4F3;
-    color: #25283D;
+    color: #4d483d;
 }
 
 .create_project_hidden {
@@ -417,5 +418,5 @@ select option {
 
 /* Handle */
 .projects-list::-webkit-scrollbar-thumb {
-    background: #25283D;
+    background: #4d483d;
 }

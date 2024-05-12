@@ -23,7 +23,7 @@
     margin-top: 25px;
     border-radius: 3px;
     padding: 5px;
-    border: 1px solid #25283d6e;
+    border: 1px solid #4d483d;
 }
 .blob-to-image{
     width:50px;
@@ -54,11 +54,14 @@
 }
 .card{
     min-width: 280px;
-    background-color: #5b6c5d85;
+    background-color: white;
     /*background-color: #d668533d;*/
     border:none;
-    border-radius: 2px;
+    border-radius: 20px;
     /*border: 1px solid #25283d6e;*/
+    box-shadow: 1px 15px 20px #354f523b;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.025);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .card-title{
     font-size:16px;
@@ -88,7 +91,7 @@
     border-radius: 5px;
 }
 .board-title1{
-    border: 2px solid #25283D;
+    border: 2px solid #4d483d;
     border-radius: 5px;
 }
 .list2{
@@ -97,8 +100,8 @@
     min-width: 280px;
 }
 .icon-statistic{
-    background-color: #D66853;
-    border-radius: 5px;
+    background-color: #587785;
+    border-radius: 10px;
     width: 50px;
     /* padding-right: 10px; */
     margin-right: 30px;
@@ -113,7 +116,7 @@
 
 }
 .icons li {
-    background: none repeat scroll 0 0 #25283D;
+    background: none repeat scroll 0 0 #4d483d;
     height: 6px;
     width: 6px;
     line-height: 0;
@@ -154,7 +157,7 @@
     padding-left:15px;
 }
  .progress-bar{
-    background-color:#25283D;
+    background-color:#4d483d;
 
 }
 .progress{
