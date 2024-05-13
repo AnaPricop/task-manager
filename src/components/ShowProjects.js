@@ -21,7 +21,7 @@ function ShowProjects({projects, setProjects, info, setInfo, status}) {
     const projectList =
         projects.length === 0
             ? 'There are no projects.'
-            : projects.map((project, k) => <ProjectCard project={project} projects={projects} setProjects={setProjects} setProjectsDel={setProjectsDel} info={info} setInfo={setInfo} status={status[k]}/>);
+            : projects.map((project, k) => <ProjectCard key={k} project={project} projects={projects} setProjects={setProjects} setProjectsDel={setProjectsDel} info={info} setInfo={setInfo} status={status[k]}/>);
     // if (projects.length === 0)
     //     setIsLoading(true)
     // else {
@@ -36,7 +36,7 @@ function ShowProjects({projects, setProjects, info, setInfo, status}) {
             {isLoading ? (
                 <Loading/>
             ) : (<>
-                <h5>Your Projects</h5>
+                <h5 className="row" style={{marginLeft: '35px'}}>Your Projects</h5>
                 <div className='list row py-2'>{projectList}</div>
             </>)}
         </div>

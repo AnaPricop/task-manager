@@ -402,7 +402,7 @@ select option {
 .input-select {
     opacity: 0.0;
     position: absolute;
-    width: 200px;
+    width: 120px;
     height: 120px;
     cursor: pointer;
     z-index: 2000;
@@ -433,14 +433,16 @@ select option {
     /*bottom: 0;*/
     width: 120px;
     height: 85px;
-    top: 20px;
+    /*left: 45px;*/
+    /*top: 25px;*/
     text-align: center;
     font-weight: bold;
     line-height: 52px;
     align-items: center;
     justify-content: center;
+    align-content:center;
     /*text-align:center;*/
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 }
 
 .projects-list {

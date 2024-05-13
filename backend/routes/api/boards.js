@@ -63,14 +63,14 @@ router.post('/', (req, res) => {
     }
 });
 
-// router.put('/:id', (req, res) => {
-//     Project.findByIdAndUpdate(req.params.id, req.body)
-//         .then(project => res.json({ msg: 'Updated successfully' }))
-//         .catch(err =>
-//             res.status(400).json({ error: 'Unable to update the Database' })
-//         );
-// });
-//
+router.put('/:id', (req, res) => {
+    Board.findByIdAndUpdate(req.params.id, req.body)
+        .then(project => res.json({ msg: 'Updated successfully' }))
+        .catch(err =>
+            res.status(400).json({ error: 'Unable to update the Database' })
+        );
+});
+
 router.delete('/:id', (req, res) => {
     Board.findByIdAndDelete(req.params.id)
         .then(project => res.json({mgs: 'Project entry deleted successfully'}))

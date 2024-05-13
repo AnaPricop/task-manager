@@ -33,8 +33,7 @@ function ShowStatistic({info}) {
 
     return (
         <div className='ShowBookList p-3 row '>
-
-            <h5>Dashboard</h5>
+            <h5 className="row" style={{marginLeft: '35px'}}>Dashboard</h5>
             <div className="list row py-2">
                 <div className=' list2 mx-5 my-4 col-lg-2 col-md-8 justify-content-center d-flex'>
                     <div className="col-4 px-2 py-2 icon-statistic" style={{backgroundColor: '#4FDB7F'}}>

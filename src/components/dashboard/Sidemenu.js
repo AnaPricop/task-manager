@@ -115,10 +115,9 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
     const projectList =
         projects.length === 0
             ? <a className="link-dark1">No projects.</a>
-            : projects.map((project, k) => <li style={{textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
+            : projects.map((project, k) => <li  key={k} style={{textDecoration: 'none', alignContent: 'center', textAlign: 'left'}} onClick={() => handleNext(project._id)}
                                                className="hover-project" ><a
-                className="nav-proj link-dark1 align-center justify-content-center"
-                onClick={() => handleNext(project._id)}>
+                className="nav-proj link-dark1 align-center justify-content-center">
                 <img className="img-style-proj-sidebar" src={project.image ? project.image : background}
                      alt="Card image cap"/>
                 {project.title} </a></li>);

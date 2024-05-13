@@ -11,15 +11,16 @@ import styles from "../../css/dashboard.css";
 import boards from "../../css/boards.css";
 import tasks from "../../css/tasks.css";
 import {FaInfoCircle} from "react-icons/fa";
-const BoardCard = ({board, currentBoard}) => {
-    console.log(currentBoard)
+import Offcanvas from "react-bootstrap/Offcanvas";
+const BoardCard = ({board, setBoard, currentBoard}) => {
+    console.log(currentBoard, board)
     const [edit, setEdit] = useState(true);
     const [saveBoard, setSaveBoard] = useState(false);
     const [title, setTitle] = useState(currentBoard.title)
     const [focus, setFocus] = useState(false);
     const onTodoChange = (value) => {
         console.log(value)
-        setTitle({title: value})
+        setTitle({title:value})
     }
 
     const [isClicked, setClicked] = useState(0);
@@ -45,6 +46,34 @@ const BoardCard = ({board, currentBoard}) => {
              setIsLoading(false);})
     }, [currentBoard]);
     useEffect(() => {}, []);
+    const updateBoard = async (e) => {
+        console.log(currentBoard, title)
+        await axios
+            .put("http://localhost:8001/api/boards/" + currentBoard._id, title)
+            .then((res) => {
+                // res.data.task.status = e;
+                currentBoard.title = title.title;
+                setSaveBoard(!saveBoard);
+                setEdit(!edit);
+                setFocus(!focus);
+
+                var index1 = '';
+                board.map((datum, index) => {
+                    console.log(datum)
+                    if (datum._id === currentBoard._id)
+                    {
+                        index1 = index;
+                    }
+                })
+                console.log(index1)
+                let newArr = [...board]; // copying the old datas array
+                newArr[index1] = currentBoard;
+                setBoard(newArr);
+            })
+            .catch((err) => {
+                console.log("Error in update task!");
+            });
+    };
     const list_0 = tasks.filter(task => parseInt(task.status) === 0).length === 0 ? '' : tasks.filter(task => parseInt(task.status) === 0).map((b, k) =>
         <TaskCard task={b} key={k} tasks={tasks} setTasks={setTasks}/>);
     const list_1 = tasks.filter(task => parseInt(task.status) === 1).length === 0 ? '' : tasks.filter(task => parseInt(task.status) === 1).map((b, k) =>
@@ -64,6 +93,15 @@ const BoardCard = ({board, currentBoard}) => {
                         setEdit(!edit);
                          setFocus(!focus);
                     }}>Edit</button>
+                    <div className={saveBoard ? "labels-task py-2 board-save" : "not-vis labels-task py-2"}>
+                        <span><button className="save-task btn btn-dark"
+                                      onClick={() => updateBoard()}>Save</button></span>
+                        <span><button className="cancel-task btn" onClick={() => {
+                            setSaveBoard(!saveBoard);
+                            setEdit(!edit);
+                            setFocus(!focus);
+                        }}>Cancel</button></span>
+                    </div>
                 </div>
                     <div className="my-5 w-100 row h-90">
                         <div className="col-3 mx-5">

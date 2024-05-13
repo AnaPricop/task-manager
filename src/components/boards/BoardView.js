@@ -21,7 +21,7 @@ console.log(board, project)
     return (
         <Row>
             <h2 className="boards-h2 mx-5 my-3">Boards</h2>
-            <div className="px-2 mx-5 my-5 col-lg-2 col-md-8 justify-content-center" key={board._id}>
+            <div className="px-2 mx-5 my-5 col-lg-2 col-md-8 justify-content-center" key={board._id} style={{boxShadow:'1px 15px 20px #354f5212'}}>
                 <Card className="text-white card-board bg-dark justify-content-center" onClick={() => createBoardF()}>
                     <Card.Img src="../addboard.svg" alt="Card image" className="card-svg" />
                 </Card>

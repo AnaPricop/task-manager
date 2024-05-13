@@ -444,6 +444,7 @@
     cursor: pointer;
     /*margin-top:7px;*/
     padding:3px;
+    padding-left: 30px;
 }
 
 /*.link-dark1:hover, .link-dark1:hover {*/
@@ -505,7 +506,9 @@
     background-color: rgb(37, 40, 61);
     color: #F2F4F3;
 }
-
+.board-save{
+    margin-left: 110px;
+}
 .edit-board {
     background-color: transparent;
     color: #272829;

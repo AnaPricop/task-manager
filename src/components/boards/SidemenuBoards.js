@@ -73,17 +73,11 @@ const SidemenuBoards = ({board, setBoard, project, selected, createBoard, setCre
                                         style={{paddingLeft: '30px'}}
                                         onMouseEnter={e => {
                                             setDotsStyle(b._id);
-                                            console.log(b._id, dotsStyle)
                                         }}
                                         onMouseLeave={e => {
                                             setDotsStyle('')
                                         }}> {b.title}<li style={{textDecoration: 'none', alignContent: 'center', textAlign: 'left'}}
                                       className="" >
-            {/*    <a*/}
-            {/*    className={selected && b._id === selected ? "active nav-proj link-dark1 align-center justify-content-center" : "nav-proj link-dark1 align-center justify-content-center"}*/}
-            {/*     style={{paddingLeft: '30px'}}*/}
-            {/*>*/}
-            {/*    {b.title} </a>*/}
                 <Dropdown onSelect={dropdowndel} onClick={() => setSelectedItem(b.title)}>
                     <Dropdown.Toggle tag="text" id="dropdown-autoclose-true"
                                      className={b._id === dotsStyle || (selected && b._id === selected) ? ' display-dots settings-btn-sidemenu' : 'not-display-dots settings-btn-sidemenu'}
