@@ -56,7 +56,7 @@ const Home = () => {
                 <Loading/>
             ) : ( <>
             <div className="col-10
-             col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '110px', overflowX: 'hidden'}}>
+             col-sm-11 my-3 proj-list-margin" style={{paddingLeft: '150px', overflowX: 'hidden'}}>
                 <Statistic info={info}  style={{zIndex: 500}}/>
             <Projects projects={projects} setProjects={setProjects} style={{zIndex: 500}} info={info} setInfo={setInfo} status={status}/>
             </div>

@@ -118,7 +118,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
             {/*    </svg>*/}
             {/*    <span className="span_progress">In Progress</span>*/}
             {/*</div>*/}
-            <div className="row">
+            <div className="row" style={{paddingLeft: '15px'}}>
                 <div className="col-8 " style={{paddingLeft: '30px'}} title="Change Image">
                     <div className="select-img"
                          onMouseEnter={e => {
@@ -188,7 +188,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                     </Dropdown>
                 </div>
             </div>
-            <div className="card-body ">
+            <div className="card-body " style={{marginLeft: '15px'}}>
                 <div  className=" progress-bar1">
                 <ProgressBar className="col-9" now={now} label={`${now}%`} visuallyHidden />
                     <div className="col-3 nb-prog">{status.doneTasks}/{status.allTasks}</div>

@@ -59,9 +59,10 @@
     border:none;
     border-radius: 20px;
     /*border: 1px solid #25283d6e;*/
-    box-shadow: 1px 15px 20px #354f523b;
+    /*box-shadow: 1px 15px 20px #354f523b;*/
+    box-shadow: 1px 15px 20px #354f5212;
     -webkit-tap-highlight-color: rgba(0,0,0,0.025);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    /*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);*/
 }
 .card-title{
     font-size:16px;
@@ -98,6 +99,7 @@
     background-color: white;
     border-radius: 5px;
     min-width: 280px;
+    box-shadow: 1px 15px 20px #354f5212;
 }
 .icon-statistic{
     background-color: #587785;

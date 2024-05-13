@@ -36,7 +36,7 @@ function ShowProjects({projects, setProjects, info, setInfo, status}) {
             {isLoading ? (
                 <Loading/>
             ) : (<>
-                <h5>Your Projects</h5>
+                <h5 className="row" style={{marginLeft: '35px'}}>Your Projects</h5>
                 <div className='list row py-2'>{projectList}</div>
             </>)}
         </div>
