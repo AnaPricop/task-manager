@@ -67,7 +67,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
 
     const [boardData, setBoard] = useState({  //board data
         title: "",
-        idProject: projects[0]._id,
+        idProject: projects && projects[0] ? projects[0]._id : '',
         background: ""
     });
     //background board
@@ -170,7 +170,7 @@ const Sidemenu = ({projects, setProjects, information, setInfo}) => {
             ) : (<>
                     {alertBoard ? <Alert key="success" variant="success" onClose={() => setAlertBoard(false)} dismissible>
                         Board created successfully.
-                    </Alert> : (alertProject ? <Alert key="success" variant="success" onClose={() => setAlertProject(false)} dismissible>
+                    </Alert> : (alertProject ? <Alert key="success" variant="success" style={{fontSize: '14px'}} onClose={() => setAlertProject(false)} dismissible>
                         Project created successfully.
                     </Alert> : '')}
                     <div className="sidebar-header">

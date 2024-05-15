@@ -11,7 +11,7 @@ import {Dropdown} from "react-bootstrap";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setInfo, status}) => {
     var background = './color.svg';
-    var now = 100 / status.allTasks * status.doneTasks;
+    var now =status && status.allTasks ? 100 / status.allTasks * status.doneTasks : 100;
     const [focus, setFocus] = useState(false);
     const handleClickFocus = () => {
         setFocus(!focus)
@@ -99,6 +99,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
                 setProjectsDel(projid);
                 setProjId('');
                 info.all = info.all - 1;
+                info.inprogress = info.inprogress - 1;
                 setInfo(info);
             })
             .catch((err) => {
@@ -204,7 +205,7 @@ const ProjectCard = ({project, projects, setProjects, setProjectsDel, info, setI
             <div className="card-body " style={{marginLeft: '15px'}}>
                 <div  className=" progress-bar1">
                     <ProgressBar className="col-9" now={now} label={`${now}%`} visuallyHidden />
-                    <div className="col-3 nb-prog">{status.doneTasks}/{status.allTasks}</div>
+                    <div className="col-3 nb-prog">{status && status.doneTasks ? status.doneTasks + '/' + status.allTasks : 0}</div>
                 </div>
                 {/*<div className="d-flex">*/}
 

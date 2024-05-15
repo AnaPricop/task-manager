@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -12,8 +12,9 @@ import boards from "../../css/boards.css";
 import tasks from "../../css/tasks.css";
 import {FaInfoCircle} from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
-const BoardCard = ({board, setBoard, currentBoard}) => {
+const BoardCard = ({board, setBoard, currentBoard, project}) => {
     console.log(currentBoard, board)
+    let navigate = useNavigate();
     const [edit, setEdit] = useState(true);
     const [saveBoard, setSaveBoard] = useState(false);
     const [title, setTitle] = useState(currentBoard.title)
@@ -31,7 +32,7 @@ const BoardCard = ({board, setBoard, currentBoard}) => {
     var token = localStorage.getItem("token");
     // let list0 = [], list1 = [], list2 = [];
     const [list0, setList0] = useState([]);
-
+    const { state } = useLocation();
      function fetchData() {
         let res =  axios.get('http://localhost:8001/api/tasks/' + currentBoard._id)
        // console.log(res.data)
@@ -69,6 +70,12 @@ const BoardCard = ({board, setBoard, currentBoard}) => {
                 let newArr = [...board]; // copying the old datas array
                 newArr[index1] = currentBoard;
                 setBoard(newArr);
+                navigate(`/${project._id}/${currentBoard.title}`,{
+                    state: {
+                        ...state,
+                        board: currentBoard
+                    }
+                })
             })
             .catch((err) => {
                 console.log("Error in update task!");

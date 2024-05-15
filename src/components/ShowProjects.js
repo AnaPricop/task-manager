@@ -20,7 +20,7 @@ function ShowProjects({projects, setProjects, info, setInfo, status}) {
 
     const projectList =
         projects.length === 0
-            ? 'There are no projects.'
+            ? <h6 style={{marginLeft: '35px'}}>There are no projects.</h6>
             : projects.map((project, k) => <ProjectCard key={k} project={project} projects={projects} setProjects={setProjects} setProjectsDel={setProjectsDel} info={info} setInfo={setInfo} status={status[k]}/>);
     // if (projects.length === 0)
     //     setIsLoading(true)

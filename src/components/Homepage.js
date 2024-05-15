@@ -35,7 +35,15 @@ const Login = () => {
     return (
         <div>
         <Navbar />
-            <h1 className="align_center" style={styles.align_center}> Let's get started!</h1>
+            <h1 className="align_center" style={styles.align_center}> Organize your projects now.</h1>
+            <div className="row align_center justify-content-center">
+                <Link to="/signup" className="textdecoration" >
+            <button className="button-homepage" >Start now</button>
+                </Link>
+            </div>
+            <div className="imgdiv">
+            <img className="imghomepage" src="./ss-home.png"/>
+            </div>
         </div>
     //     <div className='list'>{bookList}</div>
     // <div className="h1"></div>

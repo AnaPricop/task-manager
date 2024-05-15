@@ -13,7 +13,7 @@ const BoardView = ({board, project, setCreateBoard, createBoard}) => {
 console.log(board, project)
     const boardList =
         board.length === 0
-            ? 'No boards.'
+            ? ''
             : board.map((b, k) => <BoardCard board={b} key={k} project={project}/>);
     const createBoardF = () => {
         setCreateBoard(!createBoard);

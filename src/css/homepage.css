@@ -1,13 +1,13 @@
 .svg_navbar {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin-right:5px;
 }
 
-.svg_navbar2 {
-    width: 30px;
-    height: 20px;
-}
+/*.svg_navbar2 {*/
+/*    width: 40px;*/
+/*    height: 30px;*/
+/*}*/
 
 .textdecoration {
     text-decoration: none;
@@ -20,14 +20,16 @@
 
 .nav_link {
     font-size: 1em;
-    padding-right: 40px !important;
-    color: black;
+    margin-right: 40px !important;
+    color: #444551;
     text-decoration: none;
 }
 
 .nav_brand {
     font-size: 1.4em;
     padding-left:5px;
+    font-weight: 500;
+    color:#444551;
 }
 
 .nav_menu {
@@ -77,4 +79,73 @@
         padding-left: 200px;
         /*margin-right:10px;*/
     }
+}
+.nav-homepage{
+cursor: pointer;
+}
+/*.nav-homepage .nav-item:hover .nav_link{*/
+/*    color: #3C40C6;*/
+/*    font-weight: 600;*/
+/*    border-bottom: 2px solid #3C40C6;*/
+
+/*    !*transition: color  1s ease;*!*/
+/*    transform: scaleX(0);*/
+/*    transition: transform 250ms ease-in-out;*/
+/*    !*transition: all 1s;*!*/
+/*}*/
+
+
+.nav-homepage .nav-item .nav_link{
+    color: #444551;
+    display: inline-block;
+    margin: 0;
+    font-weight: 600;
+    /*text-transform: uppercase;*/
+    background: linear-gradient(#3C40C6 0 0);
+    background-size:0% 4px,100% 4px; /* we make the top one 0% width */
+    background-position:bottom left;
+    background-repeat:no-repeat;
+    transition:0.5s;
+}
+
+
+.nav-homepage .nav-item:hover .nav_link{
+    background-size:100% 4px; /* 100% width on hover */
+}
+.navbar{
+    background-color: #f5f5f5!important;
+    font-family: Poppins, sans-serif;
+    position:sticky;
+    top: 0;
+}
+.nav-homepage .nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.button-homepage{
+    width:120px;
+    font-size:18px;
+    font-weight:600;
+    color: #f5f5f5;
+    background-color: #3C40C6;
+    border-radius:10px;
+    border: none;
+    padding: 6px;
+
+}
+.button-homepage:hover{
+    background-color: rgba(60, 64, 198, 0.78);
+}
+.imghomepage{
+    width:60vw;
+    /*height:10vw;*/
+
+    /*background-image: url("../../public/ss-home.PNG");*/
+    /*height: 100%;*/
+}
+.imgdiv{
+    margin-top:5%;
+    align-content: center;
+    align-items:center;
+    text-align:center;
 }
