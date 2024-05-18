@@ -70,7 +70,7 @@ Authentication
 
 - Register
   
-![Screenshot Capture - 2024-05-18 - 20-31-18](https://github.com/AnaPricop/task-manager/assets/60388013/89f419c2-f6c6-4c8f-b8e0-4d46e2eeba9f)
+![Screenshot Capture - 2024-05-18 - 21-06-42](https://github.com/AnaPricop/task-manager/assets/60388013/8fb89a83-98cf-4b1a-b695-d66966e615c3)
 
 Dashboard
 - Project statistics, projects overview
