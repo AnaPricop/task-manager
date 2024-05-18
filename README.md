@@ -53,6 +53,10 @@ Start the server
   cd backend
   npm start
 ```
+## ENV
+
+- MONGODB_URI = mongodb+srv://anap17:Pricopana1@cluster1.9ybny.mongodb.net/
+- JWTPRIVATEKEY =
 
 ## Features
 Homepage
@@ -102,6 +106,7 @@ Board view (tasks)
 - Two types of projects: Personal (with daily tasks) and Work (work tasks)
 - Remind me option for tasks (receive an email)
 - List type for tasks
+- User roles
 
 
 
