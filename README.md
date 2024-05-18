@@ -55,7 +55,7 @@ Start the server
 ```
 ## ENV
 
-- MONGODB_URI = mongodb+srv://anap17:Pricopana1@cluster1.9ybny.mongodb.net/
+- MONGODB_URI = 
 - JWTPRIVATEKEY =
 
 ## Features
