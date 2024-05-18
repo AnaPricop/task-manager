@@ -41,13 +41,13 @@ Install dependencies
   npm install
 ```
 
-Start the server
+Start the client
 
 
 ```bash
   npm run start
 ```
-Start the Client
+Start the server
 
 ```bash
   cd backend
