@@ -60,12 +60,14 @@ Start the server
 
 ## Features
 Homepage
+
 ![Screenshot Capture - 2024-05-18 - 20-31-55](https://github.com/AnaPricop/task-manager/assets/60388013/721990b8-00eb-4239-a5a8-6ef0fd9a2e4f)
 
 Authentication
 - LogIn
   
 ![Screenshot Capture - 2024-05-18 - 20-30-47](https://github.com/AnaPricop/task-manager/assets/60388013/fa9cfbe6-3b6b-4b90-b611-823b3b36e03a)
+
 - Register
   
 ![Screenshot Capture - 2024-05-18 - 20-31-18](https://github.com/AnaPricop/task-manager/assets/60388013/89f419c2-f6c6-4c8f-b8e0-4d46e2eeba9f)
@@ -74,6 +76,7 @@ Dashboard
 - Project statistics, projects overview
   
 ![Screenshot Capture - 2024-05-18 - 20-35-11](https://github.com/AnaPricop/task-manager/assets/60388013/55aafac6-b533-4b34-bef7-02d0afc616d9)
+
 - Create project and create board (where you can choose the board's background color)
   
 ![Screenshot Capture - 2024-05-18 - 20-37-10](https://github.com/AnaPricop/task-manager/assets/60388013/7f0b0b33-40f5-4a6b-810a-582f5ac93774)
