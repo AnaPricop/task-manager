@@ -50,7 +50,6 @@ Start the server
 Start the Client
 
 ```bash
-  //open now terminal
   cd backend
   npm start
 ```
@@ -101,7 +100,8 @@ Board view (tasks)
 
 - Invite users to your projects
 - Two types of projects: Personal (with daily tasks) and Work (work tasks)
-- 
+- Remind me option for tasks (receive an email)
+- List type for tasks
 
 
 
